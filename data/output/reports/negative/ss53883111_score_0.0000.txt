@@ -1,0 +1,14 @@
+Study ID: s53883111
+Label: 0
+Soft Score: 0.0000
+View: PA
+
+==================================================
+IMPRESSION:
+No acute cardiopulmonary process.
+
+==================================================
+FINDINGS:
+The lungs are clear.  The hilar and cardiomediastinal contours are normal.
+ There is no pneumothorax. There is no pleural effusion. Pulmonary vascularity
+ is normal.

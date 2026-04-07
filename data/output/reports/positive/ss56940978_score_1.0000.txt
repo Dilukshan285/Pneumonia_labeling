@@ -1,0 +1,21 @@
+Study ID: s56940978
+Label: 1
+Soft Score: 1.0000
+View: PA
+
+==================================================
+IMPRESSION:
+Rounded opacity in the right lung base concerning for a right middle lobe
+ pneumonia.  Finding is progressed compared with prior studies and may
+ represent relapsing pneumonia or a slow growing underlying pulmonary lesion. 
+ Recommend nonemergent chest CT for further evaluation.
+
+==================================================
+FINDINGS:
+A rounded density in the right lower lung is compatible with a right middle
+ lobe pneumonia.  Given that there has been increasing density in the right
+ lung base compared with prior studies dating back to ___, nonemergent chest
+ CT is recommended for further evaluation.  There is minimal left lung base
+ pleural thickening.  There is no pleural effusion or pneumothorax.  Underlying
+ moderate emphysema has progressed slightly compared with prior studies.  The
+ cardiomediastinal silhouette is normal.

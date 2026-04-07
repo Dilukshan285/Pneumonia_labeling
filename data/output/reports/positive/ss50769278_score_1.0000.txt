@@ -1,0 +1,19 @@
+Study ID: s50769278
+Label: 1
+Soft Score: 1.0000
+View: PA
+
+==================================================
+IMPRESSION:
+New or worsened right base patchy opacity.  Differential
+ diagnosis includes aspiration or an early pneumonic infiltrate.  Atelectasis
+ is in the differential, but considered less likely, as there also appears to
+ be a small right effusion.
+
+==================================================
+FINDINGS:
+Compared to ___ chest x-ray, there is new patchy opacity at the right lung
+ base, slight blunting of the right costophrenic angle, AND minimal, if any,
+ atelectasis at the left lung base.  No gross left effusion.  No CHF. 
+ Cardiomediastinal silhouette unchanged.  Biventricular pacemaker again noted.
+ No pneumothorax detected.

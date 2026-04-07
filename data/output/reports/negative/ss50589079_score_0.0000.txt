@@ -1,0 +1,14 @@
+Study ID: s50589079
+Label: 0
+Soft Score: 0.0000
+View: AP
+
+==================================================
+IMPRESSION:
+No acute cardiopulmonary process.
+
+==================================================
+FINDINGS:
+The lungs are clear where not obscured by overlying cardiac leads and wires. 
+ The cardiomediastinal silhouette is within normal limits.  No acute osseous
+ abnormalities identified.

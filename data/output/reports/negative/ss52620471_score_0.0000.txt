@@ -1,0 +1,15 @@
+Study ID: s52620471
+Label: 0
+Soft Score: 0.0000
+View: AP
+
+==================================================
+IMPRESSION:
+No acute cardiopulmonary process.
+
+==================================================
+FINDINGS:
+Heart size is normal.  Mediastinal and hilar contours are unremarkable. 
+ Pulmonary vascularity is normal.  Lungs are clear without focal consolidation.
+ No pleural effusion or pneumothorax is detected.  There are no acute osseous
+ abnormalities.

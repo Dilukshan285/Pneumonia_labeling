@@ -1,0 +1,21 @@
+Study ID: s57078404
+Label: 0
+Soft Score: 0.0000
+View: PA
+
+==================================================
+IMPRESSION:
+1. No acute cardiopulmonary process.
+ 
+ 2. Although no fracture or other bone abnormality is seen, conventional chest
+ radiographs are not appropriate for detection or characterization of chest
+ cage lesions. Any focal findings should be clearly marked and imaged with
+ either bone detail views or CT scanning.
+
+==================================================
+FINDINGS:
+Lungs are well inflated and clear.  No pleural effusion or pneumothorax. 
+ Heart size, mediastinal contour, and hila are unremarkable.
+ 
+ Limited assessment of the osseous structures are unremarkable.  No displaced
+ rib fracture.

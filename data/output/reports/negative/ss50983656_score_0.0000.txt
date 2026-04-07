@@ -1,0 +1,14 @@
+Study ID: s50983656
+Label: 0
+Soft Score: 0.0000
+View: PA
+
+==================================================
+IMPRESSION:
+No acute cardiopulmonary process.
+
+==================================================
+FINDINGS:
+The lungs are clear and the lung volumes are normal. No pleural effusion,
+ pneumothorax or focal airspace consolidation. Heart is normal size.
+ Mediastinal and hilar structures are unremarkable.

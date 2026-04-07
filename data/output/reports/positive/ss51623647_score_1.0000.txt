@@ -1,0 +1,16 @@
+Study ID: s51623647
+Label: 1
+Soft Score: 1.0000
+View: AP
+
+==================================================
+IMPRESSION:
+Left mid to lower lung pneumonia.
+
+==================================================
+FINDINGS:
+Left PICC line is in unchanged position.  Tracheostomy tube is in unchanged
+ position.  The lung volume is small.  Left perihilar opacity has worsened,
+ likely worsening pneumonia.  Left lower lobe atelectasis has improved.  No
+ pleural effusions or pneumothorax.  The cardiomediastinal silhouette is
+ unchanged.

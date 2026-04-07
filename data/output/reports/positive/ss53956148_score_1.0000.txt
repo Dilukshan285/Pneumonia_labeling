@@ -1,0 +1,15 @@
+Study ID: s53956148
+Label: 1
+Soft Score: 1.0000
+View: PA
+
+==================================================
+IMPRESSION:
+Mild lower lobe pneumonia.
+
+==================================================
+FINDINGS:
+There is peribronchial thickening localized to the lower lobes, though
+ difficult to locate on the PA view, concerning for pneumonia and given the
+ symptoms.  Mildly enlarged heart size and prominent pulmonary vessels are
+ likely physiologic.  No pleural abnormalities are seen.

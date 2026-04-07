@@ -1,0 +1,14 @@
+Study ID: s59357862
+Label: 0
+Soft Score: 0.0000
+View: PA
+
+==================================================
+IMPRESSION:
+No acute cardiopulmonary process.
+
+==================================================
+FINDINGS:
+The lungs are well expanded and clear.  The cardiomediastinal
+ silhouette is unremarkable.  The lungs demonstrate no evidence of focal
+ pneumonia, pulmonary edema, pleural effusion or pneumothorax.

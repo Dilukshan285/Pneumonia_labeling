@@ -1,0 +1,925 @@
+================================================================================
+PNEUMONIA LABELING — ISSUE AND IMPLEMENTATION PLAN
+For: PP1 and PP2 — MIMIC-CXR Dataset
+Hardware: Lenovo LOQ — Ryzen 7 8845HS — 32GB RAM — RTX 4060 8GB
+Version: FINAL
+================================================================================
+
+
+================================================================================
+SECTION 1 — THE ISSUE
+================================================================================
+
+The MIMIC-CXR dataset provides pre-generated pneumonia labels through a tool
+called CheXpert Labeler. CheXpert is a rule-based Natural Language Processing
+(NLP) system that reads free-text radiology reports and extracts labels using
+fixed keyword patterns and basic negation rules such as detecting phrases like
+"no pneumonia" or "clear lungs." These labels are stored in a CSV file called
+mimic-cxr-2.0.0-chexpert.csv and are widely used by researchers as ground
+truth for training chest X-ray classification models including PP1 and PP2.
+
+However, upon manual inspection of the MIMIC-CXR reports, a critical labeling
+error was discovered. CheXpert is incorrectly labeling certain radiology reports
+as POSITIVE for pneumonia when the actual clinical content of the report clearly
+states a NEGATIVE finding. This false positive problem arises because CheXpert
+uses simple pattern matching and cannot understand complex sentence structures,
+context-dependent negation, uncertainty phrases, or multi-sentence clinical
+reasoning. For example, a report that says "findings are not consistent with
+pneumonia" or "pneumonia cannot be entirely excluded but is clinically unlikely"
+may be incorrectly flagged as positive by CheXpert because it detects the word
+"pneumonia" without properly resolving the surrounding clinical context.
+
+This is a fundamental problem for model training. If the training labels are
+wrong, the DenseNet-121 model for PP1 and the progression model for PP2 will
+learn from incorrect data, producing unreliable predictions. Even though PP1
+uses only CXR images at inference time and PP2 uses images with reports, both
+systems depend entirely on label quality during training. Since the CheXpert
+labels were generated from reports, and those labels have been shown to contain
+errors, the labels cannot be trusted as ground truth without correction.
+
+To solve this, a five-stage advanced labeling pipeline is designed to replace
+the unreliable CheXpert labels with high-quality, clinically validated labels,
+followed by a final image-label linking stage. This pipeline processes all
+MIMIC-CXR free-text radiology reports and generates three output classes:
+POSITIVE, NEGATIVE, and UNCERTAIN. Only POSITIVE and NEGATIVE labels enter
+model training. UNCERTAIN labels are retained in the reference file only and
+are excluded from both PP1 and PP2 training datasets.
+
+The final labels are connected to their corresponding CXR images using the
+study_id key that is present in both the report metadata and the image metadata
+files. These corrected labels are used for training both PP1 and PP2. At
+inference time, PP1 accepts only an uploaded CXR image and produces findings
+without needing any report, while PP2 accepts serial images and reports for
+progression analysis. The labeling pipeline is a one-time preprocessing step
+that runs entirely on local hardware with no external API calls, ensuring full
+data privacy compliance with MIMIC-CXR data use agreements.
+
+
+================================================================================
+SECTION 2 — IMPLEMENTATION PLAN
+================================================================================
+
+--------------------------------------------------------------------------------
+OVERVIEW
+--------------------------------------------------------------------------------
+
+The labeling pipeline has five stages followed by one image-linking stage.
+Each stage processes the output of the previous stage. The pipeline runs on
+all free-text radiology reports in the MIMIC-CXR dataset. The final output is
+a single CSV file containing study_id and a confirmed label of POSITIVE,
+NEGATIVE, or UNCERTAIN for each report, plus a soft probability score. This
+file is then merged with the MIMIC-CXR image metadata using study_id to produce
+the final training datasets for PP1 and PP2. Only POSITIVE and NEGATIVE labels
+enter the final training datasets. UNCERTAIN labels are retained in the
+reference label file only and excluded from all model training.
+
+Total estimated time on Ryzen 7 8845HS with RTX 4060 8GB and 32GB RAM:
+approximately 5 to 7 hours for the fully automated stages running overnight.
+Manual labeling across Stage 4 (200 reports) and Stage 5 (300 reports) requires
+approximately 7 to 10 additional hours and must be completed in separate
+dedicated sessions away from the automated pipeline run.
+
+
+--------------------------------------------------------------------------------
+PREPARATION — BEFORE STARTING THE PIPELINE
+--------------------------------------------------------------------------------
+
+Step P1 — Environment Setup
+Create a dedicated Python 3.10.12 virtual environment for this pipeline.
+Install all required libraries with the following exact pinned versions to
+ensure full reproducibility and compatibility across the entire pipeline:
+
+    torch==2.1.2
+    transformers==4.35.2
+    snorkel==0.9.8
+    negspacy==1.0.3
+    spacy==3.5.4
+    pandas==2.0.3
+    numpy==1.24.4
+    scikit-learn==1.3.2
+    scipy==1.11.4
+    tqdm==4.66.1
+
+Install PyTorch with CUDA 12.1 support using the following command to ensure
+the RTX 4060 GPU is correctly accessible by PyTorch:
+
+    pip install torch==2.1.2 --index-url https://download.pytorch.org/whl/cu121
+
+After installing spaCy, download the standard English model with:
+
+    python -m spacy download en_core_web_sm
+
+The negspaCy library uses its own built-in clinical termset which is loaded
+at runtime via termset("en_clinical") and does not require a separate model
+download beyond en_core_web_sm.
+
+After all installations are complete, verify GPU detection with the following
+Python check before proceeding to any other step:
+
+    import torch
+    print(torch.cuda.is_available())
+    print(torch.cuda.get_device_name(0))
+
+Both lines must produce True and the RTX 4060 device name respectively. If
+GPU is not detected, Stage 2 Labeling Function 5 will fail silently or fall
+back to CPU, causing either incorrect results or extreme slowdown. Do not
+proceed with the pipeline until GPU is confirmed operational.
+
+Step P2 — Download and Verify MIMIC-CXR Files
+Obtain access to the MIMIC-CXR dataset through PhysioNet using a credentialed
+account. Download the MIMIC-CXR JPG version which is significantly smaller than
+the full DICOM version. The following four files are required across all pipeline
+stages: the reports folder containing all free-text radiology reports organized
+by subject_id and study_id, the file mimic-cxr-2.0.0-split.csv which maps
+study_id to dicom_id and train/validate/test split assignments, the file
+mimic-cxr-2.0.0-chexpert.csv which contains the original CheXpert labels used
+for reference only and never as ground truth, and the file
+mimic-cxr-2.0.0-metadata.csv which contains the ViewPosition and StudyDate
+columns for every image. Confirm that all four files are present, non-empty,
+and fully downloaded before running any pipeline stage.
+
+Step P3 — Load All Reports into a Single DataFrame
+Read all free-text report files from the reports folder. Each report file is
+named using the study_id. Load every report and create a master DataFrame with
+three columns: subject_id, study_id, and report_text. Strip all leading and
+trailing whitespace from every report_text value. Convert all study_id values
+to strings with consistent formatting to prevent join mismatches caused by
+mixed integer and string types across files. This master DataFrame is the input
+to all five stages of the pipeline. Save it as master_reports.csv for reuse
+without reloading from the raw report files.
+
+Step P4 — Verify Report Contents
+Before running the pipeline, manually inspect 20 to 30 randomly selected
+reports to understand the structure of MIMIC-CXR free-text reports. Identify
+which reports contain clearly labeled sections such as FINDINGS, IMPRESSION,
+CLINICAL HISTORY, and INDICATION. Note any unusual formatting, inconsistent
+capitalization, or missing sections. This inspection directly informs and
+validates the section parsing rules used in Stage 1. Also note any reports
+that appear to describe entirely unrelated studies with no chest or lung
+terminology, as these are handled by the pre-filter in Stage 2 Step 2.0.
+
+
+--------------------------------------------------------------------------------
+STAGE 1 — SECTION-AWARE REPORT PARSING
+--------------------------------------------------------------------------------
+
+Purpose:
+Standard labelers scan the entire report text without distinction between
+sections. This causes systematic errors because a word like "pneumonia"
+appearing in the CLINICAL HISTORY section as "patient has a history of
+pneumonia" is not a current diagnosis but would be incorrectly flagged as
+positive. Section-aware parsing separates each report into its clinical sections
+and assigns different priority weights to each section during labeling. This
+stage produces structured section columns that all six labeling functions in
+Stage 2 operate on.
+
+Step 1.1 — Define Section Headers
+Create a comprehensive list of known section header patterns that appear in
+MIMIC-CXR radiology reports. Common headers include FINDINGS, IMPRESSION,
+CLINICAL HISTORY, INDICATION, TECHNIQUE, COMPARISON, CONCLUSION, and
+RECOMMENDATION. Some reports use fully uppercase headers, some use title case,
+and some use abbreviations or omit headers entirely. All section header matching
+must be performed using case-insensitive regular expression patterns that handle
+trailing colons, irregular spacing, and punctuation variations.
+
+Step 1.2 — Split Each Report into Sections
+For each report in the master DataFrame, apply a case-insensitive regex-based
+section splitter that detects header keywords and breaks the report text into
+a Python dictionary where each key is a normalized uppercase section name and
+each value is the text content of that section. If a section is not present in
+a report, its value is set to an empty string. Do not assume any section is
+always present in every report. The parser must degrade gracefully when any
+section is absent, producing empty strings rather than errors or omissions.
+
+Step 1.3 — Assign Clinical Weights to Sections
+Assign a fixed priority weight to each section based on its clinical
+significance for diagnosis. The IMPRESSION section receives the highest weight
+of 3 because it represents the radiologist's final synthesized conclusion and
+is the single most reliable indicator of the current diagnosis. The FINDINGS
+section receives a weight of 2 because it describes direct observational
+findings from the imaging study. The CLINICAL HISTORY and INDICATION sections
+receive a weight of 1 because they describe the reason the patient presented
+for imaging, not what was found. The TECHNIQUE and COMPARISON sections receive
+a weight of 0 and are never used for label assignment under any circumstance.
+
+Step 1.4 — Store Parsed Sections
+Add new columns to the master DataFrame for each diagnostically relevant
+section: impression_text, findings_text, and history_text. Reports that have
+no IMPRESSION section use findings_text as the primary labeling target in all
+downstream stages. Reports with neither IMPRESSION nor FINDINGS present have
+both columns set to empty strings and are handled by the pre-filter defined in
+Stage 2 Step 2.0. Save the updated DataFrame as parsed_reports.csv.
+
+
+--------------------------------------------------------------------------------
+STAGE 2 — SNORKEL PROGRAMMATIC WEAK SUPERVISION WITH SIX LABELING FUNCTIONS
+--------------------------------------------------------------------------------
+
+Purpose:
+Instead of relying on a single labeling method, Snorkel runs six independent
+labeling functions simultaneously. Each labeling function casts a vote on the
+label for each report. Snorkel then trains a generative label model that learns
+how much to trust each labeling function based on their agreement and
+disagreement patterns, without requiring any manually annotated examples. This
+produces a soft probability score for each report rather than a hard binary
+label, preserving uncertainty information for downstream threshold conversion.
+
+Step 2.0 — Pre-Filter Unrelated Reports
+Before constructing the Snorkel label matrix, identify and separately handle
+all reports that contain no reference to pneumonia or lung findings anywhere
+in their full text. These reports will produce all six labeling functions
+returning ABSTAIN, which causes undefined or numerically unstable behavior
+in the Snorkel LabelModel and must be prevented.
+
+For each report, check whether any term from the combined positive, negative,
+and uncertain keyword lists defined in Steps 2.1 through 2.3 appears anywhere
+in the full report_text column using case-insensitive matching. If no keyword
+from any list is found anywhere in the report, assign the label NEGATIVE
+directly with a soft_score of 0.02 and a label_source of "pre_filter" and
+exclude this report from the Snorkel pipeline entirely. This assignment is
+clinically valid because a radiology report with no lung or pneumonia
+terminology describes a study performed for an entirely unrelated clinical
+indication and represents a true negative for pneumonia by absence of any
+relevant finding.
+
+Save all pre-filtered reports with their direct NEGATIVE assignments as
+prefilter_negatives.csv. All remaining reports that contain at least one
+keyword from any list proceed to the six labeling functions below.
+
+--- Labeling Function 1 — Keyword Rules ---
+
+Step 2.1 — Define Positive Keyword List
+Create a comprehensive list of terms that indicate pneumonia is present.
+Apply all matching as case-insensitive throughout. This list includes:
+pneumonia, bronchopneumonia, pneumonitis, consolidation, lobar consolidation,
+focal consolidation, multilobar consolidation, infectious consolidation,
+patchy opacity, airspace opacity, alveolar opacity, pulmonary opacity,
+pneumonic opacity, infiltrate, air bronchogram, opacification,
+airspace disease, and perihilar infiltrate.
+
+Step 2.2 — Define Negative Keyword List
+Create a list of terms that indicate pneumonia is absent. Apply all matching
+as case-insensitive. This list includes: no pneumonia, no consolidation,
+no infiltrate, no opacity, no acute process, no airspace disease,
+no focal consolidation, lungs are clear, clear lungs, unremarkable lungs,
+no acute cardiopulmonary, lungs are well expanded, and no acute findings.
+
+Step 2.3 — Define Uncertain Keyword List
+Create a list of terms that indicate diagnostic uncertainty. Apply all matching
+as case-insensitive. This list includes: possible pneumonia, possibly pneumonia,
+cannot exclude pneumonia, cannot rule out pneumonia, questionable pneumonia,
+suspected pneumonia, consistent with pneumonia, compatible with pneumonia,
+likely pneumonia, probable pneumonia, may represent pneumonia,
+could represent pneumonia, concern for pneumonia, pneumonia not excluded,
+atypical pneumonia, developing pneumonia, early pneumonia, and evolving
+pneumonia.
+
+Step 2.4 — Apply Keyword Labeling Function
+Apply this function to the impression_text column first. If impression_text is
+empty, apply to findings_text. Apply all keyword matching in case-insensitive
+mode. The following check order is mandatory and must not be changed: check
+uncertain terms first, then check negative terms, then check positive terms.
+This exact order prevents a report that contains both uncertainty language and
+positive pneumonia terms from being incorrectly classified as a hard positive
+finding. Assign POSITIVE, NEGATIVE, or UNCERTAIN as the LF1 vote. Assign
+ABSTAIN if no keyword from any of the three lists matches the target section
+text.
+
+--- Labeling Function 2 — NegEx Clinical Negation Detection ---
+
+Step 2.5 — Set Up NegEx with Clinical Termset
+Load the negspaCy library using the en_core_web_sm spaCy model. Before adding
+the negex component to the spaCy pipeline, apply the built-in clinical termset
+by calling termset("en_clinical"). This clinical termset contains negation
+trigger words specific to medical language including: without, no evidence of,
+denies, rules out, negative for, and resolved. This clinical termset produces
+significantly more accurate negation detection than general-purpose NLP
+negation systems when applied to radiology report text.
+
+Step 2.6 — Apply NegEx to Positive Findings
+Run NegEx only on reports where LF1 produced a POSITIVE vote. Pass the
+impression_text (or findings_text if impression_text is empty) through the
+configured negspaCy pipeline. For each sentence in the text that contains a
+positive pneumonia term, check whether the entity is flagged as negated by
+negspaCy within that sentence's context window. If the pneumonia term is
+confirmed as negated, override the finding from positive to negative. This
+directly and specifically addresses the false positive problem identified with
+CheXpert in Section 1.
+
+Step 2.7 — Assign LF2 Label
+If LF1 produced a POSITIVE vote and NegEx confirms that the positive term is
+negated in its sentence context, assign NEGATIVE as the LF2 vote. If LF1
+produced a POSITIVE vote and NegEx confirms the positive term is not negated,
+assign POSITIVE as the LF2 vote. For all reports where LF1 found no positive
+terms, assign ABSTAIN for LF2, as NegEx has no positive entity to evaluate.
+
+--- Labeling Function 3 — CheXpert Labeler as Reference ---
+
+Step 2.8 — Load Original CheXpert Labels
+Load the mimic-cxr-2.0.0-chexpert.csv file and join it to the parsed reports
+DataFrame on study_id. For each study_id, read the Pneumonia column value.
+Handle all column values with explicit mapping as follows: a value of 1.0 maps
+to POSITIVE, a value of 0.0 maps to NEGATIVE, a value of -1.0 maps to
+UNCERTAIN, and any NaN or missing value maps to ABSTAIN. Apply fillna with the
+ABSTAIN integer encoding immediately after loading, because pandas may represent
+missing values inconsistently depending on the installed version. Do not rely
+on implicit NaN handling at any point in this step.
+
+Step 2.9 — Assign LF3 Label
+Use the converted CheXpert value as one vote among six. Do not treat it as
+reliable ground truth. The Snorkel label model learns how much weight to assign
+to LF3 by observing its agreement and disagreement with the other five labeling
+functions across the full dataset. This approach corrects CheXpert errors by
+demoting it from ground truth to one noisy voter rather than discarding its
+signal entirely, which would waste its valid signal on correct cases.
+
+--- Labeling Function 4 — Section Weight Priority ---
+
+Step 2.10 — Apply Section Weight Logic
+If impression_text is non-empty and LF1 produced a label using impression_text,
+use that label as the LF4 vote. If impression_text and findings_text contain
+conflicting signals from LF1, always prioritize the impression_text label
+without exception. The IMPRESSION section is the radiologist's final clinical
+conclusion and supersedes all other sections under all circumstances. If only
+findings_text is non-empty and produced a label, use that label as the LF4
+vote. If neither section produced a label, assign ABSTAIN.
+
+Step 2.11 — Assign LF4 Label
+This labeling function outputs the section-weighted label. Its role is to
+provide an independent vote that reinforces confident labels derived from the
+highest-priority clinical section and explicitly encodes the clinical hierarchy
+established in Stage 1 into the Snorkel label matrix.
+
+--- Labeling Function 5 — NLI Zero-Shot Classification ---
+
+Step 2.12 — Load Zero-Shot Classification Model
+Load the facebook/bart-large-mnli model from HuggingFace using the
+zero-shot-classification pipeline. This model was explicitly fine-tuned on
+the Multi-Genre Natural Language Inference corpus and is architecturally correct
+for zero-shot classification through entailment scoring. Load this model onto
+the RTX 4060 GPU by setting device=0 in the pipeline constructor. Clear GPU
+memory completely before loading.
+
+Critical note on model selection: the model zzxslp/RadBERT-RoBERTa-4m is not
+used for this labeling function and must not be substituted here. RadBERT is
+a masked language model pretrained on radiology text using masked language
+modeling only. It was never fine-tuned on any Natural Language Inference task
+and therefore has no entailment scoring head. If RadBERT is loaded into the
+zero-shot-classification pipeline it will not throw an error but will produce
+probability scores that are numerically plausible and superficially convincing
+while being semantically meaningless. This type of silent failure would corrupt
+LF5 votes without any visible warning. facebook/bart-large-mnli is used here
+because entailment scoring is the exact task it was trained on and it produces
+valid and reliable zero-shot outputs.
+
+Step 2.13 — Run Zero-Shot Classification
+Use the loaded pipeline with exactly three candidate labels: "pneumonia present",
+"pneumonia absent", and "pneumonia uncertain". Run classification on the
+impression_text column. If impression_text is empty, use findings_text. Truncate
+all inputs to 1024 tokens maximum, which is the context limit for BART-based
+models. Use a default batch size of 8 to safely manage VRAM on the RTX 4060
+8GB GPU. If no out-of-memory errors occur after the first few batches, the
+batch size may be increased to 12 to improve throughput. Do not exceed 12
+without active VRAM monitoring. Monitor VRAM usage throughout all batches and
+reduce the batch size immediately if an out-of-memory error occurs during
+processing.
+
+Step 2.14 — Assign LF5 Label
+Convert the model's highest-scoring candidate label to the corresponding Snorkel
+label using the following mapping: "pneumonia present" maps to POSITIVE,
+"pneumonia absent" maps to NEGATIVE, and "pneumonia uncertain" maps to
+UNCERTAIN. If the highest-scoring candidate achieves a confidence score below
+0.40, assign ABSTAIN instead of using the low-confidence prediction, as scores
+below this threshold indicate insufficient certainty to contribute a meaningful
+vote. After all batches are processed, delete the model object and call
+torch.cuda.empty_cache() to release GPU memory completely before any subsequent
+operation.
+
+--- Labeling Function 6 — Uncertainty Phrase Detector ---
+
+Step 2.15 — Build Uncertainty Detector
+Create a targeted detector that specifically identifies hedging language and
+clinical uncertainty markers using case-insensitive matching. The following
+phrases are included: cannot be excluded, possible, probable, may represent,
+differential includes, suspicious for, worrisome for, questionable, not
+excluded, could represent, cannot rule out, and concern for. Apply this
+detector to impression_text first, then to findings_text if impression_text
+is empty.
+
+Step 2.16 — Assign LF6 Label
+If any uncertainty phrase is found in the target section text, assign UNCERTAIN
+as the LF6 vote regardless of what any other labeling function produced for
+that report. The presence of clinical hedging language is treated as a
+definitive uncertainty signal that supersedes all other votes. If no uncertainty
+phrase is found anywhere in the target text, assign ABSTAIN and allow the
+remaining labeling functions to determine the label for this report.
+
+--- Snorkel Label Model ---
+
+Step 2.17 — Build the Snorkel Label Matrix
+Combine all six labeling function outputs into a label matrix where each row
+is one report and each column is one labeling function's vote. Include only
+reports that passed the pre-filter in Step 2.0. Encode all votes as integers
+using the following fixed mapping: POSITIVE = 1, NEGATIVE = 0, UNCERTAIN = 2,
+ABSTAIN = -1. Before proceeding to training, verify that no row has all six
+columns set to -1. The pre-filter in Step 2.0 guarantees this condition for
+any correctly implemented pipeline but the check must still be performed
+explicitly as a safeguard.
+
+Step 2.18 — Train the Snorkel Label Model
+Train the Snorkel LabelModel on the full label matrix. Because this pipeline
+defines three label classes — NEGATIVE = 0, POSITIVE = 1, UNCERTAIN = 2 —
+the LabelModel must be initialized with cardinality=3 before training begins.
+Omitting this parameter causes the LabelModel to default to binary
+classification with cardinality=2, which will produce incorrect probability
+distributions and silently corrupt all downstream soft scores. The label model
+learns the accuracy and correlation structure of each labeling function without
+requiring any manually labeled examples. It determines which labeling functions
+tend to agree, which tend to disagree, and how to weight each function's vote
+proportionally. Train using the following parameters: cardinality=3,
+n_epochs=500, lr=0.01, optimizer="adam", seed=42. The seed value of 42 must
+be set consistently here and in all other stochastic operations throughout the
+pipeline to ensure full reproducibility across repeated runs. Training runs
+entirely on CPU and uses approximately 8 to 10 gigabytes of system RAM, which
+is well within the 32 gigabytes available on this machine.
+
+Step 2.19 — Generate Soft Label Probabilities
+Use the trained LabelModel to call predict_proba on the full label matrix. This
+returns a probability distribution across all three label classes for each
+report, producing one probability value per class per row. Because the class
+encoding is NEGATIVE = 0, POSITIVE = 1, UNCERTAIN = 2, the POSITIVE class
+probability is located at column index 1 of the predict_proba output array.
+Extract predict_proba[:, 1] as the soft_score for each report. A soft_score
+close to 1.0 indicates strong positive signal with high agreement among
+labeling functions. A soft_score close to 0.0 indicates strong negative signal.
+A soft_score near 0.5 indicates significant disagreement among labeling
+functions and maximum uncertainty. Save these soft_scores alongside each
+study_id as snorkel_soft_scores.csv. After saving, merge this file with the
+pre-filter negatives from Step 2.0 to produce a complete soft score file that
+covers every report in the dataset.
+
+
+--------------------------------------------------------------------------------
+STAGE 3 — SOFT LABEL CONVERSION AND CONFIDENCE SCORING
+--------------------------------------------------------------------------------
+
+Purpose:
+Convert the continuous soft probability scores produced by Snorkel into three
+discrete label classes with associated confidence scores. Reports with high
+confidence scores become hard labels in the confident pool for model training.
+Reports with scores in the middle uncertainty range are routed to active
+learning in Stage 4 for targeted manual review.
+
+Step 3.1 — Apply Confidence Thresholds
+Apply the following thresholds to the soft probability scores from Stage 2.
+These thresholds are based on standard weak supervision practice where scores
+of 0.75 or above represent strong positive signal and scores of 0.25 or below
+represent strong negative signal, leaving the middle range as genuinely
+ambiguous cases requiring manual resolution. A score of 0.75 or above is
+classified as POSITIVE with high confidence. A score of 0.25 or below is
+classified as NEGATIVE with high confidence. A score strictly greater than
+0.25 and strictly less than 0.75 is classified as UNCERTAIN and is flagged
+for manual review in Stage 4. These three conditions are mutually exclusive
+and collectively exhaustive across all possible soft_score values, ensuring
+that every report in the dataset receives exactly one classification with no
+gaps or overlaps.
+
+Step 3.2 — Record Confidence Score
+For each report, record both the discrete label and the raw soft probability
+score as the soft_score column. The soft_score is retained in all downstream
+files for use as a label smoothing target during model training. Instead of
+training with hard binary targets of exactly 0.0 and 1.0, both the DenseNet-121
+model for PP1 and the progression model for PP2 use the soft_score directly as
+the training target, for example 0.88 for a strongly confident positive. Label
+smoothing with these values reduces model overconfidence and improves
+generalization to unseen data. Manually labeled reports from Stage 4 receive
+fixed soft_scores of 0.95 for a POSITIVE manual label, 0.05 for a NEGATIVE
+manual label, and 0.50 for an UNCERTAIN manual label, reflecting their
+gold-standard status with a conservative margin that avoids hard boundary
+values.
+
+Step 3.3 — Split into Confident and Uncertain Pools
+Create two separate DataFrames from the Stage 2 output. The confident pool
+contains all reports with soft_scores of 0.75 or above (labeled POSITIVE) or
+0.25 or below (labeled NEGATIVE). The uncertain pool contains all reports with
+soft_scores strictly greater than 0.25 and strictly less than 0.75 (labeled
+UNCERTAIN). Together these two conditions cover every possible soft_score value
+with no gaps between them. Save the confident pool as confident_pool.csv and
+the uncertain pool as uncertain_pool.csv.
+
+Step 3.4 — Check Class Balance
+Count the number of POSITIVE and NEGATIVE labels in the confident pool.
+If the ratio of the majority class to the minority class exceeds 3:1 in either
+direction, record this imbalance explicitly in a separate note file for use
+during model training. Class imbalance will be handled during model training
+using class-weighted loss functions or minority class oversampling, not during
+the labeling pipeline. A NEGATIVE-heavy imbalance is expected in MIMIC-CXR
+because pneumonia is less prevalent than normal chest findings in the clinical
+population and this realistic imbalance must be preserved in the label
+distribution.
+
+Step 3.5 — Threshold Sensitivity Check
+After completing Step 3.1, perform a sensitivity check to verify and document
+the threshold selection. Test two alternative threshold pairs: 0.70 and 0.30,
+and 0.80 and 0.20. For each pair, record the resulting confident pool size and
+uncertain pool size. Compare these numbers against the 0.75 and 0.25 results.
+If the 0.75/0.25 thresholds produce a confident pool that is less than half
+the size of the 0.70/0.30 pair or more than double the size of the 0.80/0.20
+pair, review and adjust the thresholds accordingly. Save all three comparison
+results as threshold_sensitivity.csv. Include this table in the research paper
+methodology section as quantitative justification for the chosen threshold
+values.
+
+
+--------------------------------------------------------------------------------
+STAGE 4 — ACTIVE LEARNING FOR UNCERTAIN CASES
+--------------------------------------------------------------------------------
+
+Purpose:
+Instead of discarding uncertain reports or randomly selecting reports to
+manually label, active learning identifies the reports where the pipeline is
+most confused and routes only those to manual review. This strategy makes
+manual annotation effort maximally efficient by concentrating human effort
+on the cases that provide the highest information value when labeled.
+
+Step 4.1 — Rank Uncertain Reports by Confusion Score
+For each report in the uncertain pool, calculate a confusion score defined as
+the absolute distance of its soft_score from 0.5. A soft_score of exactly 0.5
+represents maximum disagreement among all six labeling functions and a confusion
+score of 0.0. A soft_score further from 0.5 in either direction represents less
+disagreement and a higher confusion score. Sort the uncertain pool in ascending
+order of confusion score so that the most ambiguous reports appear first.
+
+Step 4.2 — Select Top 200 Most Uncertain Reports
+Select the top 200 reports from the sorted uncertain pool with confusion scores
+closest to 0.0. These are the reports where the six labeling functions disagreed
+most strongly with each other and provide the highest value when resolved
+through manual labeling. Export these 200 reports as active_learning_queue.csv
+with the following columns: study_id, report_text, impression_text,
+findings_text, soft_score, LF1_vote, LF2_vote, LF3_vote, LF4_vote, LF5_vote,
+and LF6_vote.
+
+Step 4.3 — Manual Labeling of the 200 Reports
+Read each of the 200 selected reports carefully. Focus on the impression_text
+column and what the radiologist explicitly concluded. For each report, assign
+one of three labels: POSITIVE, NEGATIVE, or UNCERTAIN. Do not refer to the
+LF vote columns or the soft_score column during labeling to avoid anchoring
+bias. Assign UNCERTAIN only when the radiologist's own conclusion in the text
+is genuinely hedged and cannot be resolved to a binary classification even
+after thorough reading of both impression_text and findings_text. Save your
+manual labels in a new column called manual_label within the same file.
+This step takes approximately 3 to 5 hours.
+
+Important note on clinical validity: These 200 manually assigned labels are
+designated gold-standard in the final label set and receive increased weight
+during training. If access to a clinical collaborator or practicing radiologist
+is available, their review of ambiguous cases within the 200 is strongly
+recommended and must be documented in the research paper. If no clinical
+reviewer is available, the manual labeling must be conducted with maximum care
+and the following limitation statement must appear explicitly in the research
+paper methodology section: manual labels were assigned by a researcher without
+clinical credentials and represent best-effort interpretation of
+radiologist-authored report text rather than independent clinical diagnosis.
+
+Step 4.4 — Merge Manual Labels Back
+Merge the manually labeled 200 reports back into the confident pool. Replace
+the pipeline-generated label for each of these 200 reports with the value in
+the manual_label column. Override the soft_score for each manually labeled
+report with fixed values as follows: POSITIVE manual labels receive a
+soft_score of 0.95, NEGATIVE manual labels receive a soft_score of 0.05, and
+UNCERTAIN manual labels receive a soft_score of 0.50. These overrides reflect
+the gold-standard status of manual labels while maintaining compatibility with
+the label smoothing approach used during model training. Reports from the 200
+that received an UNCERTAIN manual label are excluded from the combined label
+set and will not enter model training.
+
+Step 4.5 — Final Combined Label Set
+Combine the confident pool pipeline labels and the manually resolved labels
+from the 200 active learning reports into one final label DataFrame. Assign a
+label_source column with the value "pipeline" for Snorkel-derived labels,
+"pre_filter" for labels assigned in Step 2.0, and "manual" for the 200
+manually labeled reports. Remove all rows with a label of UNCERTAIN before
+saving, as UNCERTAIN labels are excluded from model training. The remaining
+POSITIVE and NEGATIVE labels constitute the complete and final label set.
+Save as final_pneumonia_labels.csv with columns: subject_id, study_id, label,
+soft_score, and label_source. This file is the complete label reference for
+both PP1 and PP2 training.
+
+
+--------------------------------------------------------------------------------
+STAGE 5 — MANUAL VALIDATION AND COHEN'S KAPPA
+--------------------------------------------------------------------------------
+
+Purpose:
+Before using the labels for model training, independently validate their quality
+by comparing a random sample of pipeline-generated labels against manually
+assigned labels from a separate annotator session. Cohen's Kappa measures
+inter-annotator agreement between the pipeline and the manual reader and
+provides quantitative evidence of label reliability for the research paper.
+This stage is entirely independent of Stage 4 and uses a separate random sample
+that does not overlap with the 200 active learning reports.
+
+Step 5.1 — Sample 300 Random Reports for Validation
+From the confident pool reports only, explicitly excluding all 200 study_ids
+that were manually reviewed in Stage 4, randomly sample 300 reports using a
+fixed random seed of 42 for reproducibility. Sampling 300 reports rather than
+a smaller number provides stronger statistical power for the Kappa calculation
+and is more defensible during research paper peer review given the full size
+of the MIMIC-CXR dataset. Export these 300 reports with their study_ids,
+impression_text, and findings_text columns only. Do not include the pipeline
+labels in this export file. Manual labeling in Step 5.2 must be performed
+without any knowledge of the pipeline's assigned labels for these reports.
+
+Step 5.2 — Manually Label the 300 Validation Reports
+Read each of the 300 sampled reports independently and assign POSITIVE,
+NEGATIVE, or UNCERTAIN based solely on your reading of the impression_text
+and findings_text columns. Do not refer to any pipeline labels, CheXpert
+labels, LF votes, or soft_scores during this step. Save your manual labels
+in a separate file called manual_validation_labels.csv with exactly two
+columns: study_id and manual_label.
+
+Step 5.3 — Calculate Cohen's Kappa
+Load manual_validation_labels.csv and join it to final_pneumonia_labels.csv
+on study_id to retrieve the pipeline labels for the same 300 reports. Compute
+Cohen's Kappa using sklearn.metrics.cohen_kappa_score with the pipeline labels
+as one annotator and your manual labels as the second annotator. Include all
+three label classes in the calculation. Interpret the result using the following
+scale: a Kappa score of 0.80 or above indicates strong agreement and confirms
+the pipeline is producing research-grade labels suitable for model training.
+A score between 0.60 and 0.79 indicates moderate agreement and requires a
+review of the confidence threshold settings in Stage 3 Step 3.1 before model
+training proceeds. A score below 0.60 indicates the pipeline requires structural
+adjustment and model training must not begin until a Kappa score of at least
+0.60 is achieved.
+
+Step 5.4 — Record and Report Kappa Score
+Record the final Cohen's Kappa score. Record the count and percentage of
+POSITIVE, NEGATIVE, and UNCERTAIN labels in the final_pneumonia_labels.csv
+dataset. Record the count of labels produced by each label_source category:
+pipeline, pre_filter, and manual. Save all of these figures as
+cohen_kappa_validation.csv. The Kappa score, the class distribution table, and
+the label source breakdown must all appear in the methodology section of the
+research paper as evidence of labeling pipeline quality and transparency.
+
+
+--------------------------------------------------------------------------------
+STAGE 6 — CONNECT LABELS TO IMAGES USING STUDY_ID
+--------------------------------------------------------------------------------
+
+Purpose:
+The labeling pipeline works on text reports. The model training pipelines for
+PP1 and PP2 work on CXR images. This stage creates the final training-ready
+datasets by connecting each validated label to its corresponding CXR image
+using the shared study_id key. All UNCERTAIN labels are excluded at this stage.
+Only POSITIVE and NEGATIVE labels enter the training datasets.
+
+Step 6.1 — Load Final Labels
+Load final_pneumonia_labels.csv which contains subject_id, study_id, label,
+soft_score, and label_source for every labeled report. Before proceeding,
+explicitly verify that only POSITIVE and NEGATIVE label values are present in
+the label column. If any UNCERTAIN labels remain from a prior step, remove them
+now. Do not proceed with UNCERTAIN labels present in this file.
+
+Step 6.2 — Load MIMIC-CXR Image Metadata
+Load mimic-cxr-2.0.0-split.csv which contains subject_id, study_id, dicom_id,
+and split for every image in the dataset. The split column assigns each image
+to the train, validate, or test set using the official MIMIC-CXR splits, which
+must be preserved exactly as defined to enable fair comparison with other
+published models. Additionally load mimic-cxr-2.0.0-metadata.csv which contains
+the ViewPosition and StudyDate columns for every image. The ViewPosition column
+classifies each image as PA (posteroanterior), AP (anteroposterior), or LL
+(lateral).
+
+Step 6.2a — Filter to Frontal Views and Deduplicate
+MIMIC-CXR contains multiple views per study including frontal and lateral CXR
+images. For pneumonia detection training, only frontal views must be used
+because pneumonia findings are clinically assessed on frontal chest radiographs.
+Filter the image metadata to keep only rows where ViewPosition is PA or AP.
+Remove all rows where ViewPosition is LL or any other non-frontal value.
+This step is mandatory. Including lateral views trains the model on anatomically
+different images that do not reflect how pneumonia diagnosis is performed
+clinically and will produce unreliable predictions.
+
+After filtering to frontal views only, apply the following two deduplication
+rules within each study_id to ensure exactly one image per study enters the
+training dataset:
+
+Rule 1: If a study contains both PA and AP views, discard all AP rows and
+retain only PA rows. PA images are higher diagnostic quality because the
+patient stands and the chest is closer to the detector, producing a sharper
+image with less magnification.
+
+Rule 2: If a study still contains more than one image row after applying
+Rule 1 (indicating multiple PA views exist for the same study), retain only
+the row with the lowest dicom_id value as a deterministic tiebreaker. This
+ensures reproducibility across repeated pipeline runs.
+
+After applying both rules, verify that each study_id maps to exactly one image
+row in the filtered metadata. If any study_id maps to zero rows after filtering,
+that study is excluded from the training dataset and its exclusion is logged.
+
+Step 6.2b — Confirm Absence of Uncertain Labels
+Perform an inner join preview between the filtered image metadata and
+final_pneumonia_labels.csv on study_id. Confirm that no UNCERTAIN labels appear
+in the joined result. If any are found, remove them before proceeding to the
+full merge in Step 6.3.
+
+Step 6.3 — Merge on study_id
+Perform an inner join between the final labels DataFrame and the frontal-filtered
+deduplicated image metadata DataFrame on the study_id column. This produces a
+unified DataFrame where each row contains: subject_id, study_id, dicom_id,
+label, soft_score, label_source, view_position, and split. Only study_ids that
+appear in both files are retained. Study_ids present in the labels file but
+absent from the filtered image metadata are silently dropped. Log the count of
+dropped study_ids for inclusion in the research paper data section.
+
+Step 6.4 — Build Image File Paths
+Add a column called image_path by constructing the full file path for each
+image using the MIMIC-CXR JPG base directory, the subject_id folder structure,
+and the dicom_id filename with a .jpg extension, following the MIMIC-CXR JPG
+directory hierarchy. After building all paths, verify that each file exists on
+disk using a file existence check on every row. Remove any rows where the image
+file is not found on disk and log the count of removed rows.
+
+Step 6.5 — Save Final Training Dataset
+Save the final merged DataFrame as training_dataset.csv. This file has exactly
+one row per image and contains the following columns: subject_id, study_id,
+dicom_id, image_path, label, soft_score, label_source, view_position, and
+split. This file is the complete and final input to the DenseNet-121 training
+pipeline for PP1 and to the progression modeling pipeline for PP2 single-study
+training.
+
+Step 6.6 — For PP2 — Add Serial Sequence Grouping
+For PP2 only, perform an additional grouping step to produce patient-level
+progression sequences for LSTM training. Load the StudyDate column from
+mimic-cxr-2.0.0-metadata.csv which contains the study acquisition date in
+YYYY-MM-DD format. When loading this column, apply pd.to_datetime(errors='coerce')
+to handle the rare cases in MIMIC-CXR where StudyDate values are missing or
+malformed. Rows where StudyDate cannot be parsed will have a NaT value after
+conversion and must be excluded from PP2 sequences before sorting, as
+chronological ordering cannot be guaranteed without a valid date. Merge this
+date information into the training dataset using study_id as the join key.
+
+Sort all rows first by subject_id in ascending order and then by StudyDate in
+ascending chronological order within each patient group, so that the earliest
+study always appears first and the most recent study always appears last in
+every sequence.
+
+Group all studies belonging to the same patient into a single record. Include
+only patients who have two or more studies with valid frontal images and either
+POSITIVE or NEGATIVE labels to form a valid progression sequence. Patients with
+only one qualifying study cannot demonstrate radiological progression and must
+be excluded from PP2 sequences, though they remain in training_dataset.csv for
+PP1 training without modification.
+
+Save the PP2 sequences as pp2_sequences.json. JSON format is used instead of
+CSV because storing ordered Python lists inside CSV cells causes silent data
+corruption when reloading with pandas, as list values are stored as raw strings
+and require manual parsing that introduces brittle dependencies. JSON preserves
+list structure natively and reloads correctly using Python's json module or
+pandas read_json without any custom parsing.
+
+Each record in pp2_sequences.json uses the following exact structure:
+
+{
+  "subject_id": "10000032",
+  "study_ids": ["s50414267", "s53189527", "s58857458"],
+  "study_dates": ["2180-03-06", "2180-04-12", "2180-05-01"],
+  "image_paths": ["/path/to/image_a.jpg", "/path/to/image_b.jpg", "/path/to/image_c.jpg"],
+  "labels": ["NEGATIVE", "NEGATIVE", "POSITIVE"],
+  "soft_scores": [0.11, 0.14, 0.83]
+}
+
+Save the full list of all patient sequence records as pp2_sequences.json. When
+loading this file for PP2 model training, use Python's json.load or pandas
+read_json directly. No string parsing or ast.literal_eval is required.
+
+
+--------------------------------------------------------------------------------
+FINAL OUTPUT FILES
+--------------------------------------------------------------------------------
+
+File 1: master_reports.csv
+Contains: subject_id, study_id, report_text
+Used for: retained as reproducibility reference for Stage 1 input
+
+File 2: parsed_reports.csv
+Contains: subject_id, study_id, report_text, impression_text, findings_text,
+          history_text
+Used for: primary input to all six labeling functions in Stage 2
+
+File 3: prefilter_negatives.csv
+Contains: subject_id, study_id, label (NEGATIVE), soft_score (0.02),
+          label_source (pre_filter)
+Used for: merged into final_pneumonia_labels.csv in Stage 4 Step 4.5
+
+File 4: snorkel_soft_scores.csv
+Contains: subject_id, study_id, soft_score from Snorkel LabelModel
+Used for: input to Stage 3 confidence threshold conversion
+
+File 5: confident_pool.csv
+Contains: subject_id, study_id, label, soft_score
+Used for: input to Stage 4 merge and Stage 5 validation sampling
+
+File 6: uncertain_pool.csv
+Contains: subject_id, study_id, soft_score
+Used for: input to Stage 4 active learning queue construction
+
+File 7: threshold_sensitivity.csv
+Contains: threshold pairs tested, confident pool size, uncertain pool size
+Used for: research paper justification of chosen threshold values
+
+File 8: active_learning_queue.csv
+Contains: study_id, report_text, impression_text, findings_text, soft_score,
+          LF1_vote, LF2_vote, LF3_vote, LF4_vote, LF5_vote, LF6_vote
+Used for: Stage 4 manual labeling of the 200 most uncertain reports
+
+File 9: final_pneumonia_labels.csv
+Contains: subject_id, study_id, label, soft_score, label_source
+Label values: POSITIVE and NEGATIVE only — no UNCERTAIN labels present
+label_source values: pipeline, pre_filter, or manual
+Used for: primary label reference for both PP1 and PP2 training
+
+File 10: training_dataset.csv
+Contains: subject_id, study_id, dicom_id, image_path, label, soft_score,
+          label_source, view_position, split
+Label values: POSITIVE and NEGATIVE only — frontal views only — one row per study
+Used for: PP1 DenseNet-121 training and PP2 single-study progression training
+
+File 11: pp2_sequences.json
+Contains: per-patient records with subject_id, ordered study_ids, study_dates,
+          image_paths, labels, and soft_scores
+Patients: two or more qualifying studies only — chronological order guaranteed
+Used for: PP2 LSTM progression model training
+
+File 12: manual_validation_labels.csv
+Contains: study_id, manual_label for the 300 independently labeled validation
+          reports from Stage 5
+Used for: Cohen's Kappa calculation in Stage 5 Step 5.3
+
+File 13: cohen_kappa_validation.csv
+Contains: study_id, pipeline_label, manual_label for all 300 validation reports
+          plus Cohen's Kappa score, class distribution counts and percentages,
+          and label source breakdown for all three source categories
+Used for: required reporting in the research paper methodology section
+
+Key Input Files from MIMIC-CXR required across all pipeline stages:
+- mimic-cxr-reports/              all free-text radiology reports by subject_id
+- mimic-cxr-2.0.0-split.csv       study_id to dicom_id and split assignments
+- mimic-cxr-2.0.0-chexpert.csv    original CheXpert labels for LF3 reference
+- mimic-cxr-2.0.0-metadata.csv    ViewPosition and StudyDate for every image
+
+
+--------------------------------------------------------------------------------
+HARDWARE NOTES FOR IMPLEMENTATION
+--------------------------------------------------------------------------------
+
+RTX 4060 8GB VRAM management is critical throughout Stage 2. The only labeling
+function that uses the GPU is LF5. The model used for LF5 is
+facebook/bart-large-mnli, which occupies approximately 2 to 3 gigabytes of
+VRAM. Load this model onto the GPU by passing device=0 to the pipeline
+constructor. After all batches are processed, explicitly delete the model
+object and call torch.cuda.empty_cache() to release GPU memory completely
+before any other operation. Do not load any other model onto the GPU while
+LF5 is active.
+
+The following two models are not part of the labeling pipeline and must not
+be confused with LF5:
+
+RadBERT (zzxslp/RadBERT-RoBERTa-4m) is not used in the labeling pipeline
+because it is a masked language model without an NLI fine-tuning stage. It
+cannot produce valid zero-shot classification scores and would silently corrupt
+LF5 votes if substituted here.
+
+BioBERT is not part of the labeling pipeline. It is used later during PP2
+model training for encoding radiology report text and is entirely separate from
+the labeling stage described in this document.
+
+All other labeling functions (LF1 through LF4 and LF6) and the Snorkel
+LabelModel training in Step 2.18 run entirely on CPU. Snorkel LabelModel
+training uses approximately 8 to 10 gigabytes of system RAM, which is well
+within the 32 gigabytes available. Section parsing, keyword matching, NegEx
+negation detection, CheXpert reference loading, section weight logic, and
+uncertainty phrase detection all complete quickly on CPU.
+
+Reproducibility: set the random seed to 42 consistently across all libraries
+at the very start of the pipeline script before any other code runs:
+
+    import random; random.seed(42)
+    import numpy as np; np.random.seed(42)
+    import torch; torch.manual_seed(42)
+
+This ensures that the Snorkel LabelModel training, the Stage 4 active learning
+sampling, and the Stage 5 validation sampling all produce identical results
+across repeated runs on the same machine.
+
+The full automated pipeline can be started before sleep and will complete by
+morning. Manual labeling for Stage 4 (200 reports, approximately 3 to 5 hours)
+and Stage 5 (300 reports, approximately 4 to 6 hours) must be completed in
+separate dedicated sessions and must not be rushed, as these labels directly
+determine the final quality of all training data for PP1 and PP2.
+
+
+================================================================================
+END OF DOCUMENT
+================================================================================

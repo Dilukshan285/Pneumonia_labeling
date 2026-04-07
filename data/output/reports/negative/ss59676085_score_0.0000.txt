@@ -1,0 +1,14 @@
+Study ID: s59676085
+Label: 0
+Soft Score: 0.0000
+View: PA
+
+==================================================
+IMPRESSION:
+No acute cardiopulmonary process.
+
+==================================================
+FINDINGS:
+The lungs are well-expanded and clear.  There is no focal consolidation,
+ effusion, or pneumothorax.  Cardiac and mediastinal contours are normal. 
+ Osseous structures are unremarkable.

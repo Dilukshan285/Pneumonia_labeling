@@ -1,0 +1,22 @@
+Study ID: s58464082
+Label: 1
+Soft Score: 1.0000
+View: AP
+
+==================================================
+IMPRESSION:
+1. COPD and cardiomegaly.
+ 2. Mild vascular plethora consistent with mild CHF.
+ 3. Patchy opacity left base consistent with atelectasis, the differential
+ diagnosis includes infectious infiltrate or changes due to aspiration.
+
+==================================================
+FINDINGS:
+were discussed by Dr. ___ with Dr. ___ on the telephone on
+  ___ at 12:56 AM, 2 minutes after discovery of the findings. were discussed by Dr. ___ with Dr. ___ on the telephone on
+  ___ at 12:56 AM, 2 minutes after discovery of the findings.
+ ______________________________________________________________________________ There is probable background hyperinflation/COPD.  The cardiomediastinal
+ silhouette is enlarged.  There is mild pulmonary vascular congestion.  There
+ is increased retrocardiac opacity.  While this could represent atelectasis,
+ the differential diagnosis includes infection or aspiration.  Minimal
+ atelectasis at the right base is also present.  No gross effusion.

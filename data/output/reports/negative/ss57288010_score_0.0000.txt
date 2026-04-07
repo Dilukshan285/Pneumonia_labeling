@@ -1,0 +1,15 @@
+Study ID: s57288010
+Label: 0
+Soft Score: 0.0000
+View: PA
+
+==================================================
+IMPRESSION:
+No acute cardiopulmonary process.
+
+==================================================
+FINDINGS:
+Frontal and lateral views of the chest were obtained.  The patient
+ is rotated slightly to the left.  No focal consolidation, pleural effusion, or
+ evidence of pneumothorax is seen.  There is minimal right base atelectasis. 
+ The cardiac silhouette is top normal.  There is mild thoracic scoliosis.

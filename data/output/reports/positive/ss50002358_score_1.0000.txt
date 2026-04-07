@@ -1,0 +1,19 @@
+Study ID: s50002358
+Label: 1
+Soft Score: 1.0000
+View: AP
+
+==================================================
+IMPRESSION:
+In comparison with the study of ___, there again are low lung volumes with
+ increased opacification at the bases consistent with pleural effusion and
+ underlying compressive atelectasis.  Mild elevation of pulmonary venous
+ pressure is again seen.  Left IJ catheter again extends to the mid portion of
+ the SVC.
+ In the absence of a lateral view, superimposed pneumonia would have to be
+ considered in the appropriate clinical setting.
+
+==================================================
+FINDINGS:
+. .
+ ______________________________________________________________________________

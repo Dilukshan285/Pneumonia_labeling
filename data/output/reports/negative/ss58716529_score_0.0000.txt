@@ -1,0 +1,16 @@
+Study ID: s58716529
+Label: 0
+Soft Score: 0.0000
+View: AP
+
+==================================================
+IMPRESSION:
+No radiographic evidence of pneumonia.
+
+==================================================
+FINDINGS:
+The cardiac silhouette is mildly enlarged. The mediastinal contours normal.  3
+ transvenous and pacing wires are noted, one ending in the right atrium and the
+ other is ending in the right ventricle.  There is no focal consolidation.
+ Streaky retrocardiac opacity likely represents atelectasis. There is no
+ evidence of pleural effusion or pneumothorax.

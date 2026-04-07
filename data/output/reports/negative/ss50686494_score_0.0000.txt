@@ -1,0 +1,17 @@
+Study ID: s50686494
+Label: 0
+Soft Score: 0.0000
+View: PA
+
+==================================================
+IMPRESSION:
+No acute cardiopulmonary process.
+
+==================================================
+FINDINGS:
+Left-sided pacemaker device is noted with leads terminating in the right
+ atrium and right ventricle.  Epicardial pacing leads are also in unchanged
+ positions.  The heart size is normal.  Mediastinal and hilar contours are
+ unremarkable.  Lungs are clear and the pulmonary vasculature is normal.  No
+ pleural effusion or pneumothorax is seen.  There are no acute osseous
+ abnormalities.

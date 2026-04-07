@@ -1,0 +1,16 @@
+Study ID: s57441110
+Label: 1
+Soft Score: 1.0000
+View: PA
+
+==================================================
+IMPRESSION:
+Interval complete resolution of right lower lobe pneumonia.
+
+==================================================
+FINDINGS:
+Frontal and lateral chest radiographs were obtained.
+ 
+ The previous right lower lobe opacity has essentially cleared.  There is no
+ new focal consolidation, pleural effusion, or pneumothorax.  The
+ cardiomediastinal silhouette and hilar contours are normal.

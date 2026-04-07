@@ -1,0 +1,20 @@
+Study ID: s56845699
+Label: 1
+Soft Score: 1.0000
+View: PA
+
+==================================================
+IMPRESSION:
+1.  Heterogeneous parenchymal opacity in the right lower lobe has increased in
+ density since the prior study, concerning for pulmonary hemorrhage or
+ increasing pneumonia.
+ 2.  Right pleural effusion has been drained and there is trace left pleural
+ fluid.
+
+==================================================
+FINDINGS:
+Since ___ the moderate right pleural effusion has resolved, with an
+ underlying heterogeneous opacity in the right lower lobe that has increased in
+ density, concerning for pulmonary parenchymal contusion/hemorrhage or
+ developing pneumonia. Heart size is normal and the lungs are otherwise clear. 
+ Trace left pleural effusion is again seen.

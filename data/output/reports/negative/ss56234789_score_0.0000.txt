@@ -1,0 +1,12 @@
+Study ID: s56234789
+Label: 0
+Soft Score: 0.0000
+View: PA
+
+==================================================
+IMPRESSION:
+No acute cardiopulmonary process.
+
+==================================================
+FINDINGS:
+Frontal and lateral views of the chest are compared to previous

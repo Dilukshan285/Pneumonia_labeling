@@ -1,0 +1,16 @@
+Study ID: s55709399
+Label: 1
+Soft Score: 1.0000
+View: AP
+
+==================================================
+IMPRESSION:
+Interval improvement in the ill-defined bilateral lower lobe airspace
+ opacities, possibly representing improving aspiration and or infectious
+ pneumonia.
+
+==================================================
+FINDINGS:
+As compared to ___, poorly defined opacities in the lower lobes
+ bilaterally have slightly improved.  There are associated small bilateral
+ effusions. The cardiac silhouette is unremarkable.  No pneumothorax.
