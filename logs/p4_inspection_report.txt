@@ -1,0 +1,308 @@
+================================================================================
+STEP P4 — REPORT INSPECTION RESULTS
+Sample size: 30 reports (random seed: 42)
+================================================================================
+
+--- Report 1/30 ---
+  Subject ID:  17356783
+  Study ID:    s59936520
+  Text length: 373 chars
+  Sections:    FINDINGS, IMPRESSION, HISTORY, TECHNIQUE, COMPARISON, FINAL REPORT
+  Chest terms: YES
+  Text preview (first 300 chars):
+    FINAL REPORT |  HISTORY:  Cough and crackles in left lower lung.   |   |  TECHNIQUE:  Frontal and lateral views of the chest.   |   |  COMPARISON:  None  |   |  FINDINGS: |   |  The lungs are clear.  The cardiomediastinal silhouette and hilar contours are |  within normal limits.  The pleural surfaces are clear without
+
+--- Report 2/30 ---
+  Subject ID:  11281568
+  Study ID:    s57952766
+  Text length: 524 chars
+  Sections:    FINDINGS, CLINICAL HISTORY, HISTORY, FINAL REPORT
+  Chest terms: YES
+  Text preview (first 300 chars):
+    FINAL REPORT |  STUDY:  AP chest, ___. |   |  CLINICAL HISTORY:  ___-year-old man with toxoplasmosis, intubated with |  respiratory failure. |   |  FINDINGS:  Comparison is made to the previous study from ___. |   |  There is an endotracheal tube whose tip is 3.8 cm below the carina, |  appropriately sited.  There ar
+
+--- Report 3/30 ---
+  Subject ID:  10291098
+  Study ID:    s55245325
+  Text length: 529 chars
+  Sections:    IMPRESSION, INDICATION, EXAMINATION, FINAL REPORT
+  Chest terms: YES
+  Text preview (first 300 chars):
+    FINAL REPORT |  EXAMINATION:  CHEST (PORTABLE AP) |   |  INDICATION:  ___ year old man with s/p MCCfound to have Lefort III fracture, |  mandibular fracture, bilateral first rib fractures, cerebral right frontal |  contusion.  // eval for interval change |   |  IMPRESSION:  |   |  As compared to ___ chest radiograph,
+
+--- Report 4/30 ---
+  Subject ID:  18550222
+  Study ID:    s54486178
+  Text length: 1116 chars
+  Sections:    FINDINGS, IMPRESSION, HISTORY, TECHNIQUE, FINAL REPORT
+  Chest terms: YES
+  Text preview (first 300 chars):
+    FINAL REPORT |  CHEST RADIOGRAPHS |   |  HISTORY:  Worsening nocturnal dyspnea. |   |  COMPARISONS:  ___. |   |  TECHNIQUE:  Chest, PA and lateral. |   |  FINDINGS:  A dual lead pacemaker/ICD device with leads terminating in the |  right atrium and ventricle, apparently via an anomalous left-sided superior |  vena cava, 
+
+--- Report 5/30 ---
+  Subject ID:  13184997
+  Study ID:    s54403438
+  Text length: 904 chars
+  Sections:    FINDINGS, IMPRESSION, INDICATION, TECHNIQUE, COMPARISON, FINAL REPORT
+  Chest terms: YES
+  Text preview (first 300 chars):
+    FINAL REPORT |  INDICATION:  Cough, shortness of breath, and fever, here to evaluate for acute |  cardiopulmonary process. |   |  COMPARISON:  Chest radiograph dated ___. |   |  TECHNIQUE:  Upright AP radiograph of the chest. |   |  FINDINGS:  There is increased density in the right hilar region and streaky |  opacif
+
+--- Report 6/30 ---
+  Subject ID:  12808803
+  Study ID:    s57620423
+  Text length: 458 chars
+  Sections:    FINDINGS, HISTORY, FINAL REPORT
+  Chest terms: YES
+  Text preview (first 300 chars):
+    FINAL REPORT |  HISTORY:  NG tube placement. |   |  FINDINGS:  The NG tube extends at least to the mid body of the stomach.  The |  side hole is probably just below the esophagogastric junction. |   |  There is some suggested increased opacification at the bases.  This could |  represent increased pulmonary venou
+
+--- Report 7/30 ---
+  Subject ID:  12578079
+  Study ID:    s53266091
+  Text length: 736 chars
+  Sections:    IMPRESSION, INDICATION, COMPARISON, EXAMINATION, FINAL REPORT
+  Chest terms: YES
+  Text preview (first 300 chars):
+    FINAL REPORT |    The mid if it would need for the mid and the and the and the. |   |  EXAMINATION:  CHEST (PA AND LAT) |   |  INDICATION:  ___ year old woman with COPD, recent PNA - with LLL collapse, |  assess for improvement  // assess for interval change     assess for interval |  change |   |  COMPARISON:  Chest
+
+--- Report 8/30 ---
+  Subject ID:  11636169
+  Study ID:    s57610437
+  Text length: 492 chars
+  Sections:    FINDINGS, INDICATION, COMPARISON, FINAL REPORT
+  Chest terms: YES
+  Text preview (first 300 chars):
+    FINAL REPORT |  CHEST RADIOGRAPH |   |  INDICATION:  Endotracheal tube placement. |   |  COMPARISON:  ___, 4:38 p.m. |   |  FINDINGS:  As compared to the previous radiograph, lung volumes have |  increased, reflecting improved ventilation.  Unchanged position of the |  endotracheal tube and the nasogastric tube.  Unc
+
+--- Report 9/30 ---
+  Subject ID:  18481577
+  Study ID:    s52859836
+  Text length: 605 chars
+  Sections:    FINDINGS, IMPRESSION, HISTORY, TECHNIQUE, COMPARISON, FINAL REPORT
+  Chest terms: YES
+  Text preview (first 300 chars):
+    FINAL REPORT |  HISTORY:   ___ years old man with pineal mass and associated hydrocephalus.  VP |  shunt placement and fever, evaluation for pneumonia |   |  TECHNIQUE:  Chest x-ray in 2 projections. |   |  COMPARISON:  Exam compared to ___. |   |  FINDINGS: |   |  Compared to prior examination there are no new consoli
+
+--- Report 10/30 ---
+  Subject ID:  11216230
+  Study ID:    s57239326
+  Text length: 576 chars
+  Sections:    FINDINGS, IMPRESSION, INDICATION, TECHNIQUE, COMPARISON, FINAL REPORT
+  Chest terms: YES
+  Text preview (first 300 chars):
+    FINAL REPORT |  INDICATION:  ___-year-old female with vomiting.  Evaluate for acute process |  such as pneumonia. |   |  TECHNIQUE:  Frontal and lateral chest radiographs were obtained with the |  patient in the upright position. |   |  COMPARISON:  Chest radiograph from ___. |   |  FINDINGS:  |   |  No focal consolidati
+
+--- Report 11/30 ---
+  Subject ID:  17793580
+  Study ID:    s58783095
+  Text length: 429 chars
+  Sections:    FINDINGS, IMPRESSION, HISTORY, FINAL REPORT
+  Chest terms: YES
+  Text preview (first 300 chars):
+    FINAL REPORT |  CHEST, TWO VIEWS:  ___ |   |  HISTORY:  ___-year-old female with shortness of breath. |   |  FINDINGS:  PA and lateral views of the chest are compared to previous exam |  from ___.  The lungs are clear of consolidation or pulmonary |  vascular congestion or effusion.  Cardiomediastinal silhouette 
+
+--- Report 12/30 ---
+  Subject ID:  18523218
+  Study ID:    s54626566
+  Text length: 551 chars
+  Sections:    FINDINGS, COMPARISON, FINAL REPORT
+  Chest terms: YES
+  Text preview (first 300 chars):
+    FINAL REPORT |  PORTABLE CHEST X-RAY OF ___ |   |  COMPARISON:  ___ radiograph. |   |  FINDINGS:  Stable cardiomegaly accompanied by worsening asymmetrically |  distributed bilateral airspace opacification, involving the left lung |  relatively diffusely and preferentially involving the mid and lower lung |  region
+
+--- Report 13/30 ---
+  Subject ID:  16252873
+  Study ID:    s55043129
+  Text length: 358 chars
+  Sections:    EXAMINATION, FINAL REPORT
+  Chest terms: YES
+  Text preview (first 300 chars):
+    FINAL REPORT |  REASON FOR EXAMINATION:  Evaluation of the patient with pneumothorax and chest |  tube placement. |   |  AP radiograph of the chest was reviewed in comparison to ___. |   |  The pigtail catheter is in place.  Cardiomegaly is noted, substantial.  |  Thickening of the pleura on the right is re-demon
+
+--- Report 14/30 ---
+  Subject ID:  11028696
+  Study ID:    s55477087
+  Text length: 650 chars
+  Sections:    FINDINGS, IMPRESSION, CLINICAL HISTORY, HISTORY, COMPARISON, FINAL REPORT
+  Chest terms: YES
+  Text preview (first 300 chars):
+    FINAL REPORT |  CHEST RADIOGRAPH PERFORMED ON ___ |   |  COMPARISON:  Prior chest radiograph from ___ and chest CT from ___. |   |  CLINICAL HISTORY:  Dyspnea, assess for edema or pneumonia. |   |  FINDINGS:  AP upright and lateral views of the chest were provided.  |  Cardiomegaly is stable and moderate in overall
+
+--- Report 15/30 ---
+  Subject ID:  16805324
+  Study ID:    s58293257
+  Text length: 347 chars
+  Sections:    FINDINGS, IMPRESSION, INDICATION, TECHNIQUE, FINAL REPORT
+  Chest terms: YES
+  Text preview (first 300 chars):
+    FINAL REPORT |  INDICATION:  Fever to 102 and cough, assess for acute process. |   |  TECHNIQUE:  Radiographs of the chest. |   |  COMPARISONS:  None available. |   |  FINDINGS: The lungs are clear.  There is no pleural effusion or pneumothorax.  |  Heart is top normal in size.  Normal cardiomediastinal silhouette.
+
+--- Report 16/30 ---
+  Subject ID:  14881263
+  Study ID:    s57136539
+  Text length: 587 chars
+  Sections:    FINDINGS, CLINICAL HISTORY, HISTORY, FINAL REPORT
+  Chest terms: YES
+  Text preview (first 300 chars):
+    FINAL REPORT |  STUDY:  PA and lateral chest, ___. |   |  CLINICAL HISTORY:  ___-year-old woman with left-sided pleural effusion.  |  Evaluate interval change. |   |  FINDINGS:  Comparison is made to prior study from ___. |   |  There is a right IJ central line with distal lead tip at the cavoatrial |  junction.  The
+
+--- Report 17/30 ---
+  Subject ID:  10377337
+  Study ID:    s53874070
+  Text length: 872 chars
+  Sections:    IMPRESSION, INDICATION, COMPARISON, EXAMINATION, FINAL REPORT
+  Chest terms: YES
+  Text preview (first 300 chars):
+    FINAL REPORT |  EXAMINATION:  CHEST (PORTABLE AP) |   |  INDICATION:  ___F with history of several SBO's presenting with high grade SBO, |  hypotension and elevated lactate now s/p ex-lap.  // Interval assesment     |  Interval assesment |   |  COMPARISON:  Prior chest radiographs one ___ through ___. |   |  IMPRESSI
+
+--- Report 18/30 ---
+  Subject ID:  10347064
+  Study ID:    s56951918
+  Text length: 893 chars
+  Sections:    FINDINGS, COMPARISON, FINAL REPORT
+  Chest terms: YES
+  Text preview (first 300 chars):
+    FINAL REPORT |  EXAM:  Chest, single supine AP portable view. |   |  CLINICAL INFORMATION:  ___-year-old female with history of 15-feet fall from |  horse with left renal laceration, multiple rib fractures with small |  pneumohemothorax. |   |  COMPARISON:  ___. |   |  FINDINGS:  Again seen are numerous left-sided ri
+
+--- Report 19/30 ---
+  Subject ID:  11119692
+  Study ID:    s59859175
+  Text length: 477 chars
+  Sections:    FINDINGS, IMPRESSION, INDICATION, HISTORY, TECHNIQUE, COMPARISON, EXAMINATION, FINAL REPORT
+  Chest terms: YES
+  Text preview (first 300 chars):
+    FINAL REPORT |  EXAMINATION:  CHEST (PA AND LAT) |   |  INDICATION:  History: ___M with left ankle fracture, needs cxr pre op  // Pre |  op |   |  TECHNIQUE:  Chest PA and lateral |   |  COMPARISON:  None. |   |  FINDINGS:  |   |  Heart size is normal.  The mediastinal and hilar contours are normal. The |  pulmonary vasculat
+
+--- Report 20/30 ---
+  Subject ID:  12503324
+  Study ID:    s57084221
+  Text length: 462 chars
+  Sections:    EXAMINATION, FINAL REPORT
+  Chest terms: YES
+  Text preview (first 300 chars):
+    FINAL REPORT |  REASON FOR EXAMINATION:  Evaluation of the patient with myelodysplastic |  syndrome, new fever and cough. |   |  AP radiograph of the chest was reviewed in comparison to ___ |   |  The right PICC line tip is at the level of cavoatrial junction.  Bibasal |  consolidations and atelectasis appear to 
+
+--- Report 21/30 ---
+  Subject ID:  12685954
+  Study ID:    s50019661
+  Text length: 1229 chars
+  Sections:    FINDINGS, IMPRESSION, INDICATION, EXAMINATION, FINAL REPORT
+  Chest terms: YES
+  Text preview (first 300 chars):
+    FINAL REPORT |  TYPE OF EXAMINATION:  Chest PA and lateral. |   |  INDICATION:  ___-year-old male patient with end-stage renal disease, prerenal |  transplant evaluation.  Assess cardiopulmonary abnormalities. |   |  FINDINGS:  PA and lateral chest views were obtained with patient in upright |  position.  The hea
+
+--- Report 22/30 ---
+  Subject ID:  15802145
+  Study ID:    s58370881
+  Text length: 320 chars
+  Sections:    EXAMINATION, FINAL REPORT
+  Chest terms: YES
+  Text preview (first 300 chars):
+    FINAL REPORT |  REASON FOR EXAMINATION:  Preoperative planning. |   |  PA and lateral upright chest radiographs were reviewed in comparison to ___. |   |  Heart size is mildly enlarged, especially the left ventricle, unchanged.  |  Mediastinum is stable.  Lungs are essentially clear.  There is no pleural |  effus
+
+--- Report 23/30 ---
+  Subject ID:  16935843
+  Study ID:    s50799689
+  Text length: 513 chars
+  Sections:    IMPRESSION, HISTORY, FINAL REPORT
+  Chest terms: YES
+  Text preview (first 300 chars):
+    FINAL REPORT |  PA AND LATERAL CHEST, ___   |   |  HISTORY:  A ___-year-old woman after mitral valve repair and a left atrial |  appendage ligation. |   |  IMPRESSION:  PA and lateral chest compared to ___: |   |  Moderate right pleural effusion is stable or slightly increased.  There is no |  appreciable right pneum
+
+--- Report 24/30 ---
+  Subject ID:  10306412
+  Study ID:    s54876602
+  Text length: 1110 chars
+  Sections:    FINDINGS, IMPRESSION, INDICATION, TECHNIQUE, COMPARISON, FINAL REPORT
+  Chest terms: YES
+  Text preview (first 300 chars):
+    FINAL REPORT |  INDICATION:  ___ year old man with cough  // shortness of breath, cough |   |  TECHNIQUE:  Chest PA and lateral |   |  COMPARISON:  ___ |   |  FINDINGS:  |   |  Cardiomediastinal contours are within normal limits without change. A |  peripheral subcentimeter nodular opacity at level of the right ninth p
+
+--- Report 25/30 ---
+  Subject ID:  16439649
+  Study ID:    s56148913
+  Text length: 516 chars
+  Sections:    EXAMINATION, FINAL REPORT
+  Chest terms: YES
+  Text preview (first 300 chars):
+    FINAL REPORT |  REASON FOR EXAMINATION:  ET tube placement. |   |  AP radiograph of the chest was reviewed in comparison to ___. |   |  The ET tube tip is approximately 5 cm above the carina.  The NG tube tip is in |  the stomach.  Heart size and mediastinum are unremarkable.  Left retrocardiac |  consolidation a
+
+--- Report 26/30 ---
+  Subject ID:  12297365
+  Study ID:    s52037169
+  Text length: 537 chars
+  Sections:    FINDINGS, IMPRESSION, INDICATION, COMPARISON, EXAMINATION, FINAL REPORT
+  Chest terms: YES
+  Text preview (first 300 chars):
+    FINAL REPORT |  EXAMINATION:  CHEST (AP AND LAT) |   |  INDICATION:  ___F with recent surgery on ___, presented with fever and |  chills. |   |  COMPARISON:  None |   |  FINDINGS:  |   |  AP upright and lateral views of the chest provided. |   |  There is no focal consolidation, effusion, or pneumothorax. The |  cardiomedias
+
+--- Report 27/30 ---
+  Subject ID:  18237734
+  Study ID:    s52653179
+  Text length: 615 chars
+  Sections:    FINDINGS, IMPRESSION, INDICATION, COMPARISON, FINAL REPORT
+  Chest terms: YES
+  Text preview (first 300 chars):
+    FINAL REPORT |  INDICATION:  Status post anterior cervical fusion and multiple spinal |  injuries, evaluate for interval change. |   |  COMPARISON:  Chest radiograph from ___. |   |  FINDINGS:  One portable AP upright view of the chest.  Endotracheal tube ends |  6 cm from the carina.  Extensive spinal hardware i
+
+--- Report 28/30 ---
+  Subject ID:  17473327
+  Study ID:    s54896078
+  Text length: 478 chars
+  Sections:    FINDINGS, IMPRESSION, INDICATION, COMPARISON, FINAL REPORT
+  Chest terms: YES
+  Text preview (first 300 chars):
+    FINAL REPORT |  INDICATION:  Preoperative assessment before right lower extremity debridement. |   |  COMPARISON:  Chest radiograph ___. |   |  FINDINGS:  The cardiomediastinal contours are normal. Slight increased soft |  tissue nodularity superior to the left hilus is present. There is no pleural |  effusion or
+
+--- Report 29/30 ---
+  Subject ID:  18063505
+  Study ID:    s55449300
+  Text length: 495 chars
+  Sections:    IMPRESSION, INDICATION, EXAMINATION, FINAL REPORT
+  Chest terms: YES
+  Text preview (first 300 chars):
+    FINAL REPORT |  EXAMINATION:  CHEST (PORTABLE AP) |   |  INDICATION:  ___ year old man with IPH  // dobhoff placement      dobhoff |  placement |   |  IMPRESSION:  |   |  In comparison with the study of ___, on the final image there is a Dopp |  off tube in place that is pointing upward to the fundus.  The opaque tip
+
+--- Report 30/30 ---
+  Subject ID:  16254738
+  Study ID:    s54607164
+  Text length: 814 chars
+  Sections:    FINDINGS, INDICATION, COMPARISON, FINAL REPORT
+  Chest terms: YES
+  Text preview (first 300 chars):
+    FINAL REPORT |  CHEST RADIOGRAPH |   |  INDICATION:  Fever and sputum, evaluation for pneumonia. |   |  COMPARISON:  ___. |   |  FINDINGS:  As compared to the previous radiograph, the monitoring and support |  devices are in unchanged position.  There are newly appeared massive bilateral |  parenchymal opacities, lik
+
+
+================================================================================
+SECTION FREQUENCY SUMMARY
+================================================================================
+
+  FINAL REPORT           30/30  (100.0%)  ##################################################
+  FINDINGS               21/30  ( 70.0%)  ###################################
+  IMPRESSION             19/30  ( 63.3%)  ###############################
+  COMPARISON             16/30  ( 53.3%)  ##########################
+  INDICATION             15/30  ( 50.0%)  #########################
+  EXAMINATION            11/30  ( 36.7%)  ##################
+  HISTORY                10/30  ( 33.3%)  ################
+  TECHNIQUE               8/30  ( 26.7%)  #############
+  CLINICAL HISTORY        3/30  ( 10.0%)  #####
+
+  Reports WITH chest/lung terminology:     30/30 (100.0%)
+  Reports WITHOUT chest/lung terminology:  0/30 (0.0%)
+
+================================================================================
+KEY OBSERVATIONS FOR STAGE 1 SECTION PARSING
+================================================================================
+
+  1. IMPRESSION section present in 19/30 reports (63.3%)
+     → This is the highest-priority section for labeling (weight=3)
+
+  2. FINDINGS section present in 21/30 reports (70.0%)
+     → Fallback target when IMPRESSION is missing (weight=2)
+
+  3. Reports with BOTH Impression + Findings: 14/30
+     Reports with NEITHER:                    4/30
+
+  4. Non-chest studies detected: 0/30
+     → These will be handled by the pre-filter in Stage 2 Step 2.0

@@ -1,0 +1,125 @@
+2026-04-06 12:49:01,334 | INFO | ======================================================================
+2026-04-06 12:49:01,334 | INFO | FINAL TRAINING LABEL EXTRACTION
+2026-04-06 12:49:01,334 | INFO | Snorkel Soft Scores + CheXpert 8-Disease Filter
+2026-04-06 12:49:01,334 | INFO | ======================================================================
+2026-04-06 12:49:01,334 | INFO |   Positive threshold: soft_score >= 0.75
+2026-04-06 12:49:01,335 | INFO |   Negative threshold: soft_score <= 0.25
+2026-04-06 12:49:01,335 | INFO |   Disease exclusions: 8 diseases
+2026-04-06 12:49:01,335 | INFO | 
+2026-04-06 12:49:01,335 | INFO | STEP 1: Loading Snorkel soft scores...
+2026-04-06 12:49:01,606 | INFO |   Total reports: 227,835
+2026-04-06 12:49:01,606 | INFO |   study_id format: ['s52067803', 's50536653', 's57344656']
+2026-04-06 12:49:01,607 | INFO |   soft_score range: [0.000000, 1.000000]
+2026-04-06 12:49:01,608 | INFO |   soft_score mean:  0.2537
+2026-04-06 12:49:01,614 | INFO |   Label sources: {'snorkel_lm': 159473, 'pre_filter': 64336, 'all_abstain': 4026}
+2026-04-06 12:49:01,614 | INFO | 
+2026-04-06 12:49:01,615 | INFO | STEP 2: Applying confidence thresholds...
+2026-04-06 12:49:01,646 | INFO |       POSITIVE:   42,923  (18.8%)
+2026-04-06 12:49:01,646 | INFO |       NEGATIVE:  160,149  (70.3%)
+2026-04-06 12:49:01,646 | INFO |      UNCERTAIN:   24,763  (10.9%)
+2026-04-06 12:49:01,646 | INFO | 
+2026-04-06 12:49:01,716 | INFO |   POSITIVE pool:   42,923
+2026-04-06 12:49:01,716 | INFO |   NEGATIVE candidates: 160,149
+2026-04-06 12:49:01,716 | INFO |   UNCERTAIN (excluded): 24,763
+2026-04-06 12:49:01,716 | INFO | 
+2026-04-06 12:49:01,716 | INFO | STEP 3: Loading CheXpert for 8-disease clean-negative filter...
+2026-04-06 12:49:01,860 | INFO |   CheXpert entries: 227,827
+2026-04-06 12:49:01,860 | INFO |   study_id format: ['s50414267', 's53189527', 's53911762']
+2026-04-06 12:49:01,860 | INFO |   Join check (500-sample overlap): 350
+2026-04-06 12:49:01,860 | INFO | 
+2026-04-06 12:49:01,860 | INFO |   Applying 8-disease filter (excluding mimicking diseases):
+2026-04-06 12:49:01,868 | INFO |     Atelectasis              :  56,135 studies with finding
+2026-04-06 12:49:01,876 | INFO |     Consolidation            :  15,109 studies with finding
+2026-04-06 12:49:01,883 | INFO |     Edema                    :  40,192 studies with finding
+2026-04-06 12:49:01,889 | INFO |     Lung Lesion              :   7,425 studies with finding
+2026-04-06 12:49:01,897 | INFO |     Lung Opacity             :  55,356 studies with finding
+2026-04-06 12:49:01,904 | INFO |     Pleural Effusion         :  60,114 studies with finding
+2026-04-06 12:49:01,911 | INFO |     Pleural Other            :   2,776 studies with finding
+2026-04-06 12:49:01,920 | INFO |     Pneumothorax             :  11,492 studies with finding
+2026-04-06 12:49:01,945 | INFO | 
+2026-04-06 12:49:01,945 | INFO |   Clean studies (no mimicking diseases): 99,184
+2026-04-06 12:49:01,945 | INFO |   Excluded studies:                      128,643
+2026-04-06 12:49:01,945 | INFO | 
+2026-04-06 12:49:02,028 | INFO |   [COMPARISON] Old 12-disease filter would keep: 73,465
+2026-04-06 12:49:02,028 | INFO |   [COMPARISON] New 8-disease filter keeps:       99,184
+2026-04-06 12:49:02,028 | INFO |   [COMPARISON] Additional negatives retained:    25,719
+2026-04-06 12:49:02,028 | INFO | 
+2026-04-06 12:49:02,028 | INFO | STEP 4: Filtering negative candidates...
+2026-04-06 12:49:02,253 | INFO |   Negative candidates not in CheXpert: 8
+2026-04-06 12:49:02,254 | INFO |   (These are pre-filter/all-abstain reports — treated as clean)
+2026-04-06 12:49:02,272 | INFO |   Negative candidates before filter: 160,149
+2026-04-06 12:49:02,272 | INFO |   Clean negatives after filter:      86,077
+2026-04-06 12:49:02,272 | INFO |   Excluded by disease filter:         74,072
+2026-04-06 12:49:02,272 | INFO | 
+2026-04-06 12:49:02,272 | INFO | STEP 5: Building final training label set...
+2026-04-06 12:49:02,619 | INFO |   Saved: C:\Users\dviya\Desktop\Pneumonia_labeling\data\output\final_training_labels.csv
+2026-04-06 12:49:02,619 | INFO | 
+2026-04-06 12:49:02,620 | INFO | ======================================================================
+2026-04-06 12:49:02,620 | INFO | FINAL TRAINING LABEL SUMMARY
+2026-04-06 12:49:02,620 | INFO | ======================================================================
+2026-04-06 12:49:02,620 | INFO |   POSITIVE:    42,923  (33.3%)
+2026-04-06 12:49:02,620 | INFO |   NEGATIVE:    86,077  (66.7%)
+2026-04-06 12:49:02,620 | INFO |   TOTAL:      129,000
+2026-04-06 12:49:02,620 | INFO |   NEG:POS ratio: 2.01:1
+2026-04-06 12:49:02,621 | INFO | 
+2026-04-06 12:49:02,621 | INFO |   Label source breakdown:
+2026-04-06 12:49:02,625 | INFO |     snorkel_lm: 108,807
+2026-04-06 12:49:02,625 | INFO |     pre_filter: 19,313
+2026-04-06 12:49:02,625 | INFO |     all_abstain: 880
+2026-04-06 12:49:02,625 | INFO | 
+2026-04-06 12:49:02,625 | INFO |   Soft score statistics:
+2026-04-06 12:49:02,630 | INFO |     POSITIVE: mean=0.9740  std=0.0522  min=0.7552  max=1.0000
+2026-04-06 12:49:02,638 | INFO |     NEGATIVE: mean=0.0319  std=0.0450  min=0.0000  max=0.2377
+2026-04-06 12:49:02,638 | INFO | 
+2026-04-06 12:49:02,639 | INFO |   Report accounting:
+2026-04-06 12:49:02,639 | INFO |     Total reports in dataset:      227,835
+2026-04-06 12:49:02,639 | INFO |     Excluded (uncertain scores):    24,763
+2026-04-06 12:49:02,639 | INFO |     Excluded (disease filter):      74,072
+2026-04-06 12:49:02,639 | INFO |     Final training labels:         129,000
+2026-04-06 12:49:02,639 | INFO |     Coverage:                     56.6%
+2026-04-06 12:49:02,639 | INFO | 
+2026-04-06 12:49:02,639 | INFO | ======================================================================
+2026-04-06 12:49:02,639 | INFO | SAMPLE VERIFICATION — 5 POSITIVE, 5 NEGATIVE
+2026-04-06 12:49:02,640 | INFO | ======================================================================
+2026-04-06 12:49:04,025 | INFO | 
+  --- POSITIVE samples ---
+2026-04-06 12:49:04,086 | INFO |   [s57466070] score=0.9969 src=snorkel_lm
+2026-04-06 12:49:04,086 | INFO |     IMPRESSION: In comparison with the study of ___, there is poor definition of the
+ medial portion of the left hemidiaphragm with blunting of the costophrenic
+ angle. This most likely reflects c
+2026-04-06 12:49:04,087 | INFO | 
+2026-04-06 12:49:04,087 | INFO |   [s56406916] score=0.8145 src=snorkel_lm
+2026-04-06 12:49:04,087 | INFO |     IMPRESSION: Increased fluid overload with increased right effusion.
+2026-04-06 12:49:04,087 | INFO | 
+2026-04-06 12:49:04,087 | INFO |   [s57990279] score=0.9898 src=snorkel_lm
+2026-04-06 12:49:04,087 | INFO |     IMPRESSION: Mild pulmonary edema has recurred and could obscure early pneumonia.  Mild
+ cardiomegaly is chronic.  No appreciable pleural effusion or pneumothorax. 
+ Right supraclavicular dual 
+2026-04-06 12:49:04,087 | INFO | 
+2026-04-06 12:49:04,087 | INFO |   [s50171855] score=0.9808 src=snorkel_lm
+2026-04-06 12:49:04,087 | INFO |     IMPRESSION: A left retrocardiac opacity could represent an early pneumonia or sequela of
+ aspiration. Short-term followup chest radiograph to document resolution is
+ recommended.
+2026-04-06 12:49:04,087 | INFO | 
+2026-04-06 12:49:04,087 | INFO |   [s55619172] score=0.8145 src=snorkel_lm
+2026-04-06 12:49:04,087 | INFO |     IMPRESSION: Mild asymmetric pulmonary edema, similar to that seen on the previous exam.
+2026-04-06 12:49:04,089 | INFO | 
+2026-04-06 12:49:04,095 | INFO | 
+  --- NEGATIVE samples ---
+2026-04-06 12:49:04,156 | INFO |   [s59677124] score=0.0200 src=pre_filter
+2026-04-06 12:49:04,156 | INFO |     IMPRESSION: No pneumothorax post chest tube removal.
+2026-04-06 12:49:04,156 | INFO | 
+2026-04-06 12:49:04,156 | INFO |   [s52363297] score=0.0696 src=snorkel_lm
+2026-04-06 12:49:04,157 | INFO |     IMPRESSION: No pneumothorax.
+2026-04-06 12:49:04,157 | INFO | 
+2026-04-06 12:49:04,157 | INFO |   [s57414439] score=0.0696 src=snorkel_lm
+2026-04-06 12:49:04,157 | INFO |     IMPRESSION: No acute intrathoracic process.
+2026-04-06 12:49:04,157 | INFO | 
+2026-04-06 12:49:04,157 | INFO |   [s52860881] score=0.0200 src=pre_filter
+2026-04-06 12:49:04,157 | INFO |     IMPRESSION: 
+2026-04-06 12:49:04,157 | INFO | 
+2026-04-06 12:49:04,158 | INFO |   [s51140571] score=0.0142 src=snorkel_lm
+2026-04-06 12:49:04,158 | INFO |     IMPRESSION: No acute findings, no signs of pneumoperitoneum.
+2026-04-06 12:49:04,158 | INFO | 
+2026-04-06 12:49:04,158 | INFO | Completed in 2.8 seconds
+2026-04-06 12:49:04,158 | INFO | Output: C:\Users\dviya\Desktop\Pneumonia_labeling\data\output\final_training_labels.csv

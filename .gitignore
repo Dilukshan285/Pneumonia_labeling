@@ -1,23 +1,10 @@
 # Virtual environment
 labeling_env/
 
-# Large data files (exceed GitHub 100MB limit)
-data/raw/
-data/intermediate/
-data/output/*.csv
-data/output/deprecated_v1_archive/
-data/*.zip
-
-# Zip archives
-*.zip
-
 # Python cache
 __pycache__/
 *.pyc
 *.pyo
-
-# Logs
-logs/
 
 # OS files
 Thumbs.db

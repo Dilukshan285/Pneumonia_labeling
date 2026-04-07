@@ -1,0 +1,1660 @@
+﻿======================================================================
+STAGE 2 ΓÇö STEPS 2.8 THROUGH 2.11 EXECUTION (v2.5)
+(LF3: CheXpert Reference + LF4: Section Weight Priority)
+======================================================================
+
+  KEYWORD_LIST_VERSION: v2.5
+
+Loading LF1+LF2 results from C:\Users\dviya\Desktop\Pneumonia_labeling\data\intermediate\lf1_lf2_results.csv...
+  Reports loaded: 163,499
+
+----------------------------------------------------------------------
+BASELINE ΓÇö LF1 & LF2 (from previous steps)
+----------------------------------------------------------------------
+  LF1 (Keywords):
+        POSITIVE:    37,943  (23.2%)
+        NEGATIVE:    64,063  (39.2%)
+       UNCERTAIN:    11,114  (6.8%)
+         ABSTAIN:    50,379  (30.8%)
+        Coverage:   113,120  (69.2%)
+
+  LF2 (NegEx):
+        POSITIVE:    32,551  (19.9%)
+        NEGATIVE:     2,688  (1.6%)
+       UNCERTAIN:         0  (0.0%)
+         ABSTAIN:   128,260  (78.4%)
+        Coverage:    35,239  (21.6%)
+
+----------------------------------------------------------------------
+STEP 2.8 ΓÇö LOADING ORIGINAL CHEXPERT LABELS
+----------------------------------------------------------------------
+
+  Loaded 227,827 unique CheXpert studies in 0.2s
+
+  CheXpert Pneumonia label distribution:
+        POSITIVE:    16,556  (7.3%)
+        NEGATIVE:    24,338  (10.7%)
+       UNCERTAIN:    18,291  (8.0%)
+         ABSTAIN:   168,642  (74.0%)
+
+----------------------------------------------------------------------
+STEP 2.9 ΓÇö MERGING LF3 LABELS INTO PIPELINE
+----------------------------------------------------------------------
+
+  Reports matched to CheXpert:        56,261  (34.4%)
+  Reports NOT in CheXpert (ABSTAIN):  107,238  (65.6%)
+
+  LF3 (CheXpert Reference):
+        POSITIVE:    15,770  (9.6%)
+        NEGATIVE:    23,924  (14.6%)
+       UNCERTAIN:    16,567  (10.1%)
+         ABSTAIN:   107,238  (65.6%)
+        Coverage:    56,261  (34.4%)
+
+----------------------------------------------------------------------
+CROSS-TABULATION: LF1 ├ù LF3
+----------------------------------------------------------------------
+  Cross-tabulation: LF1 (Keywords) (rows) ├ù LF3 (CheXpert) (cols)
+
+lf3_label  POSITIVE  NEGATIVE  UNCERTAIN  ABSTAIN     All
+lf1_label                                                
+POSITIVE      10132      1841       8111    17859   37943
+NEGATIVE       1561     20136       1014    41352   64063
+UNCERTAIN      2687       958       5313     2156   11114
+ABSTAIN        1390       989       2129    45871   50379
+All           15770     23924      16567   107238  163499
+
+  LF1 vs LF3 agreement (where both vote):
+    Both voted:      51,753
+    Agree:           35,581  (68.8%)
+    Disagree:        16,172  (31.2%)
+
+  Disagreement breakdown:
+    LF1=POSITIVE vs LF3=UNCERTAIN                   8,111
+    LF1=UNCERTAIN vs LF3=POSITIVE                   2,687
+    LF1=POSITIVE vs LF3=NEGATIVE                    1,841
+    LF1=NEGATIVE vs LF3=POSITIVE                    1,561
+    LF1=NEGATIVE vs LF3=UNCERTAIN                   1,014
+    LF1=UNCERTAIN vs LF3=NEGATIVE                     958
+
+----------------------------------------------------------------------
+STEPS 2.10-2.11 ΓÇö APPLYING LF4 (SECTION WEIGHT PRIORITY)
+----------------------------------------------------------------------
+
+  Processing 163,499 reports with section weight logic...
+  Priority: IMPRESSION (weight=3) > FINDINGS (weight=2)
+  If impression conflicts with findings ΓåÆ ALWAYS use impression
+
+python : 
+At line:1 char:1
++ python -m stage2_labeling.run_steps_2_8_to_2_11 2>&1 | Out-File -File ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+  LF4 section weight:   0%|          | 0/163499 [00:00<?, ?reports/s]
+  LF4 section weight:   0%|          | 130/163499 [00:00<02:06, 1287.48reports/s]
+  LF4 section weight:   0%|          | 300/163499 [00:00<01:46, 1526.85reports/s]
+  LF4 section weight:   0%|          | 455/163499 [00:00<01:47, 1522.91reports/s]
+  LF4 section weight:   0%|          | 628/163499 [00:00<01:41, 1602.14reports/s]
+  LF4 section weight:   0%|          | 793/163499 [00:00<01:40, 1612.44reports/s]
+  LF4 section weight:   1%|          | 968/163499 [00:00<01:38, 1658.45reports/s]
+  LF4 section weight:   1%|          | 1152/163499 [00:00<01:34, 1716.89reports/s]
+  LF4 section weight:   1%|          | 1324/163499 [00:00<01:34, 1715.45reports/s]
+  LF4 section weight:   1%|          | 1497/163499 [00:00<01:34, 1709.74reports/s]
+  LF4 section weight:   1%|          | 1674/163499 [00:01<01:33, 1725.14reports/s]
+  LF4 section weight:   1%|          | 1851/163499 [00:01<01:33, 1732.47reports/s]
+  LF4 section weight:   1%|          | 2025/163499 [00:01<01:37, 1654.28reports/s]
+  LF4 section weight:   1%|ΓûÅ         | 2197/163499 [00:01<01:36, 1666.91reports/s]
+  LF4 section weight:   1%|ΓûÅ         | 2380/163499 [00:01<01:34, 1709.54reports/s]
+  LF4 section weight:   2%|ΓûÅ         | 2552/163499 [00:01<01:34, 1706.32reports/s]
+  LF4 section weight:   2%|ΓûÅ         | 2723/163499 [00:01<01:36, 1670.38reports/s]
+  LF4 section weight:   2%|ΓûÅ         | 2893/163499 [00:01<01:35, 1678.57reports/s]
+  LF4 section weight:   2%|ΓûÅ         | 3062/163499 [00:01<01:37, 1653.82reports/s]
+  LF4 section weight:   2%|ΓûÅ         | 3228/163499 [00:01<01:37, 1645.64reports/s]
+  LF4 section weight:   2%|ΓûÅ         | 3393/163499 [00:02<01:39, 1605.06reports/s]
+  LF4 section weight:   2%|ΓûÅ         | 3554/163499 [00:02<01:41, 1580.90reports/s]
+  LF4 section weight:   2%|ΓûÅ         | 3713/163499 [00:02<01:42, 1552.98reports/s]
+  LF4 section weight:   2%|ΓûÅ         | 3889/163499 [00:02<01:39, 1608.21reports/s]
+  LF4 section weight:   2%|ΓûÅ         | 4070/163499 [00:02<01:35, 1666.85reports/s]
+  LF4 section weight:   3%|ΓûÄ         | 4238/163499 [00:02<01:37, 1625.42reports/s]
+  LF4 section weight:   3%|ΓûÄ         | 4401/163499 [00:02<01:38, 1615.30reports/s]
+  LF4 section weight:   3%|ΓûÄ         | 4570/163499 [00:02<01:37, 1633.23reports/s]
+  LF4 section weight:   3%|ΓûÄ         | 4736/163499 [00:02<01:37, 1632.90reports/s]
+  LF4 section weight:   3%|ΓûÄ         | 4916/163499 [00:02<01:34, 1674.58reports/s]
+  LF4 section weight:   3%|ΓûÄ         | 5084/163499 [00:03<01:37, 1631.80reports/s]
+  LF4 section weight:   3%|ΓûÄ         | 5248/163499 [00:03<01:39, 1598.12reports/s]
+  LF4 section weight:   3%|ΓûÄ         | 5409/163499 [00:03<01:41, 1555.55reports/s]
+  LF4 section weight:   3%|ΓûÄ         | 5580/163499 [00:03<01:38, 1595.96reports/s]
+  LF4 section weight:   4%|ΓûÄ         | 5743/163499 [00:03<01:38, 1603.28reports/s]
+  LF4 section weight:   4%|ΓûÄ         | 5919/163499 [00:03<01:35, 1646.77reports/s]
+  LF4 section weight:   4%|ΓûÄ         | 6084/163499 [00:03<01:42, 1531.78reports/s]
+  LF4 section weight:   4%|Γûì         | 6245/163499 [00:03<01:41, 1547.71reports/s]
+  LF4 section weight:   4%|Γûì         | 6418/163499 [00:03<01:38, 1599.41reports/s]
+  LF4 section weight:   4%|Γûì         | 6580/163499 [00:04<01:37, 1602.16reports/s]
+  LF4 section weight:   4%|Γûì         | 6742/163499 [00:04<01:37, 1600.12reports/s]
+  LF4 section weight:   4%|Γûì         | 6919/163499 [00:04<01:35, 1644.24reports/s]
+  LF4 section weight:   4%|Γûì         | 7088/163499 [00:04<01:34, 1656.39reports/s]
+  LF4 section weight:   4%|Γûì         | 7264/163499 [00:04<01:32, 1686.11reports/s]
+  LF4 section weight:   5%|Γûì         | 7449/163499 [00:04<01:30, 1730.77reports/s]
+  LF4 section weight:   5%|Γûì         | 7625/163499 [00:04<01:29, 1738.52reports/s]
+  LF4 section weight:   5%|Γûì         | 7806/163499 [00:04<01:28, 1754.01reports/s]
+  LF4 section weight:   5%|Γûì         | 8000/163499 [00:04<01:26, 1802.69reports/s]
+  LF4 section weight:   5%|Γûî         | 8181/163499 [00:04<01:27, 1766.71reports/s]
+  LF4 section weight:   5%|Γûî         | 8384/163499 [00:05<01:24, 1838.05reports/s]
+  LF4 section weight:   5%|Γûî         | 8569/163499 [00:05<01:29, 1729.83reports/s]
+  LF4 section weight:   5%|Γûî         | 8748/163499 [00:05<01:28, 1742.19reports/s]
+  LF4 section weight:   5%|Γûî         | 8924/163499 [00:05<01:29, 1722.35reports/s]
+  LF4 section weight:   6%|Γûî         | 9097/163499 [00:05<01:32, 1675.77reports/s]
+  LF4 section weight:   6%|Γûî         | 9266/163499 [00:05<01:32, 1660.30reports/s]
+  LF4 section weight:   6%|Γûî         | 9446/163499 [00:05<01:31, 1692.21reports/s]
+  LF4 section weight:   6%|Γûî         | 9617/163499 [00:05<01:30, 1693.95reports/s]
+  LF4 section weight:   6%|Γûî         | 9807/163499 [00:05<01:27, 1749.65reports/s]
+  LF4 section weight:   6%|Γûî         | 9983/163499 [00:06<01:30, 1692.09reports/s]
+  LF4 section weight:   6%|Γûî         | 10157/163499 [00:06<01:30, 1702.00reports/s]
+  LF4 section weight:   6%|Γûï         | 10328/163499 [00:06<01:33, 1635.09reports/s]
+  LF4 section weight:   6%|Γûï         | 10528/163499 [00:06<01:28, 1734.89reports/s]
+  LF4 section weight:   7%|Γûï         | 10704/163499 [00:06<01:27, 1737.08reports/s]
+  LF4 section weight:   7%|Γûï         | 10890/163499 [00:06<01:26, 1772.88reports/s]
+  LF4 section weight:   7%|Γûï         | 11095/163499 [00:06<01:22, 1849.59reports/s]
+  LF4 section weight:   7%|Γûï         | 11281/163499 [00:06<01:24, 1810.26reports/s]
+  LF4 section weight:   7%|Γûï         | 11463/163499 [00:06<01:25, 1782.37reports/s]
+  LF4 section weight:   7%|Γûï         | 11642/163499 [00:06<01:25, 1774.85reports/s]
+  LF4 section weight:   7%|Γûï         | 11828/163499 [00:07<01:24, 1795.57reports/s]
+  LF4 section weight:   7%|Γûï         | 12008/163499 [00:07<01:29, 1701.63reports/s]
+  LF4 section weight:   7%|Γûï         | 12193/163499 [00:07<01:26, 1742.94reports/s]
+  LF4 section weight:   8%|Γûè         | 12369/163499 [00:07<01:27, 1720.88reports/s]
+  LF4 section weight:   8%|Γûè         | 12542/163499 [00:07<01:28, 1710.96reports/s]
+  LF4 section weight:   8%|Γûè         | 12730/163499 [00:07<01:25, 1754.97reports/s]
+  LF4 section weight:   8%|Γûè         | 12906/163499 [00:07<01:31, 1643.87reports/s]
+  LF4 section weight:   8%|Γûè         | 13093/163499 [00:07<01:28, 1704.34reports/s]
+  LF4 section weight:   8%|Γûè         | 13265/163499 [00:07<01:28, 1697.26reports/s]
+  LF4 section weight:   8%|Γûè         | 13436/163499 [00:08<01:29, 1683.02reports/s]
+  LF4 section weight:   8%|Γûè         | 13605/163499 [00:08<01:30, 1664.59reports/s]
+  LF4 section weight:   8%|Γûè         | 13782/163499 [00:08<01:28, 1684.84reports/s]
+  LF4 section weight:   9%|Γûè         | 13982/163499 [00:08<01:24, 1769.92reports/s]
+  LF4 section weight:   9%|Γûè         | 14179/163499 [00:08<01:21, 1821.33reports/s]
+  LF4 section weight:   9%|Γûë         | 14362/163499 [00:08<01:23, 1781.41reports/s]
+  LF4 section weight:   9%|Γûë         | 14541/163499 [00:08<01:27, 1699.46reports/s]
+  LF4 section weight:   9%|Γûë         | 14712/163499 [00:08<01:36, 1545.80reports/s]
+  LF4 section weight:   9%|Γûë         | 14878/163499 [00:08<01:34, 1572.91reports/s]
+  LF4 section weight:   9%|Γûë         | 15040/163499 [00:08<01:33, 1581.71reports/s]
+  LF4 section weight:   9%|Γûë         | 15220/163499 [00:09<01:30, 1641.36reports/s]
+  LF4 section weight:   9%|Γûë         | 15412/163499 [00:09<01:26, 1719.09reports/s]
+  LF4 section weight:  10%|Γûë         | 15586/163499 [00:09<01:26, 1711.35reports/s]
+  LF4 section weight:  10%|Γûë         | 15759/163499 [00:09<01:31, 1619.51reports/s]
+  LF4 section weight:  10%|Γûë         | 15935/163499 [00:09<01:29, 1654.53reports/s]
+  LF4 section weight:  10%|Γûë         | 16128/163499 [00:09<01:25, 1730.11reports/s]
+  LF4 section weight:  10%|Γûë         | 16303/163499 [00:09<01:26, 1708.36reports/s]
+  LF4 section weight:  10%|Γûê         | 16488/163499 [00:09<01:24, 1745.07reports/s]
+  LF4 section weight:  10%|Γûê         | 16664/163499 [00:09<01:26, 1698.30reports/s]
+  LF4 section weight:  10%|Γûê         | 16835/163499 [00:10<01:28, 1661.17reports/s]
+  LF4 section weight:  10%|Γûê         | 17002/163499 [00:10<01:29, 1638.98reports/s]
+  LF4 section weight:  11%|Γûê         | 17180/163499 [00:10<01:27, 1676.03reports/s]
+  LF4 section weight:  11%|Γûê         | 17371/163499 [00:10<01:23, 1743.06reports/s]
+  LF4 section weight:  11%|Γûê         | 17546/163499 [00:10<01:24, 1737.04reports/s]
+  LF4 section weight:  11%|Γûê         | 17721/163499 [00:10<01:25, 1713.45reports/s]
+  LF4 section weight:  11%|Γûê         | 17893/163499 [00:10<01:27, 1657.16reports/s]
+  LF4 section weight:  11%|Γûê         | 18074/163499 [00:10<01:25, 1691.32reports/s]
+  LF4 section weight:  11%|Γûê         | 18244/163499 [00:10<01:29, 1625.76reports/s]
+  LF4 section weight:  11%|ΓûêΓûÅ        | 18442/163499 [00:10<01:24, 1721.45reports/s]
+  LF4 section weight:  11%|ΓûêΓûÅ        | 18616/163499 [00:11<01:25, 1685.04reports/s]
+  LF4 section weight:  11%|ΓûêΓûÅ        | 18799/163499 [00:11<01:24, 1719.74reports/s]
+  LF4 section weight:  12%|ΓûêΓûÅ        | 18972/163499 [00:11<01:25, 1688.55reports/s]
+  LF4 section weight:  12%|ΓûêΓûÅ        | 19142/163499 [00:11<01:27, 1649.96reports/s]
+  LF4 section weight:  12%|ΓûêΓûÅ        | 19317/163499 [00:11<01:25, 1678.22reports/s]
+  LF4 section weight:  12%|ΓûêΓûÅ        | 19486/163499 [00:11<01:29, 1617.92reports/s]
+  LF4 section weight:  12%|ΓûêΓûÅ        | 19674/163499 [00:11<01:25, 1691.44reports/s]
+  LF4 section weight:  12%|ΓûêΓûÅ        | 19844/163499 [00:11<01:26, 1669.29reports/s]
+  LF4 section weight:  12%|ΓûêΓûÅ        | 20017/163499 [00:11<01:25, 1684.63reports/s]
+  LF4 section weight:  12%|ΓûêΓûÅ        | 20207/163499 [00:12<01:22, 1743.76reports/s]
+  LF4 section weight:  12%|ΓûêΓûÅ        | 20393/163499 [00:12<01:20, 1776.46reports/s]
+  LF4 section weight:  13%|ΓûêΓûÄ        | 20572/163499 [00:12<01:21, 1763.20reports/s]
+  LF4 section weight:  13%|ΓûêΓûÄ        | 20759/163499 [00:12<01:19, 1792.02reports/s]
+  LF4 section weight:  13%|ΓûêΓûÄ        | 20939/163499 [00:12<01:24, 1682.96reports/s]
+  LF4 section weight:  13%|ΓûêΓûÄ        | 21109/163499 [00:12<01:27, 1634.82reports/s]
+  LF4 section weight:  13%|ΓûêΓûÄ        | 21300/163499 [00:12<01:23, 1706.70reports/s]
+  LF4 section weight:  13%|ΓûêΓûÄ        | 21477/163499 [00:12<01:22, 1722.46reports/s]
+  LF4 section weight:  13%|ΓûêΓûÄ        | 21651/163499 [00:12<01:26, 1635.67reports/s]
+  LF4 section weight:  13%|ΓûêΓûÄ        | 21816/163499 [00:12<01:27, 1616.96reports/s]
+  LF4 section weight:  13%|ΓûêΓûÄ        | 21982/163499 [00:13<01:27, 1625.41reports/s]
+  LF4 section weight:  14%|ΓûêΓûÄ        | 22167/163499 [00:13<01:23, 1686.99reports/s]
+  LF4 section weight:  14%|ΓûêΓûÄ        | 22348/163499 [00:13<01:22, 1717.41reports/s]
+  LF4 section weight:  14%|ΓûêΓûì        | 22521/163499 [00:13<01:26, 1624.33reports/s]
+  LF4 section weight:  14%|ΓûêΓûì        | 22698/163499 [00:13<01:24, 1662.43reports/s]
+  LF4 section weight:  14%|ΓûêΓûì        | 22866/163499 [00:13<01:26, 1620.29reports/s]
+  LF4 section weight:  14%|ΓûêΓûì        | 23044/163499 [00:13<01:24, 1665.47reports/s]
+  LF4 section weight:  14%|ΓûêΓûì        | 23212/163499 [00:13<01:25, 1632.29reports/s]
+  LF4 section weight:  14%|ΓûêΓûì        | 23380/163499 [00:13<01:25, 1645.06reports/s]
+  LF4 section weight:  14%|ΓûêΓûì        | 23558/163499 [00:14<01:23, 1674.72reports/s]
+  LF4 section weight:  15%|ΓûêΓûì        | 23726/163499 [00:14<01:23, 1675.67reports/s]
+  LF4 section weight:  15%|ΓûêΓûì        | 23906/163499 [00:14<01:21, 1703.91reports/s]
+  LF4 section weight:  15%|ΓûêΓûì        | 24077/163499 [00:14<01:22, 1697.42reports/s]
+  LF4 section weight:  15%|ΓûêΓûì        | 24255/163499 [00:14<01:21, 1716.84reports/s]
+  LF4 section weight:  15%|ΓûêΓûì        | 24442/163499 [00:14<01:19, 1757.83reports/s]
+  LF4 section weight:  15%|ΓûêΓûî        | 24618/163499 [00:14<01:24, 1645.03reports/s]
+  LF4 section weight:  15%|ΓûêΓûî        | 24784/163499 [00:14<01:28, 1571.68reports/s]
+  LF4 section weight:  15%|ΓûêΓûî        | 24959/163499 [00:14<01:25, 1611.90reports/s]
+  LF4 section weight:  15%|ΓûêΓûî        | 25125/163499 [00:14<01:25, 1617.01reports/s]
+  LF4 section weight:  15%|ΓûêΓûî        | 25288/163499 [00:15<01:26, 1601.75reports/s]
+  LF4 section weight:  16%|ΓûêΓûî        | 25480/163499 [00:15<01:21, 1690.54reports/s]
+  LF4 section weight:  16%|ΓûêΓûî        | 25654/163499 [00:15<01:20, 1704.44reports/s]
+  LF4 section weight:  16%|ΓûêΓûî        | 25827/163499 [00:15<01:20, 1710.43reports/s]
+  LF4 section weight:  16%|ΓûêΓûî        | 25999/163499 [00:15<01:22, 1663.59reports/s]
+  LF4 section weight:  16%|ΓûêΓûî        | 26172/163499 [00:15<01:21, 1678.18reports/s]
+  LF4 section weight:  16%|ΓûêΓûî        | 26341/163499 [00:15<01:21, 1674.80reports/s]
+  LF4 section weight:  16%|ΓûêΓûî        | 26509/163499 [00:15<01:22, 1670.01reports/s]
+  LF4 section weight:  16%|ΓûêΓûï        | 26677/163499 [00:15<01:24, 1621.74reports/s]
+  LF4 section weight:  16%|ΓûêΓûï        | 26842/163499 [00:16<01:24, 1623.54reports/s]
+  LF4 section weight:  17%|ΓûêΓûï        | 27005/163499 [00:16<01:25, 1600.54reports/s]
+  LF4 section weight:  17%|ΓûêΓûï        | 27166/163499 [00:16<01:27, 1560.21reports/s]
+  LF4 section weight:  17%|ΓûêΓûï        | 27336/163499 [00:16<01:25, 1599.19reports/s]
+  LF4 section weight:  17%|ΓûêΓûï        | 27498/163499 [00:16<01:24, 1605.20reports/s]
+  LF4 section weight:  17%|ΓûêΓûï        | 27659/163499 [00:16<01:25, 1584.02reports/s]
+  LF4 section weight:  17%|ΓûêΓûï        | 27852/163499 [00:16<01:21, 1668.50reports/s]
+  LF4 section weight:  17%|ΓûêΓûï        | 28020/163499 [00:16<01:23, 1627.00reports/s]
+  LF4 section weight:  17%|ΓûêΓûï        | 28190/163499 [00:16<01:22, 1646.87reports/s]
+  LF4 section weight:  17%|ΓûêΓûï        | 28364/163499 [00:16<01:20, 1670.72reports/s]
+  LF4 section weight:  17%|ΓûêΓûï        | 28532/163499 [00:17<01:22, 1642.18reports/s]
+  LF4 section weight:  18%|ΓûêΓûè        | 28704/163499 [00:17<01:21, 1662.97reports/s]
+  LF4 section weight:  18%|ΓûêΓûè        | 28885/163499 [00:17<01:18, 1705.91reports/s]
+  LF4 section weight:  18%|ΓûêΓûè        | 29070/163499 [00:17<01:16, 1747.92reports/s]
+  LF4 section weight:  18%|ΓûêΓûè        | 29246/163499 [00:17<01:18, 1706.17reports/s]
+  LF4 section weight:  18%|ΓûêΓûè        | 29419/163499 [00:17<01:18, 1712.05reports/s]
+  LF4 section weight:  18%|ΓûêΓûè        | 29591/163499 [00:17<01:20, 1656.44reports/s]
+  LF4 section weight:  18%|ΓûêΓûè        | 29785/163499 [00:17<01:17, 1734.96reports/s]
+  LF4 section weight:  18%|ΓûêΓûè        | 29960/163499 [00:17<01:21, 1645.18reports/s]
+  LF4 section weight:  18%|ΓûêΓûè        | 30126/163499 [00:18<01:26, 1542.90reports/s]
+  LF4 section weight:  19%|ΓûêΓûè        | 30301/163499 [00:18<01:23, 1599.23reports/s]
+  LF4 section weight:  19%|ΓûêΓûè        | 30463/163499 [00:18<01:23, 1594.56reports/s]
+  LF4 section weight:  19%|ΓûêΓûè        | 30649/163499 [00:18<01:19, 1667.64reports/s]
+  LF4 section weight:  19%|ΓûêΓûë        | 30828/163499 [00:18<01:18, 1700.79reports/s]
+  LF4 section weight:  19%|ΓûêΓûë        | 31026/163499 [00:18<01:14, 1777.73reports/s]
+  LF4 section weight:  19%|ΓûêΓûë        | 31205/163499 [00:18<01:14, 1769.99reports/s]
+  LF4 section weight:  19%|ΓûêΓûë        | 31383/163499 [00:18<01:17, 1713.96reports/s]
+  LF4 section weight:  19%|ΓûêΓûë        | 31575/163499 [00:18<01:14, 1764.65reports/s]
+  LF4 section weight:  19%|ΓûêΓûë        | 31757/163499 [00:18<01:14, 1771.35reports/s]
+  LF4 section weight:  20%|ΓûêΓûë        | 31935/163499 [00:19<01:19, 1645.32reports/s]
+  LF4 section weight:  20%|ΓûêΓûë        | 32102/163499 [00:19<01:20, 1634.80reports/s]
+  LF4 section weight:  20%|ΓûêΓûë        | 32279/163499 [00:19<01:18, 1672.24reports/s]
+  LF4 section weight:  20%|ΓûêΓûë        | 32448/163499 [00:19<01:23, 1564.70reports/s]
+  LF4 section weight:  20%|ΓûêΓûë        | 32621/163499 [00:19<01:21, 1607.03reports/s]
+  LF4 section weight:  20%|ΓûêΓûê        | 32793/163499 [00:19<01:19, 1637.88reports/s]
+  LF4 section weight:  20%|ΓûêΓûê        | 32989/163499 [00:19<01:15, 1727.63reports/s]
+  LF4 section weight:  20%|ΓûêΓûê        | 33192/163499 [00:19<01:11, 1815.34reports/s]
+  LF4 section weight:  20%|ΓûêΓûê        | 33375/163499 [00:19<01:12, 1782.65reports/s]
+  LF4 section weight:  21%|ΓûêΓûê        | 33560/163499 [00:19<01:12, 1793.21reports/s]
+  LF4 section weight:  21%|ΓûêΓûê        | 33740/163499 [00:20<01:15, 1720.20reports/s]
+  LF4 section weight:  21%|ΓûêΓûê        | 33913/163499 [00:20<01:15, 1714.19reports/s]
+  LF4 section weight:  21%|ΓûêΓûê        | 34086/163499 [00:20<01:16, 1683.88reports/s]
+  LF4 section weight:  21%|ΓûêΓûê        | 34261/163499 [00:20<01:16, 1700.40reports/s]
+  LF4 section weight:  21%|ΓûêΓûê        | 34432/163499 [00:20<01:16, 1677.60reports/s]
+  LF4 section weight:  21%|ΓûêΓûê        | 34601/163499 [00:20<01:18, 1639.78reports/s]
+  LF4 section weight:  21%|ΓûêΓûêΓûÅ       | 34780/163499 [00:20<01:16, 1680.39reports/s]
+  LF4 section weight:  21%|ΓûêΓûêΓûÅ       | 34949/163499 [00:20<01:20, 1599.38reports/s]
+  LF4 section weight:  21%|ΓûêΓûêΓûÅ       | 35133/163499 [00:20<01:17, 1666.23reports/s]
+  LF4 section weight:  22%|ΓûêΓûêΓûÅ       | 35301/163499 [00:21<01:17, 1647.94reports/s]
+  LF4 section weight:  22%|ΓûêΓûêΓûÅ       | 35488/163499 [00:21<01:14, 1710.17reports/s]
+  LF4 section weight:  22%|ΓûêΓûêΓûÅ       | 35667/163499 [00:21<01:13, 1730.83reports/s]
+  LF4 section weight:  22%|ΓûêΓûêΓûÅ       | 35850/163499 [00:21<01:12, 1758.34reports/s]
+  LF4 section weight:  22%|ΓûêΓûêΓûÅ       | 36027/163499 [00:21<01:15, 1677.64reports/s]
+  LF4 section weight:  22%|ΓûêΓûêΓûÅ       | 36196/163499 [00:21<01:17, 1653.16reports/s]
+  LF4 section weight:  22%|ΓûêΓûêΓûÅ       | 36368/163499 [00:21<01:16, 1665.43reports/s]
+  LF4 section weight:  22%|ΓûêΓûêΓûÅ       | 36547/163499 [00:21<01:14, 1696.64reports/s]
+  LF4 section weight:  22%|ΓûêΓûêΓûÅ       | 36737/163499 [00:21<01:12, 1752.42reports/s]
+  LF4 section weight:  23%|ΓûêΓûêΓûÄ       | 36913/163499 [00:21<01:14, 1708.17reports/s]
+  LF4 section weight:  23%|ΓûêΓûêΓûÄ       | 37085/163499 [00:22<01:15, 1685.03reports/s]
+  LF4 section weight:  23%|ΓûêΓûêΓûÄ       | 37254/163499 [00:22<01:14, 1684.80reports/s]
+  LF4 section weight:  23%|ΓûêΓûêΓûÄ       | 37423/163499 [00:22<01:15, 1680.78reports/s]
+  LF4 section weight:  23%|ΓûêΓûêΓûÄ       | 37598/163499 [00:22<01:14, 1696.92reports/s]
+  LF4 section weight:  23%|ΓûêΓûêΓûÄ       | 37773/163499 [00:22<01:13, 1708.08reports/s]
+  LF4 section weight:  23%|ΓûêΓûêΓûÄ       | 37979/163499 [00:22<01:09, 1808.11reports/s]
+  LF4 section weight:  23%|ΓûêΓûêΓûÄ       | 38175/163499 [00:22<01:07, 1852.72reports/s]
+  LF4 section weight:  23%|ΓûêΓûêΓûÄ       | 38361/163499 [00:22<01:09, 1799.76reports/s]
+  LF4 section weight:  24%|ΓûêΓûêΓûÄ       | 38542/163499 [00:22<01:11, 1744.21reports/s]
+  LF4 section weight:  24%|ΓûêΓûêΓûÄ       | 38717/163499 [00:23<01:13, 1697.14reports/s]
+  LF4 section weight:  24%|ΓûêΓûêΓûì       | 38888/163499 [00:23<01:15, 1660.36reports/s]
+  LF4 section weight:  24%|ΓûêΓûêΓûì       | 39055/163499 [00:23<01:16, 1626.44reports/s]
+  LF4 section weight:  24%|ΓûêΓûêΓûì       | 39233/163499 [00:23<01:14, 1667.40reports/s]
+  LF4 section weight:  24%|ΓûêΓûêΓûì       | 39421/163499 [00:23<01:11, 1726.62reports/s]
+  LF4 section weight:  24%|ΓûêΓûêΓûì       | 39595/163499 [00:23<01:13, 1683.83reports/s]
+  LF4 section weight:  24%|ΓûêΓûêΓûì       | 39773/163499 [00:23<01:12, 1707.31reports/s]
+  LF4 section weight:  24%|ΓûêΓûêΓûì       | 39945/163499 [00:23<01:14, 1659.99reports/s]
+  LF4 section weight:  25%|ΓûêΓûêΓûì       | 40114/163499 [00:23<01:14, 1661.97reports/s]
+  LF4 section weight:  25%|ΓûêΓûêΓûì       | 40299/163499 [00:23<01:11, 1712.67reports/s]
+  LF4 section weight:  25%|ΓûêΓûêΓûì       | 40471/163499 [00:24<01:13, 1676.38reports/s]
+  LF4 section weight:  25%|ΓûêΓûêΓûì       | 40671/163499 [00:24<01:09, 1768.50reports/s]
+  LF4 section weight:  25%|ΓûêΓûêΓûì       | 40854/163499 [00:24<01:08, 1785.76reports/s]
+  LF4 section weight:  25%|ΓûêΓûêΓûî       | 41040/163499 [00:24<01:07, 1803.48reports/s]
+  LF4 section weight:  25%|ΓûêΓûêΓûî       | 41221/163499 [00:24<01:08, 1786.04reports/s]
+  LF4 section weight:  25%|ΓûêΓûêΓûî       | 41400/163499 [00:24<01:08, 1771.45reports/s]
+  LF4 section weight:  25%|ΓûêΓûêΓûî       | 41597/163499 [00:24<01:06, 1828.49reports/s]
+  LF4 section weight:  26%|ΓûêΓûêΓûî       | 41781/163499 [00:24<01:07, 1794.35reports/s]
+  LF4 section weight:  26%|ΓûêΓûêΓûî       | 41969/163499 [00:24<01:07, 1813.22reports/s]
+  LF4 section weight:  26%|ΓûêΓûêΓûî       | 42154/163499 [00:25<01:06, 1819.24reports/s]
+  LF4 section weight:  26%|ΓûêΓûêΓûî       | 42337/163499 [00:25<01:10, 1715.83reports/s]
+  LF4 section weight:  26%|ΓûêΓûêΓûî       | 42522/163499 [00:25<01:09, 1746.28reports/s]
+  LF4 section weight:  26%|ΓûêΓûêΓûî       | 42714/163499 [00:25<01:07, 1788.84reports/s]
+  LF4 section weight:  26%|ΓûêΓûêΓûî       | 42912/163499 [00:25<01:05, 1843.59reports/s]
+  LF4 section weight:  26%|ΓûêΓûêΓûï       | 43098/163499 [00:25<01:07, 1772.90reports/s]
+  LF4 section weight:  26%|ΓûêΓûêΓûï       | 43277/163499 [00:25<01:08, 1767.04reports/s]
+  LF4 section weight:  27%|ΓûêΓûêΓûï       | 43455/163499 [00:25<01:11, 1675.55reports/s]
+  LF4 section weight:  27%|ΓûêΓûêΓûï       | 43635/163499 [00:25<01:10, 1698.98reports/s]
+  LF4 section weight:  27%|ΓûêΓûêΓûï       | 43824/163499 [00:25<01:08, 1752.49reports/s]
+  LF4 section weight:  27%|ΓûêΓûêΓûï       | 44008/163499 [00:26<01:07, 1773.93reports/s]
+  LF4 section weight:  27%|ΓûêΓûêΓûï       | 44188/163499 [00:26<01:07, 1780.75reports/s]
+  LF4 section weight:  27%|ΓûêΓûêΓûï       | 44367/163499 [00:26<01:07, 1771.06reports/s]
+  LF4 section weight:  27%|ΓûêΓûêΓûï       | 44545/163499 [00:26<01:10, 1694.80reports/s]
+  LF4 section weight:  27%|ΓûêΓûêΓûï       | 44746/163499 [00:26<01:06, 1780.16reports/s]
+  LF4 section weight:  27%|ΓûêΓûêΓûï       | 44932/163499 [00:26<01:05, 1802.06reports/s]
+  LF4 section weight:  28%|ΓûêΓûêΓûè       | 45113/163499 [00:26<01:10, 1684.36reports/s]
+  LF4 section weight:  28%|ΓûêΓûêΓûè       | 45286/163499 [00:26<01:09, 1690.62reports/s]
+  LF4 section weight:  28%|ΓûêΓûêΓûè       | 45462/163499 [00:26<01:09, 1710.30reports/s]
+  LF4 section weight:  28%|ΓûêΓûêΓûè       | 45649/163499 [00:27<01:07, 1756.05reports/s]
+  LF4 section weight:  28%|ΓûêΓûêΓûè       | 45826/163499 [00:27<01:10, 1664.59reports/s]
+  LF4 section weight:  28%|ΓûêΓûêΓûè       | 45996/163499 [00:27<01:10, 1668.11reports/s]
+  LF4 section weight:  28%|ΓûêΓûêΓûè       | 46170/163499 [00:27<01:09, 1687.70reports/s]
+  LF4 section weight:  28%|ΓûêΓûêΓûè       | 46351/163499 [00:27<01:08, 1719.50reports/s]
+  LF4 section weight:  28%|ΓûêΓûêΓûè       | 46550/163499 [00:27<01:05, 1793.95reports/s]
+  LF4 section weight:  29%|ΓûêΓûêΓûè       | 46730/163499 [00:27<01:06, 1764.79reports/s]
+  LF4 section weight:  29%|ΓûêΓûêΓûè       | 46907/163499 [00:27<01:06, 1765.18reports/s]
+  LF4 section weight:  29%|ΓûêΓûêΓûë       | 47084/163499 [00:27<01:07, 1716.68reports/s]
+  LF4 section weight:  29%|ΓûêΓûêΓûë       | 47260/163499 [00:27<01:07, 1728.47reports/s]
+  LF4 section weight:  29%|ΓûêΓûêΓûë       | 47441/163499 [00:28<01:06, 1750.18reports/s]
+  LF4 section weight:  29%|ΓûêΓûêΓûë       | 47618/163499 [00:28<01:06, 1749.72reports/s]
+  LF4 section weight:  29%|ΓûêΓûêΓûë       | 47794/163499 [00:28<01:07, 1711.95reports/s]
+  LF4 section weight:  29%|ΓûêΓûêΓûë       | 47981/163499 [00:28<01:05, 1758.09reports/s]
+  LF4 section weight:  29%|ΓûêΓûêΓûë       | 48182/163499 [00:28<01:03, 1825.77reports/s]
+  LF4 section weight:  30%|ΓûêΓûêΓûë       | 48367/163499 [00:28<01:03, 1826.91reports/s]
+  LF4 section weight:  30%|ΓûêΓûêΓûë       | 48557/163499 [00:28<01:02, 1843.68reports/s]
+  LF4 section weight:  30%|ΓûêΓûêΓûë       | 48744/163499 [00:28<01:02, 1844.12reports/s]
+  LF4 section weight:  30%|ΓûêΓûêΓûë       | 48929/163499 [00:28<01:05, 1754.13reports/s]
+  LF4 section weight:  30%|ΓûêΓûêΓûê       | 49106/163499 [00:28<01:06, 1713.46reports/s]
+  LF4 section weight:  30%|ΓûêΓûêΓûê       | 49280/163499 [00:29<01:06, 1719.18reports/s]
+  LF4 section weight:  30%|ΓûêΓûêΓûê       | 49453/163499 [00:29<01:09, 1638.42reports/s]
+  LF4 section weight:  30%|ΓûêΓûêΓûê       | 49618/163499 [00:29<01:12, 1566.75reports/s]
+  LF4 section weight:  30%|ΓûêΓûêΓûê       | 49785/163499 [00:29<01:11, 1593.14reports/s]
+  LF4 section weight:  31%|ΓûêΓûêΓûê       | 49964/163499 [00:29<01:09, 1641.90reports/s]
+  LF4 section weight:  31%|ΓûêΓûêΓûê       | 50140/163499 [00:29<01:07, 1675.39reports/s]
+  LF4 section weight:  31%|ΓûêΓûêΓûê       | 50319/163499 [00:29<01:06, 1703.74reports/s]
+  LF4 section weight:  31%|ΓûêΓûêΓûê       | 50505/163499 [00:29<01:04, 1741.98reports/s]
+  LF4 section weight:  31%|ΓûêΓûêΓûê       | 50680/163499 [00:29<01:06, 1687.03reports/s]
+  LF4 section weight:  31%|ΓûêΓûêΓûê       | 50850/163499 [00:30<01:09, 1623.23reports/s]
+  LF4 section weight:  31%|ΓûêΓûêΓûê       | 51035/163499 [00:30<01:06, 1679.65reports/s]
+  LF4 section weight:  31%|ΓûêΓûêΓûêΓûÅ      | 51227/163499 [00:30<01:04, 1743.94reports/s]
+  LF4 section weight:  31%|ΓûêΓûêΓûêΓûÅ      | 51403/163499 [00:30<01:04, 1734.92reports/s]
+  LF4 section weight:  32%|ΓûêΓûêΓûêΓûÅ      | 51594/163499 [00:30<01:02, 1781.19reports/s]
+  LF4 section weight:  32%|ΓûêΓûêΓûêΓûÅ      | 51773/163499 [00:30<01:05, 1703.90reports/s]
+  LF4 section weight:  32%|ΓûêΓûêΓûêΓûÅ      | 51945/163499 [00:30<01:05, 1692.20reports/s]
+  LF4 section weight:  32%|ΓûêΓûêΓûêΓûÅ      | 52115/163499 [00:30<01:06, 1674.32reports/s]
+  LF4 section weight:  32%|ΓûêΓûêΓûêΓûÅ      | 52304/163499 [00:30<01:04, 1735.37reports/s]
+  LF4 section weight:  32%|ΓûêΓûêΓûêΓûÅ      | 52479/163499 [00:31<01:06, 1681.50reports/s]
+  LF4 section weight:  32%|ΓûêΓûêΓûêΓûÅ      | 52648/163499 [00:31<01:06, 1677.11reports/s]
+  LF4 section weight:  32%|ΓûêΓûêΓûêΓûÅ      | 52817/163499 [00:31<01:09, 1582.34reports/s]
+  LF4 section weight:  32%|ΓûêΓûêΓûêΓûÅ      | 52977/163499 [00:31<01:10, 1576.58reports/s]
+  LF4 section weight:  32%|ΓûêΓûêΓûêΓûÅ      | 53136/163499 [00:31<01:09, 1577.34reports/s]
+  LF4 section weight:  33%|ΓûêΓûêΓûêΓûÄ      | 53310/163499 [00:31<01:07, 1621.02reports/s]
+  LF4 section weight:  33%|ΓûêΓûêΓûêΓûÄ      | 53482/163499 [00:31<01:06, 1647.74reports/s]
+  LF4 section weight:  33%|ΓûêΓûêΓûêΓûÄ      | 53648/163499 [00:31<01:10, 1569.17reports/s]
+  LF4 section weight:  33%|ΓûêΓûêΓûêΓûÄ      | 53814/163499 [00:31<01:08, 1591.00reports/s]
+  LF4 section weight:  33%|ΓûêΓûêΓûêΓûÄ      | 53974/163499 [00:31<01:10, 1552.68reports/s]
+  LF4 section weight:  33%|ΓûêΓûêΓûêΓûÄ      | 54153/163499 [00:32<01:07, 1618.00reports/s]
+  LF4 section weight:  33%|ΓûêΓûêΓûêΓûÄ      | 54316/163499 [00:32<01:07, 1606.45reports/s]
+  LF4 section weight:  33%|ΓûêΓûêΓûêΓûÄ      | 54498/163499 [00:32<01:05, 1665.27reports/s]
+  LF4 section weight:  33%|ΓûêΓûêΓûêΓûÄ      | 54666/163499 [00:32<01:05, 1667.96reports/s]
+  LF4 section weight:  34%|ΓûêΓûêΓûêΓûÄ      | 54840/163499 [00:32<01:04, 1684.26reports/s]
+  LF4 section weight:  34%|ΓûêΓûêΓûêΓûÄ      | 55009/163499 [00:32<01:05, 1653.51reports/s]
+  LF4 section weight:  34%|ΓûêΓûêΓûêΓûì      | 55198/163499 [00:32<01:02, 1719.17reports/s]
+  LF4 section weight:  34%|ΓûêΓûêΓûêΓûì      | 55386/163499 [00:32<01:01, 1765.20reports/s]
+  LF4 section weight:  34%|ΓûêΓûêΓûêΓûì      | 55563/163499 [00:32<01:03, 1703.63reports/s]
+  LF4 section weight:  34%|ΓûêΓûêΓûêΓûì      | 55734/163499 [00:32<01:03, 1702.64reports/s]
+  LF4 section weight:  34%|ΓûêΓûêΓûêΓûì      | 55905/163499 [00:33<01:03, 1688.91reports/s]
+  LF4 section weight:  34%|ΓûêΓûêΓûêΓûì      | 56075/163499 [00:33<01:05, 1642.49reports/s]
+  LF4 section weight:  34%|ΓûêΓûêΓûêΓûì      | 56245/163499 [00:33<01:04, 1655.60reports/s]
+  LF4 section weight:  35%|ΓûêΓûêΓûêΓûì      | 56411/163499 [00:33<01:06, 1602.91reports/s]
+  LF4 section weight:  35%|ΓûêΓûêΓûêΓûì      | 56586/163499 [00:33<01:05, 1639.49reports/s]
+  LF4 section weight:  35%|ΓûêΓûêΓûêΓûì      | 56751/163499 [00:33<01:05, 1637.42reports/s]
+  LF4 section weight:  35%|ΓûêΓûêΓûêΓûì      | 56925/163499 [00:33<01:03, 1666.33reports/s]
+  LF4 section weight:  35%|ΓûêΓûêΓûêΓûì      | 57092/163499 [00:33<01:04, 1649.71reports/s]
+  LF4 section weight:  35%|ΓûêΓûêΓûêΓûî      | 57260/163499 [00:33<01:04, 1655.67reports/s]
+  LF4 section weight:  35%|ΓûêΓûêΓûêΓûî      | 57437/163499 [00:34<01:02, 1688.13reports/s]
+  LF4 section weight:  35%|ΓûêΓûêΓûêΓûî      | 57646/163499 [00:34<00:58, 1806.34reports/s]
+  LF4 section weight:  35%|ΓûêΓûêΓûêΓûî      | 57827/163499 [00:34<00:58, 1793.93reports/s]
+  LF4 section weight:  35%|ΓûêΓûêΓûêΓûî      | 58007/163499 [00:34<01:00, 1737.39reports/s]
+  LF4 section weight:  36%|ΓûêΓûêΓûêΓûî      | 58189/163499 [00:34<00:59, 1759.48reports/s]
+  LF4 section weight:  36%|ΓûêΓûêΓûêΓûî      | 58378/163499 [00:34<00:58, 1793.66reports/s]
+  LF4 section weight:  36%|ΓûêΓûêΓûêΓûî      | 58558/163499 [00:34<00:58, 1783.40reports/s]
+  LF4 section weight:  36%|ΓûêΓûêΓûêΓûî      | 58737/163499 [00:34<01:01, 1694.42reports/s]
+  LF4 section weight:  36%|ΓûêΓûêΓûêΓûî      | 58908/163499 [00:34<01:04, 1633.24reports/s]
+  LF4 section weight:  36%|ΓûêΓûêΓûêΓûî      | 59104/163499 [00:34<01:00, 1723.14reports/s]
+  LF4 section weight:  36%|ΓûêΓûêΓûêΓûï      | 59278/163499 [00:35<01:00, 1718.20reports/s]
+  LF4 section weight:  36%|ΓûêΓûêΓûêΓûï      | 59451/163499 [00:35<01:03, 1635.84reports/s]
+  LF4 section weight:  36%|ΓûêΓûêΓûêΓûï      | 59616/163499 [00:35<01:03, 1626.09reports/s]
+  LF4 section weight:  37%|ΓûêΓûêΓûêΓûï      | 59805/163499 [00:35<01:01, 1699.79reports/s]
+  LF4 section weight:  37%|ΓûêΓûêΓûêΓûï      | 59995/163499 [00:35<00:59, 1750.90reports/s]
+  LF4 section weight:  37%|ΓûêΓûêΓûêΓûï      | 60171/163499 [00:35<01:00, 1714.84reports/s]
+  LF4 section weight:  37%|ΓûêΓûêΓûêΓûï      | 60360/163499 [00:35<00:58, 1762.02reports/s]
+  LF4 section weight:  37%|ΓûêΓûêΓûêΓûï      | 60537/163499 [00:35<00:58, 1755.20reports/s]
+  LF4 section weight:  37%|ΓûêΓûêΓûêΓûï      | 60713/163499 [00:35<01:01, 1674.56reports/s]
+  LF4 section weight:  37%|ΓûêΓûêΓûêΓûï      | 60882/163499 [00:36<01:01, 1669.94reports/s]
+  LF4 section weight:  37%|ΓûêΓûêΓûêΓûï      | 61050/163499 [00:36<01:01, 1664.89reports/s]
+  LF4 section weight:  37%|ΓûêΓûêΓûêΓûï      | 61222/163499 [00:36<01:00, 1679.57reports/s]
+  LF4 section weight:  38%|ΓûêΓûêΓûêΓûè      | 61398/163499 [00:36<01:00, 1698.17reports/s]
+  LF4 section weight:  38%|ΓûêΓûêΓûêΓûè      | 61569/163499 [00:36<01:02, 1633.32reports/s]
+  LF4 section weight:  38%|ΓûêΓûêΓûêΓûè      | 61748/163499 [00:36<01:00, 1675.87reports/s]
+  LF4 section weight:  38%|ΓûêΓûêΓûêΓûè      | 61922/163499 [00:36<01:00, 1692.51reports/s]
+  LF4 section weight:  38%|ΓûêΓûêΓûêΓûè      | 62092/163499 [00:36<01:02, 1622.93reports/s]
+  LF4 section weight:  38%|ΓûêΓûêΓûêΓûè      | 62256/163499 [00:36<01:02, 1619.02reports/s]
+  LF4 section weight:  38%|ΓûêΓûêΓûêΓûè      | 62441/163499 [00:36<01:00, 1677.63reports/s]
+  LF4 section weight:  38%|ΓûêΓûêΓûêΓûè      | 62610/163499 [00:37<01:00, 1662.81reports/s]
+  LF4 section weight:  38%|ΓûêΓûêΓûêΓûè      | 62784/163499 [00:37<00:59, 1679.64reports/s]
+  LF4 section weight:  39%|ΓûêΓûêΓûêΓûè      | 62953/163499 [00:37<01:02, 1618.14reports/s]
+  LF4 section weight:  39%|ΓûêΓûêΓûêΓûè      | 63116/163499 [00:37<01:02, 1617.41reports/s]
+  LF4 section weight:  39%|ΓûêΓûêΓûêΓûè      | 63279/163499 [00:37<01:08, 1456.63reports/s]
+  LF4 section weight:  39%|ΓûêΓûêΓûêΓûë      | 63428/163499 [00:37<01:13, 1360.05reports/s]
+  LF4 section weight:  39%|ΓûêΓûêΓûêΓûë      | 63567/163499 [00:37<01:19, 1253.29reports/s]
+  LF4 section weight:  39%|ΓûêΓûêΓûêΓûë      | 63696/163499 [00:37<01:19, 1248.46reports/s]
+  LF4 section weight:  39%|ΓûêΓûêΓûêΓûë      | 63823/163499 [00:38<01:24, 1181.20reports/s]
+  LF4 section weight:  39%|ΓûêΓûêΓûêΓûë      | 63943/163499 [00:38<01:33, 1064.90reports/s]
+  LF4 section weight:  39%|ΓûêΓûêΓûêΓûë      | 64058/163499 [00:38<01:31, 1085.64reports/s]
+  LF4 section weight:  39%|ΓûêΓûêΓûêΓûë      | 64169/163499 [00:38<01:35, 1041.53reports/s]
+  LF4 section weight:  39%|ΓûêΓûêΓûêΓûë      | 64279/163499 [00:38<01:34, 1053.99reports/s]
+  LF4 section weight:  39%|ΓûêΓûêΓûêΓûë      | 64423/163499 [00:38<01:25, 1155.14reports/s]
+  LF4 section weight:  39%|ΓûêΓûêΓûêΓûë      | 64541/163499 [00:38<01:27, 1133.64reports/s]
+  LF4 section weight:  40%|ΓûêΓûêΓûêΓûë      | 64656/163499 [00:38<01:33, 1053.24reports/s]
+  LF4 section weight:  40%|ΓûêΓûêΓûêΓûë      | 64771/163499 [00:38<01:31, 1079.22reports/s]
+  LF4 section weight:  40%|ΓûêΓûêΓûêΓûë      | 64881/163499 [00:39<01:36, 1022.04reports/s]
+  LF4 section weight:  40%|ΓûêΓûêΓûêΓûë      | 64996/163499 [00:39<01:33, 1053.92reports/s]
+  LF4 section weight:  40%|ΓûêΓûêΓûêΓûë      | 65103/163499 [00:39<01:35, 1029.65reports/s]
+  LF4 section weight:  40%|ΓûêΓûêΓûêΓûë      | 65207/163499 [00:39<01:45, 934.50reports/s] 
+  LF4 section weight:  40%|ΓûêΓûêΓûêΓûë      | 65347/163499 [00:39<01:32, 1056.49reports/s]
+  LF4 section weight:  40%|ΓûêΓûêΓûêΓûê      | 65467/163499 [00:39<01:29, 1095.93reports/s]
+  LF4 section weight:  40%|ΓûêΓûêΓûêΓûê      | 65579/163499 [00:39<01:31, 1070.47reports/s]
+  LF4 section weight:  40%|ΓûêΓûêΓûêΓûê      | 65693/163499 [00:39<01:30, 1084.16reports/s]
+  LF4 section weight:  40%|ΓûêΓûêΓûêΓûê      | 65805/163499 [00:39<01:29, 1087.77reports/s]
+  LF4 section weight:  40%|ΓûêΓûêΓûêΓûê      | 65927/163499 [00:39<01:27, 1114.60reports/s]
+  LF4 section weight:  40%|ΓûêΓûêΓûêΓûê      | 66040/163499 [00:40<01:28, 1104.09reports/s]
+  LF4 section weight:  40%|ΓûêΓûêΓûêΓûê      | 66151/163499 [00:40<01:32, 1057.91reports/s]
+  LF4 section weight:  41%|ΓûêΓûêΓûêΓûê      | 66258/163499 [00:40<01:34, 1030.98reports/s]
+  LF4 section weight:  41%|ΓûêΓûêΓûêΓûê      | 66362/163499 [00:40<01:34, 1029.73reports/s]
+  LF4 section weight:  41%|ΓûêΓûêΓûêΓûê      | 66474/163499 [00:40<01:32, 1054.53reports/s]
+  LF4 section weight:  41%|ΓûêΓûêΓûêΓûê      | 66604/163499 [00:40<01:26, 1122.28reports/s]
+  LF4 section weight:  41%|ΓûêΓûêΓûêΓûê      | 66717/163499 [00:40<01:29, 1087.18reports/s]
+  LF4 section weight:  41%|ΓûêΓûêΓûêΓûê      | 66827/163499 [00:40<01:30, 1072.05reports/s]
+  LF4 section weight:  41%|ΓûêΓûêΓûêΓûê      | 66935/163499 [00:40<01:31, 1059.83reports/s]
+  LF4 section weight:  41%|ΓûêΓûêΓûêΓûê      | 67053/163499 [00:41<01:28, 1093.90reports/s]
+  LF4 section weight:  41%|ΓûêΓûêΓûêΓûê      | 67170/163499 [00:41<01:26, 1112.14reports/s]
+  LF4 section weight:  41%|ΓûêΓûêΓûêΓûê      | 67285/163499 [00:41<01:25, 1119.20reports/s]
+  LF4 section weight:  41%|ΓûêΓûêΓûêΓûê      | 67398/163499 [00:41<01:33, 1023.90reports/s]
+  LF4 section weight:  41%|ΓûêΓûêΓûêΓûêΓûÅ     | 67504/163499 [00:41<01:33, 
+1028.35reports/s]
+  LF4 section weight:  41%|ΓûêΓûêΓûêΓûêΓûÅ     | 67617/163499 [00:41<01:31, 
+1052.74reports/s]
+  LF4 section weight:  41%|ΓûêΓûêΓûêΓûêΓûÅ     | 67724/163499 [00:41<01:33, 
+1024.93reports/s]
+  LF4 section weight:  41%|ΓûêΓûêΓûêΓûêΓûÅ     | 67844/163499 [00:41<01:29, 
+1074.39reports/s]
+  LF4 section weight:  42%|ΓûêΓûêΓûêΓûêΓûÅ     | 67958/163499 [00:41<01:27, 
+1091.45reports/s]
+  LF4 section weight:  42%|ΓûêΓûêΓûêΓûêΓûÅ     | 68071/163499 [00:42<01:26, 
+1102.40reports/s]
+  LF4 section weight:  42%|ΓûêΓûêΓûêΓûêΓûÅ     | 68182/163499 [00:42<01:30, 
+1058.96reports/s]
+  LF4 section weight:  42%|ΓûêΓûêΓûêΓûêΓûÅ     | 68297/163499 [00:42<01:27, 
+1082.29reports/s]
+  LF4 section weight:  42%|ΓûêΓûêΓûêΓûêΓûÅ     | 68406/163499 [00:42<01:28, 
+1076.12reports/s]
+  LF4 section weight:  42%|ΓûêΓûêΓûêΓûêΓûÅ     | 68514/163499 [00:42<01:29, 
+1057.15reports/s]
+  LF4 section weight:  42%|ΓûêΓûêΓûêΓûêΓûÅ     | 68620/163499 [00:42<01:33, 
+1012.64reports/s]
+  LF4 section weight:  42%|ΓûêΓûêΓûêΓûêΓûÅ     | 68726/163499 [00:42<01:32, 
+1020.36reports/s]
+  LF4 section weight:  42%|ΓûêΓûêΓûêΓûêΓûÅ     | 68846/163499 [00:42<01:28, 
+1070.30reports/s]
+  LF4 section weight:  42%|ΓûêΓûêΓûêΓûêΓûÅ     | 68962/163499 [00:42<01:26, 
+1094.90reports/s]
+  LF4 section weight:  42%|ΓûêΓûêΓûêΓûêΓûÅ     | 69101/163499 [00:42<01:20, 
+1173.14reports/s]
+  LF4 section weight:  42%|ΓûêΓûêΓûêΓûêΓûÅ     | 69219/163499 [00:43<01:23, 
+1122.95reports/s]
+  LF4 section weight:  42%|ΓûêΓûêΓûêΓûêΓûÅ     | 69346/163499 [00:43<01:20, 
+1162.96reports/s]
+  LF4 section weight:  43%|ΓûêΓûêΓûêΓûêΓûÄ     | 69492/163499 [00:43<01:15, 
+1239.42reports/s]
+  LF4 section weight:  43%|ΓûêΓûêΓûêΓûêΓûÄ     | 69618/163499 [00:43<01:15, 
+1243.08reports/s]
+  LF4 section weight:  43%|ΓûêΓûêΓûêΓûêΓûÄ     | 69743/163499 [00:43<01:19, 
+1180.49reports/s]
+  LF4 section weight:  43%|ΓûêΓûêΓûêΓûêΓûÄ     | 69875/163499 [00:43<01:16, 
+1217.31reports/s]
+  LF4 section weight:  43%|ΓûêΓûêΓûêΓûêΓûÄ     | 69998/163499 [00:43<01:18, 
+1184.91reports/s]
+  LF4 section weight:  43%|ΓûêΓûêΓûêΓûêΓûÄ     | 70118/163499 [00:43<01:20, 
+1161.66reports/s]
+  LF4 section weight:  43%|ΓûêΓûêΓûêΓûêΓûÄ     | 70241/163499 [00:43<01:19, 
+1180.20reports/s]
+  LF4 section weight:  43%|ΓûêΓûêΓûêΓûêΓûÄ     | 70360/163499 [00:44<01:20, 
+1156.66reports/s]
+  LF4 section weight:  43%|ΓûêΓûêΓûêΓûêΓûÄ     | 70494/163499 [00:44<01:16, 
+1208.54reports/s]
+  LF4 section weight:  43%|ΓûêΓûêΓûêΓûêΓûÄ     | 70616/163499 [00:44<01:17, 
+1192.75reports/s]
+  LF4 section weight:  43%|ΓûêΓûêΓûêΓûêΓûÄ     | 70736/163499 [00:44<01:18, 
+1176.51reports/s]
+  LF4 section weight:  43%|ΓûêΓûêΓûêΓûêΓûÄ     | 70854/163499 [00:44<01:20, 
+1152.82reports/s]
+  LF4 section weight:  43%|ΓûêΓûêΓûêΓûêΓûÄ     | 70970/163499 [00:44<01:20, 
+1149.19reports/s]
+  LF4 section weight:  43%|ΓûêΓûêΓûêΓûêΓûÄ     | 71098/163499 [00:44<01:18, 
+1181.70reports/s]
+  LF4 section weight:  44%|ΓûêΓûêΓûêΓûêΓûÄ     | 71217/163499 [00:44<01:22, 
+1117.41reports/s]
+  LF4 section weight:  44%|ΓûêΓûêΓûêΓûêΓûÄ     | 71335/163499 [00:44<01:21, 
+1132.23reports/s]
+  LF4 section weight:  44%|ΓûêΓûêΓûêΓûêΓûÄ     | 71449/163499 [00:44<01:21, 
+1132.91reports/s]
+  LF4 section weight:  44%|ΓûêΓûêΓûêΓûêΓûì     | 71563/163499 [00:45<01:22, 
+1120.69reports/s]
+  LF4 section weight:  44%|ΓûêΓûêΓûêΓûêΓûì     | 71678/163499 [00:45<01:21, 
+1125.65reports/s]
+  LF4 section weight:  44%|ΓûêΓûêΓûêΓûêΓûì     | 71791/163499 [00:45<01:23, 
+1097.91reports/s]
+  LF4 section weight:  44%|ΓûêΓûêΓûêΓûêΓûì     | 71902/163499 [00:45<01:28, 
+1040.58reports/s]
+  LF4 section weight:  44%|ΓûêΓûêΓûêΓûêΓûì     | 72007/163499 [00:45<01:34, 
+972.91reports/s] 
+  LF4 section weight:  44%|ΓûêΓûêΓûêΓûêΓûì     | 72129/163499 [00:45<01:27, 
+1039.70reports/s]
+  LF4 section weight:  44%|ΓûêΓûêΓûêΓûêΓûì     | 72257/163499 [00:45<01:22, 
+1101.36reports/s]
+  LF4 section weight:  44%|ΓûêΓûêΓûêΓûêΓûì     | 72381/163499 [00:45<01:19, 
+1140.47reports/s]
+  LF4 section weight:  44%|ΓûêΓûêΓûêΓûêΓûì     | 72507/163499 [00:45<01:17, 
+1167.25reports/s]
+  LF4 section weight:  44%|ΓûêΓûêΓûêΓûêΓûì     | 72643/163499 [00:46<01:14, 
+1219.85reports/s]
+  LF4 section weight:  45%|ΓûêΓûêΓûêΓûêΓûì     | 72797/163499 [00:46<01:09, 
+1311.97reports/s]
+  LF4 section weight:  45%|ΓûêΓûêΓûêΓûêΓûì     | 72960/163499 [00:46<01:04, 
+1405.25reports/s]
+  LF4 section weight:  45%|ΓûêΓûêΓûêΓûêΓûì     | 73121/163499 [00:46<01:01, 
+1458.45reports/s]
+  LF4 section weight:  45%|ΓûêΓûêΓûêΓûêΓûì     | 73300/163499 [00:46<00:58, 
+1549.52reports/s]
+  LF4 section weight:  45%|ΓûêΓûêΓûêΓûêΓûì     | 73456/163499 [00:46<00:58, 
+1544.91reports/s]
+  LF4 section weight:  45%|ΓûêΓûêΓûêΓûêΓûî     | 73643/163499 [00:46<00:54, 
+1640.20reports/s]
+  LF4 section weight:  45%|ΓûêΓûêΓûêΓûêΓûî     | 73828/163499 [00:46<00:52, 
+1702.19reports/s]
+  LF4 section weight:  45%|ΓûêΓûêΓûêΓûêΓûî     | 73999/163499 [00:46<00:54, 
+1641.70reports/s]
+  LF4 section weight:  45%|ΓûêΓûêΓûêΓûêΓûî     | 74164/163499 [00:46<00:54, 
+1626.09reports/s]
+  LF4 section weight:  45%|ΓûêΓûêΓûêΓûêΓûî     | 74328/163499 [00:47<01:00, 
+1472.41reports/s]
+  LF4 section weight:  46%|ΓûêΓûêΓûêΓûêΓûî     | 74501/163499 [00:47<00:57, 
+1537.46reports/s]
+  LF4 section weight:  46%|ΓûêΓûêΓûêΓûêΓûî     | 74682/163499 [00:47<00:55, 
+1613.11reports/s]
+  LF4 section weight:  46%|ΓûêΓûêΓûêΓûêΓûî     | 74879/163499 [00:47<00:51, 
+1709.85reports/s]
+  LF4 section weight:  46%|ΓûêΓûêΓûêΓûêΓûî     | 75053/163499 [00:47<00:53, 
+1638.66reports/s]
+  LF4 section weight:  46%|ΓûêΓûêΓûêΓûêΓûî     | 75219/163499 [00:47<00:54, 
+1619.51reports/s]
+  LF4 section weight:  46%|ΓûêΓûêΓûêΓûêΓûî     | 75383/163499 [00:47<00:54, 
+1603.25reports/s]
+  LF4 section weight:  46%|ΓûêΓûêΓûêΓûêΓûî     | 75545/163499 [00:47<00:56, 
+1559.72reports/s]
+  LF4 section weight:  46%|ΓûêΓûêΓûêΓûêΓûï     | 75719/163499 [00:47<00:54, 
+1610.73reports/s]
+  LF4 section weight:  46%|ΓûêΓûêΓûêΓûêΓûï     | 75882/163499 [00:48<00:54, 
+1612.05reports/s]
+  LF4 section weight:  47%|ΓûêΓûêΓûêΓûêΓûï     | 76044/163499 [00:48<01:00, 
+1455.85reports/s]
+  LF4 section weight:  47%|ΓûêΓûêΓûêΓûêΓûï     | 76193/163499 [00:48<01:02, 
+1404.92reports/s]
+  LF4 section weight:  47%|ΓûêΓûêΓûêΓûêΓûï     | 76336/163499 [00:48<01:09, 
+1249.81reports/s]
+  LF4 section weight:  47%|ΓûêΓûêΓûêΓûêΓûï     | 76465/163499 [00:48<01:11, 
+1219.67reports/s]
+  LF4 section weight:  47%|ΓûêΓûêΓûêΓûêΓûï     | 76592/163499 [00:48<01:10, 
+1227.66reports/s]
+  LF4 section weight:  47%|ΓûêΓûêΓûêΓûêΓûï     | 76717/163499 [00:48<01:21, 
+1063.99reports/s]
+  LF4 section weight:  47%|ΓûêΓûêΓûêΓûêΓûï     | 76828/163499 [00:48<01:23, 
+1032.68reports/s]
+  LF4 section weight:  47%|ΓûêΓûêΓûêΓûêΓûï     | 76935/163499 [00:49<01:24, 
+1028.20reports/s]
+  LF4 section weight:  47%|ΓûêΓûêΓûêΓûêΓûï     | 77053/163499 [00:49<01:20, 
+1067.37reports/s]
+  LF4 section weight:  47%|ΓûêΓûêΓûêΓûêΓûï     | 77172/163499 [00:49<01:18, 
+1097.88reports/s]
+  LF4 section weight:  47%|ΓûêΓûêΓûêΓûêΓûï     | 77284/163499 [00:49<01:19, 
+1091.20reports/s]
+  LF4 section weight:  47%|ΓûêΓûêΓûêΓûêΓûï     | 77396/163499 [00:49<01:18, 
+1095.66reports/s]
+  LF4 section weight:  47%|ΓûêΓûêΓûêΓûêΓûï     | 77522/163499 [00:49<01:15, 
+1142.35reports/s]
+  LF4 section weight:  47%|ΓûêΓûêΓûêΓûêΓûï     | 77637/163499 [00:49<01:17, 
+1113.89reports/s]
+  LF4 section weight:  48%|ΓûêΓûêΓûêΓûêΓûè     | 77749/163499 [00:49<01:16, 
+1113.74reports/s]
+  LF4 section weight:  48%|ΓûêΓûêΓûêΓûêΓûè     | 77861/163499 [00:49<01:18, 
+1091.99reports/s]
+  LF4 section weight:  48%|ΓûêΓûêΓûêΓûêΓûè     | 77971/163499 [00:49<01:18, 
+1083.13reports/s]
+  LF4 section weight:  48%|ΓûêΓûêΓûêΓûêΓûè     | 78080/163499 [00:50<01:21, 
+1051.79reports/s]
+  LF4 section weight:  48%|ΓûêΓûêΓûêΓûêΓûè     | 78204/163499 [00:50<01:17, 
+1101.52reports/s]
+  LF4 section weight:  48%|ΓûêΓûêΓûêΓûêΓûè     | 78315/163499 [00:50<01:20, 
+1051.80reports/s]
+  LF4 section weight:  48%|ΓûêΓûêΓûêΓûêΓûè     | 78449/163499 [00:50<01:15, 
+1127.15reports/s]
+  LF4 section weight:  48%|ΓûêΓûêΓûêΓûêΓûè     | 78574/163499 [00:50<01:13, 
+1155.74reports/s]
+  LF4 section weight:  48%|ΓûêΓûêΓûêΓûêΓûè     | 78704/163499 [00:50<01:11, 
+1191.03reports/s]
+  LF4 section weight:  48%|ΓûêΓûêΓûêΓûêΓûè     | 78824/163499 [00:50<01:14, 
+1137.10reports/s]
+  LF4 section weight:  48%|ΓûêΓûêΓûêΓûêΓûè     | 78939/163499 [00:50<01:15, 
+1117.58reports/s]
+  LF4 section weight:  48%|ΓûêΓûêΓûêΓûêΓûè     | 79052/163499 [00:50<01:16, 
+1103.10reports/s]
+  LF4 section weight:  48%|ΓûêΓûêΓûêΓûêΓûè     | 79163/163499 [00:51<01:17, 
+1089.40reports/s]
+  LF4 section weight:  48%|ΓûêΓûêΓûêΓûêΓûè     | 79273/163499 [00:51<01:17, 
+1091.68reports/s]
+  LF4 section weight:  49%|ΓûêΓûêΓûêΓûêΓûè     | 79383/163499 [00:51<01:18, 
+1067.73reports/s]
+  LF4 section weight:  49%|ΓûêΓûêΓûêΓûêΓûè     | 79501/163499 [00:51<01:16, 
+1096.18reports/s]
+  LF4 section weight:  49%|ΓûêΓûêΓûêΓûêΓûè     | 79611/163499 [00:51<01:21, 
+1035.08reports/s]
+  LF4 section weight:  49%|ΓûêΓûêΓûêΓûêΓûë     | 79727/163499 [00:51<01:18, 
+1068.79reports/s]
+  LF4 section weight:  49%|ΓûêΓûêΓûêΓûêΓûë     | 79835/163499 [00:51<01:20, 
+1035.51reports/s]
+  LF4 section weight:  49%|ΓûêΓûêΓûêΓûêΓûë     | 79944/163499 [00:51<01:19, 
+1050.77reports/s]
+  LF4 section weight:  49%|ΓûêΓûêΓûêΓûêΓûë     | 80050/163499 [00:51<01:26, 
+966.06reports/s] 
+  LF4 section weight:  49%|ΓûêΓûêΓûêΓûêΓûë     | 80149/163499 [00:52<01:27, 
+949.93reports/s]
+  LF4 section weight:  49%|ΓûêΓûêΓûêΓûêΓûë     | 80261/163499 [00:52<01:23, 
+992.15reports/s]
+  LF4 section weight:  49%|ΓûêΓûêΓûêΓûêΓûë     | 80362/163499 [00:52<01:23, 
+992.60reports/s]
+  LF4 section weight:  49%|ΓûêΓûêΓûêΓûêΓûë     | 80462/163499 [00:52<01:26, 
+959.57reports/s]
+  LF4 section weight:  49%|ΓûêΓûêΓûêΓûêΓûë     | 80574/163499 [00:52<01:22, 
+1001.72reports/s]
+  LF4 section weight:  49%|ΓûêΓûêΓûêΓûêΓûë     | 80686/163499 [00:52<01:19, 
+1035.60reports/s]
+  LF4 section weight:  49%|ΓûêΓûêΓûêΓûêΓûë     | 80817/163499 [00:52<01:14, 
+1114.17reports/s]
+  LF4 section weight:  49%|ΓûêΓûêΓûêΓûêΓûë     | 80930/163499 [00:52<01:17, 
+1072.17reports/s]
+  LF4 section weight:  50%|ΓûêΓûêΓûêΓûêΓûë     | 81038/163499 [00:52<01:17, 
+1068.10reports/s]
+  LF4 section weight:  50%|ΓûêΓûêΓûêΓûêΓûë     | 81148/163499 [00:52<01:16, 
+1074.76reports/s]
+  LF4 section weight:  50%|ΓûêΓûêΓûêΓûêΓûë     | 81256/163499 [00:53<01:19, 
+1030.67reports/s]
+  LF4 section weight:  50%|ΓûêΓûêΓûêΓûêΓûë     | 81363/163499 [00:53<01:19, 
+1039.12reports/s]
+  LF4 section weight:  50%|ΓûêΓûêΓûêΓûêΓûë     | 81468/163499 [00:53<01:19, 
+1034.95reports/s]
+  LF4 section weight:  50%|ΓûêΓûêΓûêΓûêΓûë     | 81590/163499 [00:53<01:15, 
+1085.06reports/s]
+  LF4 section weight:  50%|ΓûêΓûêΓûêΓûêΓûë     | 81699/163499 [00:53<01:15, 
+1080.09reports/s]
+  LF4 section weight:  50%|ΓûêΓûêΓûêΓûêΓûê     | 81812/163499 [00:53<01:14, 
+1093.23reports/s]
+  LF4 section weight:  50%|ΓûêΓûêΓûêΓûêΓûê     | 81933/163499 [00:53<01:12, 
+1127.32reports/s]
+  LF4 section weight:  50%|ΓûêΓûêΓûêΓûêΓûê     | 82072/163499 [00:53<01:07, 
+1198.32reports/s]
+  LF4 section weight:  50%|ΓûêΓûêΓûêΓûêΓûê     | 82192/163499 [00:53<01:12, 
+1122.81reports/s]
+  LF4 section weight:  50%|ΓûêΓûêΓûêΓûêΓûê     | 82319/163499 [00:53<01:10, 
+1159.62reports/s]
+  LF4 section weight:  50%|ΓûêΓûêΓûêΓûêΓûê     | 82442/163499 [00:54<01:09, 
+1174.41reports/s]
+  LF4 section weight:  50%|ΓûêΓûêΓûêΓûêΓûê     | 82561/163499 [00:54<01:11, 
+1138.52reports/s]
+  LF4 section weight:  51%|ΓûêΓûêΓûêΓûêΓûê     | 82689/163499 [00:54<01:08, 
+1172.00reports/s]
+  LF4 section weight:  51%|ΓûêΓûêΓûêΓûêΓûê     | 82807/163499 [00:54<01:11, 
+1129.94reports/s]
+  LF4 section weight:  51%|ΓûêΓûêΓûêΓûêΓûê     | 82921/163499 [00:54<01:11, 
+1124.29reports/s]
+  LF4 section weight:  51%|ΓûêΓûêΓûêΓûêΓûê     | 83034/163499 [00:54<01:12, 
+1105.78reports/s]
+  LF4 section weight:  51%|ΓûêΓûêΓûêΓûêΓûê     | 83145/163499 [00:54<01:12, 
+1105.17reports/s]
+  LF4 section weight:  51%|ΓûêΓûêΓûêΓûêΓûê     | 83262/163499 [00:54<01:11, 
+1123.19reports/s]
+  LF4 section weight:  51%|ΓûêΓûêΓûêΓûêΓûê     | 83380/163499 [00:54<01:10, 
+1139.71reports/s]
+  LF4 section weight:  51%|ΓûêΓûêΓûêΓûêΓûê     | 83502/163499 [00:55<01:09, 
+1157.40reports/s]
+  LF4 section weight:  51%|ΓûêΓûêΓûêΓûêΓûê     | 83620/163499 [00:55<01:08, 
+1157.94reports/s]
+  LF4 section weight:  51%|ΓûêΓûêΓûêΓûêΓûê     | 83736/163499 [00:55<01:10, 
+1131.55reports/s]
+  LF4 section weight:  51%|ΓûêΓûêΓûêΓûêΓûêΓûÅ    | 83850/163499 [00:55<01:15, 
+1051.81reports/s]
+  LF4 section weight:  51%|ΓûêΓûêΓûêΓûêΓûêΓûÅ    | 83972/163499 [00:55<01:12, 
+1097.88reports/s]
+  LF4 section weight:  51%|ΓûêΓûêΓûêΓûêΓûêΓûÅ    | 84083/163499 [00:55<01:13, 
+1082.36reports/s]
+  LF4 section weight:  51%|ΓûêΓûêΓûêΓûêΓûêΓûÅ    | 84193/163499 [00:55<01:13, 
+1074.64reports/s]
+  LF4 section weight:  52%|ΓûêΓûêΓûêΓûêΓûêΓûÅ    | 84306/163499 [00:55<01:12, 
+1089.99reports/s]
+  LF4 section weight:  52%|ΓûêΓûêΓûêΓûêΓûêΓûÅ    | 84416/163499 [00:55<01:13, 
+1080.93reports/s]
+  LF4 section weight:  52%|ΓûêΓûêΓûêΓûêΓûêΓûÅ    | 84537/163499 [00:55<01:10, 
+1113.96reports/s]
+  LF4 section weight:  52%|ΓûêΓûêΓûêΓûêΓûêΓûÅ    | 84649/163499 [00:56<01:12, 
+1082.45reports/s]
+  LF4 section weight:  52%|ΓûêΓûêΓûêΓûêΓûêΓûÅ    | 84764/163499 [00:56<01:11, 
+1096.87reports/s]
+  LF4 section weight:  52%|ΓûêΓûêΓûêΓûêΓûêΓûÅ    | 84884/163499 [00:56<01:09, 
+1123.08reports/s]
+  LF4 section weight:  52%|ΓûêΓûêΓûêΓûêΓûêΓûÅ    | 84997/163499 [00:56<01:09, 
+1122.84reports/s]
+  LF4 section weight:  52%|ΓûêΓûêΓûêΓûêΓûêΓûÅ    | 85110/163499 [00:56<01:10, 
+1117.03reports/s]
+  LF4 section weight:  52%|ΓûêΓûêΓûêΓûêΓûêΓûÅ    | 85222/163499 [00:56<01:10, 
+1115.73reports/s]
+  LF4 section weight:  52%|ΓûêΓûêΓûêΓûêΓûêΓûÅ    | 85338/163499 [00:56<01:09, 
+1124.36reports/s]
+  LF4 section weight:  52%|ΓûêΓûêΓûêΓûêΓûêΓûÅ    | 85451/163499 [00:56<01:12, 
+1073.96reports/s]
+  LF4 section weight:  52%|ΓûêΓûêΓûêΓûêΓûêΓûÅ    | 85559/163499 [00:56<01:16, 
+1018.67reports/s]
+  LF4 section weight:  52%|ΓûêΓûêΓûêΓûêΓûêΓûÅ    | 85665/163499 [00:57<01:15, 
+1027.52reports/s]
+  LF4 section weight:  52%|ΓûêΓûêΓûêΓûêΓûêΓûÅ    | 85769/163499 [00:57<01:17, 
+1001.79reports/s]
+  LF4 section weight:  53%|ΓûêΓûêΓûêΓûêΓûêΓûÄ    | 85870/163499 [00:57<01:17, 
+1001.86reports/s]
+  LF4 section weight:  53%|ΓûêΓûêΓûêΓûêΓûêΓûÄ    | 85976/163499 [00:57<01:16, 
+1017.75reports/s]
+  LF4 section weight:  53%|ΓûêΓûêΓûêΓûêΓûêΓûÄ    | 86092/163499 [00:57<01:13, 
+1054.42reports/s]
+  LF4 section weight:  53%|ΓûêΓûêΓûêΓûêΓûêΓûÄ    | 86199/163499 [00:57<01:13, 
+1054.09reports/s]
+  LF4 section weight:  53%|ΓûêΓûêΓûêΓûêΓûêΓûÄ    | 86319/163499 [00:57<01:10, 
+1089.15reports/s]
+  LF4 section weight:  53%|ΓûêΓûêΓûêΓûêΓûêΓûÄ    | 86429/163499 [00:57<01:12, 
+1067.03reports/s]
+  LF4 section weight:  53%|ΓûêΓûêΓûêΓûêΓûêΓûÄ    | 86540/163499 [00:57<01:11, 
+1078.61reports/s]
+  LF4 section weight:  53%|ΓûêΓûêΓûêΓûêΓûêΓûÄ    | 86652/163499 [00:57<01:10, 
+1087.30reports/s]
+  LF4 section weight:  53%|ΓûêΓûêΓûêΓûêΓûêΓûÄ    | 86761/163499 [00:58<01:12, 
+1053.67reports/s]
+  LF4 section weight:  53%|ΓûêΓûêΓûêΓûêΓûêΓûÄ    | 86881/163499 [00:58<01:10, 
+1092.50reports/s]
+  LF4 section weight:  53%|ΓûêΓûêΓûêΓûêΓûêΓûÄ    | 86994/163499 [00:58<01:09, 
+1100.57reports/s]
+  LF4 section weight:  53%|ΓûêΓûêΓûêΓûêΓûêΓûÄ    | 87105/163499 [00:58<01:10, 
+1087.79reports/s]
+  LF4 section weight:  53%|ΓûêΓûêΓûêΓûêΓûêΓûÄ    | 87224/163499 [00:58<01:08, 
+1112.95reports/s]
+  LF4 section weight:  53%|ΓûêΓûêΓûêΓûêΓûêΓûÄ    | 87342/163499 [00:58<01:07, 
+1127.41reports/s]
+  LF4 section weight:  53%|ΓûêΓûêΓûêΓûêΓûêΓûÄ    | 87458/163499 [00:58<01:06, 
+1136.64reports/s]
+  LF4 section weight:  54%|ΓûêΓûêΓûêΓûêΓûêΓûÄ    | 87590/163499 [00:58<01:03, 
+1188.06reports/s]
+  LF4 section weight:  54%|ΓûêΓûêΓûêΓûêΓûêΓûÄ    | 87709/163499 [00:58<01:08, 
+1111.71reports/s]
+  LF4 section weight:  54%|ΓûêΓûêΓûêΓûêΓûêΓûÄ    | 87833/163499 [00:59<01:06, 
+1144.52reports/s]
+  LF4 section weight:  54%|ΓûêΓûêΓûêΓûêΓûêΓûì    | 87949/163499 [00:59<01:05, 
+1145.84reports/s]
+  LF4 section weight:  54%|ΓûêΓûêΓûêΓûêΓûêΓûì    | 88065/163499 [00:59<01:06, 
+1130.56reports/s]
+  LF4 section weight:  54%|ΓûêΓûêΓûêΓûêΓûêΓûì    | 88179/163499 [00:59<01:09, 
+1076.38reports/s]
+  LF4 section weight:  54%|ΓûêΓûêΓûêΓûêΓûêΓûì    | 88288/163499 [00:59<01:13, 
+1028.75reports/s]
+  LF4 section weight:  54%|ΓûêΓûêΓûêΓûêΓûêΓûì    | 88392/163499 [00:59<01:16, 
+987.31reports/s] 
+  LF4 section weight:  54%|ΓûêΓûêΓûêΓûêΓûêΓûì    | 88492/163499 [00:59<01:19, 
+946.40reports/s]
+  LF4 section weight:  54%|ΓûêΓûêΓûêΓûêΓûêΓûì    | 88599/163499 [00:59<01:16, 
+975.86reports/s]
+  LF4 section weight:  54%|ΓûêΓûêΓûêΓûêΓûêΓûì    | 88702/163499 [00:59<01:15, 
+985.98reports/s]
+  LF4 section weight:  54%|ΓûêΓûêΓûêΓûêΓûêΓûì    | 88814/163499 [00:59<01:13, 
+1021.46reports/s]
+  LF4 section weight:  54%|ΓûêΓûêΓûêΓûêΓûêΓûì    | 88925/163499 [01:00<01:11, 
+1041.37reports/s]
+  LF4 section weight:  54%|ΓûêΓûêΓûêΓûêΓûêΓûì    | 89033/163499 [01:00<01:11, 
+1047.70reports/s]
+  LF4 section weight:  55%|ΓûêΓûêΓûêΓûêΓûêΓûì    | 89139/163499 [01:00<01:10, 
+1048.00reports/s]
+  LF4 section weight:  55%|ΓûêΓûêΓûêΓûêΓûêΓûì    | 89247/163499 [01:00<01:10, 
+1051.82reports/s]
+  LF4 section weight:  55%|ΓûêΓûêΓûêΓûêΓûêΓûì    | 89360/163499 [01:00<01:09, 
+1068.24reports/s]
+  LF4 section weight:  55%|ΓûêΓûêΓûêΓûêΓûêΓûì    | 89468/163499 [01:00<01:09, 
+1068.88reports/s]
+  LF4 section weight:  55%|ΓûêΓûêΓûêΓûêΓûêΓûì    | 89576/163499 [01:00<01:09, 
+1070.63reports/s]
+  LF4 section weight:  55%|ΓûêΓûêΓûêΓûêΓûêΓûì    | 89684/163499 [01:00<01:08, 
+1072.02reports/s]
+  LF4 section weight:  55%|ΓûêΓûêΓûêΓûêΓûêΓûì    | 89800/163499 [01:00<01:07, 
+1097.14reports/s]
+  LF4 section weight:  55%|ΓûêΓûêΓûêΓûêΓûêΓûì    | 89910/163499 [01:01<01:07, 
+1083.89reports/s]
+  LF4 section weight:  55%|ΓûêΓûêΓûêΓûêΓûêΓûî    | 90020/163499 [01:01<01:07, 
+1086.97reports/s]
+  LF4 section weight:  55%|ΓûêΓûêΓûêΓûêΓûêΓûî    | 90157/163499 [01:01<01:02, 
+1167.59reports/s]
+  LF4 section weight:  55%|ΓûêΓûêΓûêΓûêΓûêΓûî    | 90283/163499 [01:01<01:01, 
+1193.83reports/s]
+  LF4 section weight:  55%|ΓûêΓûêΓûêΓûêΓûêΓûî    | 90403/163499 [01:01<01:01, 
+1189.54reports/s]
+  LF4 section weight:  55%|ΓûêΓûêΓûêΓûêΓûêΓûî    | 90523/163499 [01:01<01:01, 
+1185.19reports/s]
+  LF4 section weight:  55%|ΓûêΓûêΓûêΓûêΓûêΓûî    | 90642/163499 [01:01<01:04, 
+1131.49reports/s]
+  LF4 section weight:  56%|ΓûêΓûêΓûêΓûêΓûêΓûî    | 90780/163499 [01:01<01:00, 
+1201.81reports/s]
+  LF4 section weight:  56%|ΓûêΓûêΓûêΓûêΓûêΓûî    | 90946/163499 [01:01<00:54, 
+1333.74reports/s]
+  LF4 section weight:  56%|ΓûêΓûêΓûêΓûêΓûêΓûî    | 91096/163499 [01:01<00:52, 
+1381.52reports/s]
+  LF4 section weight:  56%|ΓûêΓûêΓûêΓûêΓûêΓûî    | 91252/163499 [01:02<00:50, 
+1432.11reports/s]
+  LF4 section weight:  56%|ΓûêΓûêΓûêΓûêΓûêΓûî    | 91453/163499 [01:02<00:44, 
+1601.07reports/s]
+  LF4 section weight:  56%|ΓûêΓûêΓûêΓûêΓûêΓûî    | 91614/163499 [01:02<00:46, 
+1552.83reports/s]
+  LF4 section weight:  56%|ΓûêΓûêΓûêΓûêΓûêΓûî    | 91770/163499 [01:02<00:46, 
+1551.32reports/s]
+  LF4 section weight:  56%|ΓûêΓûêΓûêΓûêΓûêΓûî    | 91926/163499 [01:02<00:47, 
+1509.02reports/s]
+  LF4 section weight:  56%|ΓûêΓûêΓûêΓûêΓûêΓûï    | 92086/163499 [01:02<00:46, 
+1530.90reports/s]
+  LF4 section weight:  56%|ΓûêΓûêΓûêΓûêΓûêΓûï    | 92244/163499 [01:02<00:46, 
+1541.35reports/s]
+  LF4 section weight:  57%|ΓûêΓûêΓûêΓûêΓûêΓûï    | 92399/163499 [01:02<00:46, 
+1536.02reports/s]
+  LF4 section weight:  57%|ΓûêΓûêΓûêΓûêΓûêΓûï    | 92553/163499 [01:02<00:46, 
+1532.20reports/s]
+  LF4 section weight:  57%|ΓûêΓûêΓûêΓûêΓûêΓûï    | 92722/163499 [01:02<00:44, 
+1578.03reports/s]
+  LF4 section weight:  57%|ΓûêΓûêΓûêΓûêΓûêΓûï    | 92880/163499 [01:03<00:44, 
+1576.60reports/s]
+  LF4 section weight:  57%|ΓûêΓûêΓûêΓûêΓûêΓûï    | 93067/163499 [01:03<00:42, 
+1662.73reports/s]
+  LF4 section weight:  57%|ΓûêΓûêΓûêΓûêΓûêΓûï    | 93240/163499 [01:03<00:41, 
+1682.41reports/s]
+  LF4 section weight:  57%|ΓûêΓûêΓûêΓûêΓûêΓûï    | 93409/163499 [01:03<00:42, 
+1665.59reports/s]
+  LF4 section weight:  57%|ΓûêΓûêΓûêΓûêΓûêΓûï    | 93576/163499 [01:03<00:43, 
+1613.88reports/s]
+  LF4 section weight:  57%|ΓûêΓûêΓûêΓûêΓûêΓûï    | 93756/163499 [01:03<00:41, 
+1664.19reports/s]
+  LF4 section weight:  57%|ΓûêΓûêΓûêΓûêΓûêΓûï    | 93937/163499 [01:03<00:40, 
+1699.34reports/s]
+  LF4 section weight:  58%|ΓûêΓûêΓûêΓûêΓûêΓûè    | 94113/163499 [01:03<00:40, 
+1716.92reports/s]
+  LF4 section weight:  58%|ΓûêΓûêΓûêΓûêΓûêΓûè    | 94301/163499 [01:03<00:39, 
+1753.18reports/s]
+  LF4 section weight:  58%|ΓûêΓûêΓûêΓûêΓûêΓûè    | 94477/163499 [01:03<00:40, 
+1688.09reports/s]
+  LF4 section weight:  58%|ΓûêΓûêΓûêΓûêΓûêΓûè    | 94647/163499 [01:04<00:41, 
+1678.42reports/s]
+  LF4 section weight:  58%|ΓûêΓûêΓûêΓûêΓûêΓûè    | 94816/163499 [01:04<00:41, 
+1668.02reports/s]
+  LF4 section weight:  58%|ΓûêΓûêΓûêΓûêΓûêΓûè    | 94985/163499 [01:04<00:41, 
+1669.62reports/s]
+  LF4 section weight:  58%|ΓûêΓûêΓûêΓûêΓûêΓûè    | 95153/163499 [01:04<00:42, 
+1618.58reports/s]
+  LF4 section weight:  58%|ΓûêΓûêΓûêΓûêΓûêΓûè    | 95325/163499 [01:04<00:41, 
+1647.38reports/s]
+  LF4 section weight:  58%|ΓûêΓûêΓûêΓûêΓûêΓûè    | 95492/163499 [01:04<00:41, 
+1652.22reports/s]
+  LF4 section weight:  59%|ΓûêΓûêΓûêΓûêΓûêΓûè    | 95667/163499 [01:04<00:40, 
+1679.24reports/s]
+  LF4 section weight:  59%|ΓûêΓûêΓûêΓûêΓûêΓûè    | 95836/163499 [01:04<00:45, 
+1490.01reports/s]
+  LF4 section weight:  59%|ΓûêΓûêΓûêΓûêΓûêΓûè    | 95999/163499 [01:04<00:44, 
+1525.95reports/s]
+  LF4 section weight:  59%|ΓûêΓûêΓûêΓûêΓûêΓûë    | 96159/163499 [01:05<00:43, 
+1546.06reports/s]
+  LF4 section weight:  59%|ΓûêΓûêΓûêΓûêΓûêΓûë    | 96316/163499 [01:05<00:44, 
+1520.13reports/s]
+  LF4 section weight:  59%|ΓûêΓûêΓûêΓûêΓûêΓûë    | 96484/163499 [01:05<00:42, 
+1563.39reports/s]
+  LF4 section weight:  59%|ΓûêΓûêΓûêΓûêΓûêΓûë    | 96662/163499 [01:05<00:41, 
+1621.33reports/s]
+  LF4 section weight:  59%|ΓûêΓûêΓûêΓûêΓûêΓûë    | 96855/163499 [01:05<00:39, 
+1706.22reports/s]
+  LF4 section weight:  59%|ΓûêΓûêΓûêΓûêΓûêΓûë    | 97027/163499 [01:05<00:40, 
+1649.85reports/s]
+  LF4 section weight:  59%|ΓûêΓûêΓûêΓûêΓûêΓûë    | 97193/163499 [01:05<00:40, 
+1649.26reports/s]
+  LF4 section weight:  60%|ΓûêΓûêΓûêΓûêΓûêΓûë    | 97389/163499 [01:05<00:38, 
+1737.80reports/s]
+  LF4 section weight:  60%|ΓûêΓûêΓûêΓûêΓûêΓûë    | 97564/163499 [01:05<00:38, 
+1707.45reports/s]
+  LF4 section weight:  60%|ΓûêΓûêΓûêΓûêΓûêΓûë    | 97747/163499 [01:05<00:37, 
+1738.39reports/s]
+  LF4 section weight:  60%|ΓûêΓûêΓûêΓûêΓûêΓûë    | 97922/163499 [01:06<00:39, 
+1678.50reports/s]
+  LF4 section weight:  60%|ΓûêΓûêΓûêΓûêΓûêΓûë    | 98091/163499 [01:06<00:39, 
+1637.92reports/s]
+  LF4 section weight:  60%|ΓûêΓûêΓûêΓûêΓûêΓûê    | 98258/163499 [01:06<00:39, 
+1645.35reports/s]
+  LF4 section weight:  60%|ΓûêΓûêΓûêΓûêΓûêΓûê    | 98423/163499 [01:06<00:39, 
+1632.98reports/s]
+  LF4 section weight:  60%|ΓûêΓûêΓûêΓûêΓûêΓûê    | 98587/163499 [01:06<00:40, 
+1618.78reports/s]
+  LF4 section weight:  60%|ΓûêΓûêΓûêΓûêΓûêΓûê    | 98750/163499 [01:06<00:41, 
+1566.44reports/s]
+  LF4 section weight:  61%|ΓûêΓûêΓûêΓûêΓûêΓûê    | 98929/163499 [01:06<00:39, 
+1629.80reports/s]
+  LF4 section weight:  61%|ΓûêΓûêΓûêΓûêΓûêΓûê    | 99093/163499 [01:06<00:40, 
+1579.88reports/s]
+  LF4 section weight:  61%|ΓûêΓûêΓûêΓûêΓûêΓûê    | 99296/163499 [01:06<00:37, 
+1701.44reports/s]
+  LF4 section weight:  61%|ΓûêΓûêΓûêΓûêΓûêΓûê    | 99468/163499 [01:07<00:39, 
+1603.92reports/s]
+  LF4 section weight:  61%|ΓûêΓûêΓûêΓûêΓûêΓûê    | 99630/163499 [01:07<00:39, 
+1604.84reports/s]
+  LF4 section weight:  61%|ΓûêΓûêΓûêΓûêΓûêΓûê    | 99798/163499 [01:07<00:39, 
+1621.46reports/s]
+  LF4 section weight:  61%|ΓûêΓûêΓûêΓûêΓûêΓûê    | 99986/163499 [01:07<00:37, 
+1695.01reports/s]
+  LF4 section weight:  61%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûÅ   | 100157/163499 [01:07<00:38, 
+1628.92reports/s]
+  LF4 section weight:  61%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûÅ   | 100335/163499 [01:07<00:37, 
+1667.78reports/s]
+  LF4 section weight:  61%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûÅ   | 100511/163499 [01:07<00:37, 
+1694.11reports/s]
+  LF4 section weight:  62%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûÅ   | 100682/163499 [01:07<00:38, 
+1639.17reports/s]
+  LF4 section weight:  62%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûÅ   | 100847/163499 [01:07<00:40, 
+1560.11reports/s]
+  LF4 section weight:  62%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûÅ   | 101047/163499 [01:08<00:37, 
+1678.98reports/s]
+  LF4 section weight:  62%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûÅ   | 101229/163499 [01:08<00:36, 
+1717.96reports/s]
+  LF4 section weight:  62%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûÅ   | 101413/163499 [01:08<00:35, 
+1746.51reports/s]
+  LF4 section weight:  62%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûÅ   | 101589/163499 [01:08<00:35, 
+1745.26reports/s]
+  LF4 section weight:  62%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûÅ   | 101765/163499 [01:08<00:36, 
+1711.56reports/s]
+  LF4 section weight:  62%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûÅ   | 101937/163499 [01:08<00:37, 
+1638.22reports/s]
+  LF4 section weight:  62%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûÅ   | 102103/163499 [01:08<00:37, 
+1642.49reports/s]
+  LF4 section weight:  63%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûÄ   | 102269/163499 [01:08<00:37, 
+1646.98reports/s]
+  LF4 section weight:  63%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûÄ   | 102450/163499 [01:08<00:36, 
+1692.04reports/s]
+  LF4 section weight:  63%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûÄ   | 102620/163499 [01:08<00:36, 
+1686.25reports/s]
+  LF4 section weight:  63%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûÄ   | 102789/163499 [01:09<00:37, 
+1609.39reports/s]
+  LF4 section weight:  63%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûÄ   | 102951/163499 [01:09<00:37, 
+1607.40reports/s]
+  LF4 section weight:  63%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûÄ   | 103145/163499 [01:09<00:35, 
+1703.57reports/s]
+  LF4 section weight:  63%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûÄ   | 103317/163499 [01:09<00:35, 
+1699.43reports/s]
+  LF4 section weight:  63%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûÄ   | 103488/163499 [01:09<00:35, 
+1675.86reports/s]
+  LF4 section weight:  63%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûÄ   | 103656/163499 [01:09<00:36, 
+1627.24reports/s]
+  LF4 section weight:  63%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûÄ   | 103820/163499 [01:09<00:37, 
+1574.43reports/s]
+  LF4 section weight:  64%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûÄ   | 103988/163499 [01:09<00:37, 
+1601.01reports/s]
+  LF4 section weight:  64%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûÄ   | 104149/163499 [01:09<00:37, 
+1587.04reports/s]
+  LF4 section weight:  64%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûì   | 104314/163499 [01:09<00:36, 
+1601.66reports/s]
+  LF4 section weight:  64%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûì   | 104475/163499 [01:10<00:38, 
+1550.00reports/s]
+  LF4 section weight:  64%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûì   | 104655/163499 [01:10<00:36, 
+1617.40reports/s]
+  LF4 section weight:  64%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûì   | 104818/163499 [01:10<00:36, 
+1603.42reports/s]
+  LF4 section weight:  64%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûì   | 104999/163499 [01:10<00:35, 
+1659.43reports/s]
+  LF4 section weight:  64%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûì   | 105166/163499 [01:10<00:36, 
+1616.58reports/s]
+  LF4 section weight:  64%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûì   | 105340/163499 [01:10<00:35, 
+1651.56reports/s]
+  LF4 section weight:  65%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûì   | 105527/163499 [01:10<00:33, 
+1710.22reports/s]
+  LF4 section weight:  65%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûì   | 105699/163499 [01:10<00:34, 
+1697.35reports/s]
+  LF4 section weight:  65%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûì   | 105874/163499 [01:10<00:33, 
+1701.30reports/s]
+  LF4 section weight:  65%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûì   | 106045/163499 [01:11<00:34, 
+1683.49reports/s]
+  LF4 section weight:  65%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûì   | 106214/163499 [01:11<00:35, 
+1628.28reports/s]
+  LF4 section weight:  65%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûî   | 106393/163499 [01:11<00:34, 
+1666.57reports/s]
+  LF4 section weight:  65%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûî   | 106577/163499 [01:11<00:33, 
+1713.40reports/s]
+  LF4 section weight:  65%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûî   | 106749/163499 [01:11<00:35, 
+1617.40reports/s]
+  LF4 section weight:  65%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûî   | 106912/163499 [01:11<00:35, 
+1589.19reports/s]
+  LF4 section weight:  65%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûî   | 107086/163499 [01:11<00:34, 
+1630.83reports/s]
+  LF4 section weight:  66%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûî   | 107290/163499 [01:11<00:32, 
+1746.85reports/s]
+  LF4 section weight:  66%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûî   | 107484/163499 [01:11<00:31, 
+1798.40reports/s]
+  LF4 section weight:  66%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûî   | 107665/163499 [01:11<00:32, 
+1732.75reports/s]
+  LF4 section weight:  66%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûî   | 107840/163499 [01:12<00:33, 
+1645.90reports/s]
+  LF4 section weight:  66%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûî   | 108006/163499 [01:12<00:34, 
+1613.46reports/s]
+  LF4 section weight:  66%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûî   | 108170/163499 [01:12<00:34, 
+1617.28reports/s]
+  LF4 section weight:  66%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûï   | 108333/163499 [01:12<00:34, 
+1603.99reports/s]
+  LF4 section weight:  66%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûï   | 108516/163499 [01:12<00:32, 
+1668.29reports/s]
+  LF4 section weight:  66%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûï   | 108711/163499 [01:12<00:31, 
+1749.59reports/s]
+  LF4 section weight:  67%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûï   | 108887/163499 [01:12<00:31, 
+1708.15reports/s]
+  LF4 section weight:  67%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûï   | 109059/163499 [01:12<00:32, 
+1694.36reports/s]
+  LF4 section weight:  67%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûï   | 109258/163499 [01:12<00:30, 
+1780.25reports/s]
+  LF4 section weight:  67%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûï   | 109437/163499 [01:13<00:32, 
+1653.30reports/s]
+  LF4 section weight:  67%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûï   | 109611/163499 [01:13<00:32, 
+1673.99reports/s]
+  LF4 section weight:  67%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûï   | 109796/163499 [01:13<00:31, 
+1721.62reports/s]
+  LF4 section weight:  67%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûï   | 109977/163499 [01:13<00:30, 
+1746.69reports/s]
+  LF4 section weight:  67%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûï   | 110153/163499 [01:13<00:31, 
+1700.82reports/s]
+  LF4 section weight:  67%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûï   | 110324/163499 [01:13<00:31, 
+1673.29reports/s]
+  LF4 section weight:  68%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûè   | 110498/163499 [01:13<00:31, 
+1689.58reports/s]
+  LF4 section weight:  68%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûè   | 110668/163499 [01:13<00:31, 
+1691.10reports/s]
+  LF4 section weight:  68%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûè   | 110842/163499 [01:13<00:30, 
+1704.67reports/s]
+  LF4 section weight:  68%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûè   | 111013/163499 [01:13<00:31, 
+1670.54reports/s]
+  LF4 section weight:  68%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûè   | 111181/163499 [01:14<00:32, 
+1633.81reports/s]
+  LF4 section weight:  68%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûè   | 111347/163499 [01:14<00:31, 
+1638.44reports/s]
+  LF4 section weight:  68%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûè   | 111540/163499 [01:14<00:30, 
+1721.43reports/s]
+  LF4 section weight:  68%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûè   | 111713/163499 [01:14<00:30, 
+1701.13reports/s]
+  LF4 section weight:  68%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûè   | 111884/163499 [01:14<00:31, 
+1625.72reports/s]
+  LF4 section weight:  69%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûè   | 112048/163499 [01:14<00:31, 
+1622.62reports/s]
+  LF4 section weight:  69%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûè   | 112236/163499 [01:14<00:30, 
+1694.88reports/s]
+  LF4 section weight:  69%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûë   | 112412/163499 [01:14<00:29, 
+1711.66reports/s]
+  LF4 section weight:  69%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûë   | 112606/163499 [01:14<00:28, 
+1775.58reports/s]
+  LF4 section weight:  69%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûë   | 112792/163499 [01:15<00:28, 
+1793.31reports/s]
+  LF4 section weight:  69%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûë   | 112973/163499 [01:15<00:28, 
+1796.49reports/s]
+  LF4 section weight:  69%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûë   | 113153/163499 [01:15<00:28, 
+1762.65reports/s]
+  LF4 section weight:  69%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûë   | 113343/163499 [01:15<00:27, 
+1798.90reports/s]
+  LF4 section weight:  69%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûë   | 113524/163499 [01:15<00:29, 
+1709.57reports/s]
+  LF4 section weight:  70%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûë   | 113696/163499 [01:15<00:29, 
+1662.71reports/s]
+  LF4 section weight:  70%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûë   | 113876/163499 [01:15<00:29, 
+1697.49reports/s]
+  LF4 section weight:  70%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûë   | 114047/163499 [01:15<00:29, 
+1686.78reports/s]
+  LF4 section weight:  70%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûë   | 114253/163499 [01:15<00:27, 
+1794.17reports/s]
+  LF4 section weight:  70%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûë   | 114434/163499 [01:15<00:27, 
+1786.91reports/s]
+  LF4 section weight:  70%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûê   | 114614/163499 [01:16<00:27, 
+1778.83reports/s]
+  LF4 section weight:  70%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûê   | 114807/163499 [01:16<00:26, 
+1817.96reports/s]
+  LF4 section weight:  70%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûê   | 114990/163499 [01:16<00:27, 
+1754.78reports/s]
+  LF4 section weight:  70%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûê   | 115167/163499 [01:16<00:29, 
+1625.34reports/s]
+  LF4 section weight:  71%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûê   | 115332/163499 [01:16<00:30, 
+1602.45reports/s]
+  LF4 section weight:  71%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûê   | 115495/163499 [01:16<00:29, 
+1608.63reports/s]
+  LF4 section weight:  71%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûê   | 115657/163499 [01:16<00:31, 
+1507.51reports/s]
+  LF4 section weight:  71%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûê   | 115810/163499 [01:16<00:31, 
+1504.13reports/s]
+  LF4 section weight:  71%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûê   | 115962/163499 [01:16<00:31, 
+1496.55reports/s]
+  LF4 section weight:  71%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûê   | 116113/163499 [01:17<00:31, 
+1487.85reports/s]
+  LF4 section weight:  71%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûê   | 116278/163499 [01:17<00:30, 
+1529.75reports/s]
+  LF4 section weight:  71%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûê   | 116432/163499 [01:17<00:31, 
+1512.63reports/s]
+  LF4 section weight:  71%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûÅ  | 116584/163499 [01:17<00:33, 
+1405.51reports/s]
+  LF4 section weight:  71%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûÅ  | 116727/163499 [01:17<00:33, 
+1392.86reports/s]
+  LF4 section weight:  71%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûÅ  | 116885/163499 [01:17<00:32, 
+1443.07reports/s]
+  LF4 section weight:  72%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûÅ  | 117044/163499 [01:17<00:31, 
+1483.36reports/s]
+  LF4 section weight:  72%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûÅ  | 117206/163499 [01:17<00:30, 
+1520.61reports/s]
+  LF4 section weight:  72%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûÅ  | 117394/163499 [01:17<00:28, 
+1622.87reports/s]
+  LF4 section weight:  72%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûÅ  | 117558/163499 [01:17<00:28, 
+1584.24reports/s]
+  LF4 section weight:  72%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûÅ  | 117736/163499 [01:18<00:27, 
+1641.00reports/s]
+  LF4 section weight:  72%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûÅ  | 117908/163499 [01:18<00:27, 
+1652.82reports/s]
+  LF4 section weight:  72%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûÅ  | 118074/163499 [01:18<00:28, 
+1600.24reports/s]
+  LF4 section weight:  72%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûÅ  | 118253/163499 [01:18<00:27, 
+1653.30reports/s]
+  LF4 section weight:  72%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûÅ  | 118419/163499 [01:18<00:28, 
+1603.12reports/s]
+  LF4 section weight:  73%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûÄ  | 118605/163499 [01:18<00:26, 
+1668.08reports/s]
+  LF4 section weight:  73%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûÄ  | 118773/163499 [01:18<00:26, 
+1660.05reports/s]
+  LF4 section weight:  73%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûÄ  | 118948/163499 [01:18<00:26, 
+1685.59reports/s]
+  LF4 section weight:  73%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûÄ  | 119117/163499 [01:18<00:26, 
+1651.51reports/s]
+  LF4 section weight:  73%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûÄ  | 119299/163499 [01:19<00:26, 
+1696.24reports/s]
+  LF4 section weight:  73%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûÄ  | 119469/163499 [01:19<00:26, 
+1689.76reports/s]
+  LF4 section weight:  73%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûÄ  | 119659/163499 [01:19<00:25, 
+1747.72reports/s]
+  LF4 section weight:  73%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûÄ  | 119835/163499 [01:19<00:25, 
+1710.25reports/s]
+  LF4 section weight:  73%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûÄ  | 120007/163499 [01:19<00:26, 
+1638.18reports/s]
+  LF4 section weight:  74%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûÄ  | 120172/163499 [01:19<00:27, 
+1593.50reports/s]
+  LF4 section weight:  74%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûÄ  | 120369/163499 [01:19<00:25, 
+1696.82reports/s]
+  LF4 section weight:  74%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûÄ  | 120557/163499 [01:19<00:24, 
+1746.25reports/s]
+  LF4 section weight:  74%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûì  | 120733/163499 [01:19<00:25, 
+1699.37reports/s]
+  LF4 section weight:  74%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûì  | 120922/163499 [01:19<00:24, 
+1746.36reports/s]
+  LF4 section weight:  74%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûì  | 121098/163499 [01:20<00:24, 
+1697.14reports/s]
+  LF4 section weight:  74%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûì  | 121270/163499 [01:20<00:24, 
+1703.28reports/s]
+  LF4 section weight:  74%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûì  | 121448/163499 [01:20<00:24, 
+1715.29reports/s]
+  LF4 section weight:  74%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûì  | 121625/163499 [01:20<00:24, 
+1724.78reports/s]
+  LF4 section weight:  74%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûì  | 121798/163499 [01:20<00:25, 
+1637.04reports/s]
+  LF4 section weight:  75%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûì  | 121979/163499 [01:20<00:24, 
+1677.55reports/s]
+  LF4 section weight:  75%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûì  | 122148/163499 [01:20<00:24, 
+1670.30reports/s]
+  LF4 section weight:  75%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûì  | 122316/163499 [01:20<00:24, 
+1658.21reports/s]
+  LF4 section weight:  75%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûì  | 122494/163499 [01:20<00:24, 
+1693.55reports/s]
+  LF4 section weight:  75%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûî  | 122674/163499 [01:21<00:23, 
+1713.16reports/s]
+  LF4 section weight:  75%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûî  | 122851/163499 [01:21<00:23, 
+1723.48reports/s]
+  LF4 section weight:  75%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûî  | 123030/163499 [01:21<00:23, 
+1741.90reports/s]
+  LF4 section weight:  75%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûî  | 123205/163499 [01:21<00:24, 
+1660.59reports/s]
+  LF4 section weight:  75%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûî  | 123381/163499 [01:21<00:23, 
+1688.87reports/s]
+  LF4 section weight:  76%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûî  | 123571/163499 [01:21<00:22, 
+1744.18reports/s]
+  LF4 section weight:  76%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûî  | 123747/163499 [01:21<00:22, 
+1736.48reports/s]
+  LF4 section weight:  76%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûî  | 123922/163499 [01:21<00:23, 
+1660.88reports/s]
+  LF4 section weight:  76%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûî  | 124089/163499 [01:21<00:24, 
+1640.06reports/s]
+  LF4 section weight:  76%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûî  | 124254/163499 [01:21<00:24, 
+1588.33reports/s]
+  LF4 section weight:  76%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûî  | 124414/163499 [01:22<00:24, 
+1580.00reports/s]
+  LF4 section weight:  76%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûî  | 124573/163499 [01:22<00:25, 
+1542.52reports/s]
+  LF4 section weight:  76%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûï  | 124740/163499 [01:22<00:24, 
+1577.99reports/s]
+  LF4 section weight:  76%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûï  | 124913/163499 [01:22<00:23, 
+1615.14reports/s]
+  LF4 section weight:  77%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûï  | 125101/163499 [01:22<00:22, 
+1687.74reports/s]
+  LF4 section weight:  77%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûï  | 125295/163499 [01:22<00:21, 
+1751.60reports/s]
+  LF4 section weight:  77%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûï  | 125476/163499 [01:22<00:21, 
+1766.44reports/s]
+  LF4 section weight:  77%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûï  | 125653/163499 [01:22<00:22, 
+1718.95reports/s]
+  LF4 section weight:  77%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûï  | 125826/163499 [01:22<00:23, 
+1619.95reports/s]
+  LF4 section weight:  77%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûï  | 125990/163499 [01:23<00:23, 
+1590.70reports/s]
+  LF4 section weight:  77%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûï  | 126168/163499 [01:23<00:22, 
+1642.34reports/s]
+  LF4 section weight:  77%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûï  | 126334/163499 [01:23<00:22, 
+1632.33reports/s]
+  LF4 section weight:  77%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûï  | 126514/163499 [01:23<00:22, 
+1680.32reports/s]
+  LF4 section weight:  77%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûï  | 126703/163499 [01:23<00:21, 
+1739.31reports/s]
+  LF4 section weight:  78%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûè  | 126878/163499 [01:23<00:21, 
+1702.97reports/s]
+  LF4 section weight:  78%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûè  | 127051/163499 [01:23<00:21, 
+1709.76reports/s]
+  LF4 section weight:  78%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûè  | 127239/163499 [01:23<00:20, 
+1757.84reports/s]
+  LF4 section weight:  78%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûè  | 127428/163499 [01:23<00:20, 
+1785.91reports/s]
+  LF4 section weight:  78%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûè  | 127617/163499 [01:23<00:19, 
+1811.97reports/s]
+  LF4 section weight:  78%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûè  | 127804/163499 [01:24<00:19, 
+1829.01reports/s]
+  LF4 section weight:  78%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûè  | 127988/163499 [01:24<00:19, 
+1793.96reports/s]
+  LF4 section weight:  78%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûè  | 128168/163499 [01:24<00:20, 
+1687.22reports/s]
+  LF4 section weight:  78%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûè  | 128339/163499 [01:24<00:20, 
+1691.33reports/s]
+  LF4 section weight:  79%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûè  | 128541/163499 [01:24<00:19, 
+1778.52reports/s]
+  LF4 section weight:  79%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûè  | 128720/163499 [01:24<00:19, 
+1776.91reports/s]
+  LF4 section weight:  79%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûë  | 128905/163499 [01:24<00:19, 
+1793.80reports/s]
+  LF4 section weight:  79%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûë  | 129113/163499 [01:24<00:18, 
+1868.15reports/s]
+  LF4 section weight:  79%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûë  | 129301/163499 [01:24<00:18, 
+1859.91reports/s]
+  LF4 section weight:  79%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûë  | 129488/163499 [01:24<00:18, 
+1827.55reports/s]
+  LF4 section weight:  79%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûë  | 129672/163499 [01:25<00:18, 
+1813.92reports/s]
+  LF4 section weight:  79%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûë  | 129854/163499 [01:25<00:18, 
+1803.27reports/s]
+  LF4 section weight:  80%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûë  | 130040/163499 [01:25<00:18, 
+1814.54reports/s]
+  LF4 section weight:  80%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûë  | 130222/163499 [01:25<00:18, 
+1775.74reports/s]
+  LF4 section weight:  80%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûë  | 130406/163499 [01:25<00:18, 
+1793.79reports/s]
+  LF4 section weight:  80%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûë  | 130586/163499 [01:25<00:18, 
+1751.28reports/s]
+  LF4 section weight:  80%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûë  | 130762/163499 [01:25<00:19, 
+1662.35reports/s]
+  LF4 section weight:  80%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûê  | 130930/163499 [01:25<00:20, 
+1618.45reports/s]
+  LF4 section weight:  80%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûê  | 131123/163499 [01:25<00:19, 
+1702.91reports/s]
+  LF4 section weight:  80%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûê  | 131295/163499 [01:26<00:19, 
+1679.67reports/s]
+  LF4 section weight:  80%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûê  | 131468/163499 [01:26<00:18, 
+1692.51reports/s]
+  LF4 section weight:  81%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûê  | 131655/163499 [01:26<00:18, 
+1734.67reports/s]
+  LF4 section weight:  81%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûê  | 131829/163499 [01:26<00:18, 
+1694.28reports/s]
+  LF4 section weight:  81%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûê  | 132001/163499 [01:26<00:18, 
+1697.59reports/s]
+  LF4 section weight:  81%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûê  | 132172/163499 [01:26<00:18, 
+1663.55reports/s]
+  LF4 section weight:  81%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûê  | 132339/163499 [01:26<00:19, 
+1638.27reports/s]
+  LF4 section weight:  81%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûê  | 132504/163499 [01:26<00:19, 
+1597.95reports/s]
+  LF4 section weight:  81%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûê  | 132679/163499 [01:26<00:18, 
+1640.97reports/s]
+  LF4 section weight:  81%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûÅ | 132848/163499 [01:26<00:18, 
+1649.41reports/s]
+  LF4 section weight:  81%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûÅ | 133014/163499 [01:27<00:18, 
+1625.67reports/s]
+  LF4 section weight:  81%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûÅ | 133190/163499 [01:27<00:18, 
+1663.40reports/s]
+  LF4 section weight:  82%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûÅ | 133357/163499 [01:27<00:18, 
+1641.06reports/s]
+  LF4 section weight:  82%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûÅ | 133546/163499 [01:27<00:17, 
+1712.42reports/s]
+  LF4 section weight:  82%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûÅ | 133718/163499 [01:27<00:17, 
+1677.79reports/s]
+  LF4 section weight:  82%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûÅ | 133887/163499 [01:27<00:18, 
+1574.31reports/s]
+  LF4 section weight:  82%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûÅ | 134048/163499 [01:27<00:18, 
+1584.10reports/s]
+  LF4 section weight:  82%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûÅ | 134228/163499 [01:27<00:17, 
+1644.90reports/s]
+  LF4 section weight:  82%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûÅ | 134394/163499 [01:27<00:18, 
+1585.33reports/s]
+  LF4 section weight:  82%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûÅ | 134561/163499 [01:28<00:18, 
+1605.06reports/s]
+  LF4 section weight:  82%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûÅ | 134739/163499 [01:28<00:17, 
+1654.27reports/s]
+  LF4 section weight:  83%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûÄ | 134912/163499 [01:28<00:17, 
+1671.70reports/s]
+  LF4 section weight:  83%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûÄ | 135080/163499 [01:28<00:17, 
+1648.47reports/s]
+  LF4 section weight:  83%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûÄ | 135249/163499 [01:28<00:17, 
+1657.43reports/s]
+  LF4 section weight:  83%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûÄ | 135416/163499 [01:28<00:17, 
+1596.57reports/s]
+  LF4 section weight:  83%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûÄ | 135593/163499 [01:28<00:16, 
+1642.48reports/s]
+  LF4 section weight:  83%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûÄ | 135758/163499 [01:28<00:17, 
+1604.46reports/s]
+  LF4 section weight:  83%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûÄ | 135919/163499 [01:28<00:18, 
+1509.57reports/s]
+  LF4 section weight:  83%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûÄ | 136072/163499 [01:29<00:21, 
+1291.72reports/s]
+  LF4 section weight:  83%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûÄ | 136207/163499 [01:29<00:21, 
+1249.80reports/s]
+  LF4 section weight:  83%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûÄ | 136343/163499 [01:29<00:21, 
+1277.26reports/s]
+  LF4 section weight:  83%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûÄ | 136480/163499 [01:29<00:20, 
+1296.09reports/s]
+  LF4 section weight:  84%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûÄ | 136612/163499 [01:29<00:22, 
+1204.72reports/s]
+  LF4 section weight:  84%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûÄ | 136735/163499 [01:29<00:22, 
+1166.77reports/s]
+  LF4 section weight:  84%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûÄ | 136854/163499 [01:29<00:22, 
+1164.84reports/s]
+  LF4 section weight:  84%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûì | 136976/163499 [01:29<00:22, 
+1176.27reports/s]
+  LF4 section weight:  84%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûì | 137095/163499 [01:29<00:22, 
+1156.25reports/s]
+  LF4 section weight:  84%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûì | 137212/163499 [01:30<00:23, 
+1142.39reports/s]
+  LF4 section weight:  84%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûì | 137337/163499 [01:30<00:22, 
+1172.53reports/s]
+  LF4 section weight:  84%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûì | 137475/163499 [01:30<00:21, 
+1231.55reports/s]
+  LF4 section weight:  84%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûì | 137599/163499 [01:30<00:21, 
+1227.55reports/s]
+  LF4 section weight:  84%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûì | 137723/163499 [01:30<00:20, 
+1230.89reports/s]
+  LF4 section weight:  84%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûì | 137851/163499 [01:30<00:20, 
+1244.98reports/s]
+  LF4 section weight:  84%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûì | 137994/163499 [01:30<00:19, 
+1295.75reports/s]
+  LF4 section weight:  84%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûì | 138124/163499 [01:30<00:20, 
+1225.42reports/s]
+  LF4 section weight:  85%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûì | 138248/163499 [01:30<00:22, 
+1147.34reports/s]
+  LF4 section weight:  85%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûì | 138365/163499 [01:31<00:23, 
+1064.44reports/s]
+  LF4 section weight:  85%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûì | 138474/163499 [01:31<00:23, 
+1060.91reports/s]
+  LF4 section weight:  85%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûì | 138582/163499 [01:31<00:24, 
+1006.93reports/s]
+  LF4 section weight:  85%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûì | 138684/163499 [01:31<00:24, 
+1008.10reports/s]
+  LF4 section weight:  85%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûì | 138786/163499 [01:31<00:24, 
+989.95reports/s] 
+  LF4 section weight:  85%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûì | 138886/163499 [01:31<00:25, 
+969.91reports/s]
+  LF4 section weight:  85%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûî | 138984/163499 [01:31<00:25, 
+950.26reports/s]
+  LF4 section weight:  85%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûî | 139104/163499 [01:31<00:23, 
+1020.34reports/s]
+  LF4 section weight:  85%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûî | 139207/163499 [01:31<00:24, 
+980.94reports/s] 
+  LF4 section weight:  85%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûî | 139306/163499 [01:32<00:25, 
+951.48reports/s]
+  LF4 section weight:  85%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûî | 139434/163499 [01:32<00:23, 
+1043.50reports/s]
+  LF4 section weight:  85%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûî | 139549/163499 [01:32<00:22, 
+1072.42reports/s]
+  LF4 section weight:  85%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûî | 139659/163499 [01:32<00:22, 
+1079.77reports/s]
+  LF4 section weight:  86%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûî | 139794/163499 [01:32<00:20, 
+1153.42reports/s]
+  LF4 section weight:  86%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûî | 139910/163499 [01:32<00:20, 
+1145.80reports/s]
+  LF4 section weight:  86%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûî | 140025/163499 [01:32<00:20, 
+1143.33reports/s]
+  LF4 section weight:  86%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûî | 140140/163499 [01:32<00:21, 
+1105.90reports/s]
+  LF4 section weight:  86%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûî | 140253/163499 [01:32<00:21, 
+1103.08reports/s]
+  LF4 section weight:  86%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûî | 140398/163499 [01:32<00:19, 
+1198.46reports/s]
+  LF4 section weight:  86%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûî | 140519/163499 [01:33<00:19, 
+1156.78reports/s]
+  LF4 section weight:  86%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûî | 140659/163499 [01:33<00:18, 
+1223.37reports/s]
+  LF4 section weight:  86%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûî | 140806/163499 [01:33<00:17, 
+1293.94reports/s]
+  LF4 section weight:  86%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûî | 140963/163499 [01:33<00:16, 
+1374.52reports/s]
+  LF4 section weight:  86%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûï | 141102/163499 [01:33<00:16, 
+1330.35reports/s]
+  LF4 section weight:  86%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûï | 141236/163499 [01:33<00:17, 
+1294.45reports/s]
+  LF4 section weight:  86%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûï | 141367/163499 [01:33<00:18, 
+1215.70reports/s]
+  LF4 section weight:  87%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûï | 141490/163499 [01:33<00:18, 
+1190.17reports/s]
+  LF4 section weight:  87%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûï | 141612/163499 [01:33<00:18, 
+1197.45reports/s]
+  LF4 section weight:  87%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûï | 141733/163499 [01:33<00:18, 
+1197.91reports/s]
+  LF4 section weight:  87%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûï | 141861/163499 [01:34<00:17, 
+1221.07reports/s]
+  LF4 section weight:  87%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûï | 141989/163499 [01:34<00:17, 
+1233.65reports/s]
+  LF4 section weight:  87%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûï | 142132/163499 [01:34<00:16, 
+1290.35reports/s]
+  LF4 section weight:  87%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûï | 142262/163499 [01:34<00:16, 
+1255.23reports/s]
+  LF4 section weight:  87%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûï | 142399/163499 [01:34<00:16, 
+1284.15reports/s]
+  LF4 section weight:  87%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûï | 142541/163499 [01:34<00:15, 
+1323.58reports/s]
+  LF4 section weight:  87%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûï | 142674/163499 [01:34<00:16, 
+1235.88reports/s]
+  LF4 section weight:  87%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûï | 142799/163499 [01:34<00:16, 
+1220.78reports/s]
+  LF4 section weight:  87%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûï | 142922/163499 [01:34<00:17, 
+1184.89reports/s]
+  LF4 section weight:  87%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûï | 143047/163499 [01:35<00:17, 
+1202.21reports/s]
+  LF4 section weight:  88%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûè | 143176/163499 [01:35<00:16, 
+1225.00reports/s]
+  LF4 section weight:  88%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûè | 143300/163499 [01:35<00:16, 
+1200.64reports/s]
+  LF4 section weight:  88%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûè | 143421/163499 [01:35<00:16, 
+1181.55reports/s]
+  LF4 section weight:  88%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûè | 143553/163499 [01:35<00:16, 
+1218.83reports/s]
+  LF4 section weight:  88%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûè | 143676/163499 [01:35<00:16, 
+1221.08reports/s]
+  LF4 section weight:  88%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûè | 143803/163499 [01:35<00:16, 
+1228.57reports/s]
+  LF4 section weight:  88%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûè | 143941/163499 [01:35<00:15, 
+1266.63reports/s]
+  LF4 section weight:  88%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûè | 144074/163499 [01:35<00:15, 
+1283.11reports/s]
+  LF4 section weight:  88%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûè | 144222/163499 [01:35<00:14, 
+1340.92reports/s]
+  LF4 section weight:  88%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûè | 144357/163499 [01:36<00:14, 
+1334.33reports/s]
+  LF4 section weight:  88%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûè | 144491/163499 [01:36<00:14, 
+1335.04reports/s]
+  LF4 section weight:  88%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûè | 144627/163499 [01:36<00:14, 
+1338.94reports/s]
+  LF4 section weight:  89%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûè | 144761/163499 [01:36<00:13, 
+1338.94reports/s]
+  LF4 section weight:  89%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûè | 144895/163499 [01:36<00:14, 
+1317.26reports/s]
+  LF4 section weight:  89%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûè | 145027/163499 [01:36<00:14, 
+1249.74reports/s]
+  LF4 section weight:  89%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûë | 145153/163499 [01:36<00:14, 
+1230.23reports/s]
+  LF4 section weight:  89%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûë | 145286/163499 [01:36<00:14, 
+1256.27reports/s]
+  LF4 section weight:  89%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûë | 145413/163499 [01:36<00:14, 
+1259.13reports/s]
+  LF4 section weight:  89%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûë | 145540/163499 [01:37<00:14, 
+1254.24reports/s]
+  LF4 section weight:  89%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûë | 145678/163499 [01:37<00:13, 
+1290.26reports/s]
+  LF4 section weight:  89%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûë | 145828/163499 [01:37<00:13, 
+1348.11reports/s]
+  LF4 section weight:  89%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûë | 145967/163499 [01:37<00:12, 
+1354.97reports/s]
+  LF4 section weight:  89%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûë | 146103/163499 [01:37<00:12, 
+1355.77reports/s]
+  LF4 section weight:  89%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûë | 146239/163499 [01:37<00:13, 
+1236.08reports/s]
+  LF4 section weight:  90%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûë | 146365/163499 [01:37<00:14, 
+1196.99reports/s]
+  LF4 section weight:  90%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûë | 146487/163499 [01:37<00:14, 
+1154.63reports/s]
+  LF4 section weight:  90%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûë | 146638/163499 [01:37<00:13, 
+1249.33reports/s]
+  LF4 section weight:  90%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûë | 146790/163499 [01:37<00:12, 
+1320.49reports/s]
+  LF4 section weight:  90%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûë | 146965/163499 [01:38<00:11, 
+1439.32reports/s]
+  LF4 section weight:  90%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûë | 147117/163499 [01:38<00:11, 
+1461.20reports/s]
+  LF4 section weight:  90%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûê | 147280/163499 [01:38<00:10, 
+1509.31reports/s]
+  LF4 section weight:  90%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûê | 147449/163499 [01:38<00:10, 
+1558.67reports/s]
+  LF4 section weight:  90%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûê | 147613/163499 [01:38<00:10, 
+1579.20reports/s]
+  LF4 section weight:  90%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûê | 147772/163499 [01:38<00:10, 
+1572.37reports/s]
+  LF4 section weight:  90%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûê | 147949/163499 [01:38<00:09, 
+1628.47reports/s]
+  LF4 section weight:  91%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûê | 148130/163499 [01:38<00:09, 
+1680.89reports/s]
+  LF4 section weight:  91%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûê | 148299/163499 [01:38<00:09, 
+1630.10reports/s]
+  LF4 section weight:  91%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûê | 148463/163499 [01:39<00:09, 
+1578.35reports/s]
+  LF4 section weight:  91%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûê | 148658/163499 [01:39<00:08, 
+1680.11reports/s]
+  LF4 section weight:  91%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûê | 148828/163499 [01:39<00:08, 
+1682.72reports/s]
+  LF4 section weight:  91%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûê | 149011/163499 [01:39<00:08, 
+1724.11reports/s]
+  LF4 section weight:  91%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûê | 149184/163499 [01:39<00:08, 
+1650.53reports/s]
+  LF4 section weight:  91%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûÅ| 149350/163499 [01:39<00:08, 
+1593.71reports/s]
+  LF4 section weight:  91%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûÅ| 149516/163499 [01:39<00:08, 
+1604.89reports/s]
+  LF4 section weight:  92%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûÅ| 149691/163499 [01:39<00:08, 
+1642.57reports/s]
+  LF4 section weight:  92%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûÅ| 149885/163499 [01:39<00:07, 
+1721.41reports/s]
+  LF4 section weight:  92%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûÅ| 150058/163499 [01:39<00:07, 
+1720.87reports/s]
+  LF4 section weight:  92%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûÅ| 150243/163499 [01:40<00:07, 
+1753.80reports/s]
+  LF4 section weight:  92%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûÅ| 150419/163499 [01:40<00:07, 
+1731.00reports/s]
+  LF4 section weight:  92%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûÅ| 150608/163499 [01:40<00:07, 
+1777.04reports/s]
+  LF4 section weight:  92%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûÅ| 150786/163499 [01:40<00:07, 
+1748.36reports/s]
+  LF4 section weight:  92%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûÅ| 150962/163499 [01:40<00:07, 
+1741.83reports/s]
+  LF4 section weight:  92%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûÅ| 151137/163499 [01:40<00:07, 
+1721.28reports/s]
+  LF4 section weight:  93%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûÄ| 151310/163499 [01:40<00:07, 
+1681.53reports/s]
+  LF4 section weight:  93%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûÄ| 151479/163499 [01:40<00:07, 
+1650.86reports/s]
+  LF4 section weight:  93%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûÄ| 151645/163499 [01:40<00:07, 
+1628.01reports/s]
+  LF4 section weight:  93%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûÄ| 151821/163499 [01:40<00:07, 
+1665.99reports/s]
+  LF4 section weight:  93%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûÄ| 151988/163499 [01:41<00:07, 
+1589.93reports/s]
+  LF4 section weight:  93%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûÄ| 152173/163499 [01:41<00:06, 
+1663.22reports/s]
+  LF4 section weight:  93%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûÄ| 152344/163499 [01:41<00:06, 
+1673.89reports/s]
+  LF4 section weight:  93%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûÄ| 152513/163499 [01:41<00:06, 
+1614.80reports/s]
+  LF4 section weight:  93%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûÄ| 152676/163499 [01:41<00:06, 
+1607.59reports/s]
+  LF4 section weight:  93%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûÄ| 152838/163499 [01:41<00:06, 
+1554.65reports/s]
+  LF4 section weight:  94%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûÄ| 153009/163499 [01:41<00:06, 
+1592.70reports/s]
+  LF4 section weight:  94%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûÄ| 153169/163499 [01:41<00:06, 
+1492.49reports/s]
+  LF4 section weight:  94%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûì| 153320/163499 [01:41<00:06, 
+1464.38reports/s]
+  LF4 section weight:  94%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûì| 153476/163499 [01:42<00:06, 
+1485.49reports/s]
+  LF4 section weight:  94%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûì| 153642/163499 [01:42<00:06, 
+1533.07reports/s]
+  LF4 section weight:  94%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûì| 153835/163499 [01:42<00:05, 
+1641.22reports/s]
+  LF4 section weight:  94%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûì| 154026/163499 [01:42<00:05, 
+1717.88reports/s]
+  LF4 section weight:  94%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûì| 154199/163499 [01:42<00:05, 
+1701.46reports/s]
+  LF4 section weight:  94%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûì| 154394/163499 [01:42<00:05, 
+1772.77reports/s]
+  LF4 section weight:  95%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûì| 154572/163499 [01:42<00:05, 
+1689.05reports/s]
+  LF4 section weight:  95%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûì| 154745/163499 [01:42<00:05, 
+1696.97reports/s]
+  LF4 section weight:  95%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûì| 154935/163499 [01:42<00:04, 
+1753.45reports/s]
+  LF4 section weight:  95%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûì| 155112/163499 [01:42<00:04, 
+1725.76reports/s]
+  LF4 section weight:  95%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûì| 155286/163499 [01:43<00:04, 
+1697.06reports/s]
+  LF4 section weight:  95%|ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûî| 155457/163499 [01:43<00:04, 
+1634.85reports/s]

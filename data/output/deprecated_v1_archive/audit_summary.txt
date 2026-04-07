@@ -1,0 +1,87 @@
+======================================================================
+COMPREHENSIVE LABEL AUDIT — FINAL RESULTS
+======================================================================
+
+Total reports in CSV:          203,081
+Reports processed:             203,081
+Missing report files:                0
+Read errors:                         0
+Valid reports analyzed:         203,081
+
+----------------------------------------------------------------------
+PIPELINE LABEL DISTRIBUTION
+----------------------------------------------------------------------
+Pipeline POSITIVE (1):          42,928
+Pipeline NEGATIVE (0):         160,153
+
+----------------------------------------------------------------------
+AUDIT CLASSIFICATION DISTRIBUTION
+----------------------------------------------------------------------
+  AUDIT_NEGATIVE               130,648  (64.33%)
+  AUDIT_POSITIVE                45,538  (22.42%)
+  AUDIT_UNCLEAR                 17,735  (8.73%)
+  AUDIT_UNCERTAIN                9,160  (4.51%)
+
+----------------------------------------------------------------------
+MISMATCH ANALYSIS (Pipeline vs Audit)
+----------------------------------------------------------------------
+Total mismatches:               30,378  (14.96% of valid)
+
+  FALSE_NEGATIVE                14,721
+  NEG_BUT_UNCERTAIN              7,091
+  FALSE_POSITIVE                 6,497
+  POS_BUT_UNCERTAIN              2,069
+
+----------------------------------------------------------------------
+FALSE POSITIVE ANALYSIS (Labeled POS, Report says NEG)
+----------------------------------------------------------------------
+False positives found:           6,497
+False positive rate:             15.13%  (of 42,928 pipeline positives)
+
+  Breakdown by reason:
+    no_pneumonia_terms                        4,010
+    sentence_negation                         1,745
+    definite_negative_phrase                    341
+    negation_context_pattern                    242
+    neg_overrides_pos_last_sentence             101
+    more_neg_than_pos                            35
+    neg_with_uncertainty                         23
+
+----------------------------------------------------------------------
+FALSE NEGATIVE ANALYSIS (Labeled NEG, Report says POS)
+----------------------------------------------------------------------
+False negatives found:          14,721
+False negative rate:              9.19%  (of 160,153 pipeline negatives)
+
+  Breakdown by reason:
+    sentence_positive_term                    9,879
+    definite_positive_phrase                  4,552
+    pos_overrides_neg_last_sentence             149
+    more_pos_than_neg                           141
+
+----------------------------------------------------------------------
+UNCERTAIN MISMATCHES
+----------------------------------------------------------------------
+Pipeline POS → Audit UNCERTAIN:    2,069  (4.82%)
+Pipeline NEG → Audit UNCERTAIN:    7,091  (4.43%)
+
+----------------------------------------------------------------------
+ACCURACY ESTIMATE
+----------------------------------------------------------------------
+Confirmed correct labels:      154,968
+  - Correct positives:          30,817
+  - Correct negatives:         124,151
+Confirmed wrong labels:         21,218
+  - False positives:             6,497
+  - False negatives:            14,721
+Confirmable total:             176,186
+
+ACCURACY (confirmed):            87.96%
+
+  Note: 26,895 reports could not be confirmed
+  either way (AUDIT_UNCLEAR, AUDIT_UNCERTAIN, or no pneumonia terms).
+  The true accuracy is likely between 88.0% and
+  89.6% depending on how those resolve.
+
+Audit completed in 107.8 seconds (1.8 minutes)
+======================================================================

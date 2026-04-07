@@ -1,0 +1,32 @@
+======================================================================
+VERIFICATION AUDIT — CORRECTED LABELS
+======================================================================
+
+Total reports:                193,921
+Pipeline POSITIVE:             49,083
+Pipeline NEGATIVE:            144,838
+
+--- Audit Classification ---
+AUDIT_POSITIVE:                44,354
+AUDIT_NEGATIVE:               132,119
+AUDIT_UNCERTAIN:                   13
+AUDIT_UNCLEAR:                 17,435
+
+--- Mismatches ---
+Total mismatches:               4,776  (2.46%)
+  FALSE_POSITIVE:               2,893  (5.89% of POS)
+  FALSE_NEGATIVE:               1,870  (1.29% of NEG)
+  POS_UNCERTAIN:                    1
+  NEG_UNCERTAIN:                   12
+
+--- Accuracy ---
+Confirmed correct:            171,710
+  Correct POS:                 42,484
+  Correct NEG:                129,226
+Confirmed wrong:                4,763
+Confirmable total:            176,473
+
+ACCURACY (confirmed):           97.30%
+
+Time: 4.9s
+======================================================================

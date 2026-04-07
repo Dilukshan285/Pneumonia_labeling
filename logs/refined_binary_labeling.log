@@ -1,0 +1,143 @@
+2026-04-06 12:42:28,638 | INFO | ======================================================================
+2026-04-06 12:42:28,638 | INFO | REFINED BINARY PNEUMONIA LABELING PIPELINE — VERSION 3.0
+2026-04-06 12:42:28,638 | INFO | ======================================================================
+2026-04-06 12:42:28,638 | INFO | Keyword list version: v2.5
+2026-04-06 12:42:28,638 | INFO | Positive keywords: 88
+2026-04-06 12:42:28,638 | INFO | Negative keywords: 97
+2026-04-06 12:42:28,639 | INFO | Uncertain keywords: 59
+2026-04-06 12:42:28,639 | INFO | Negated-uncertain overrides: 61
+2026-04-06 12:42:28,639 | INFO | Other diseases to exclude from negatives: 12
+2026-04-06 12:42:28,639 | INFO | 
+2026-04-06 12:42:28,639 | INFO | STEP 1: Loading parsed reports...
+2026-04-06 12:42:30,583 | INFO |   Loaded 227,835 parsed reports
+2026-04-06 12:42:30,584 | INFO |   study_id sample: ['s52067803', 's58913004', 's50536653']
+2026-04-06 12:42:30,654 | INFO | STEP 2: Loading CheXpert labels...
+2026-04-06 12:42:30,788 | INFO |   Loaded 227,827 CheXpert entries
+2026-04-06 12:42:30,790 | INFO |   study_id sample (after 's' prefix): ['s50414267', 's53189527', 's53911762']
+2026-04-06 12:42:30,790 | INFO |   Join check — sample overlap: 16 / 100 (0 = BROKEN JOIN, investigate study_id formats)
+2026-04-06 12:42:30,804 | INFO |   Studies with NO other diseases (clean): 73,465
+2026-04-06 12:42:30,804 | INFO |   Studies with other diseases (excluded from negatives): 154,362
+2026-04-06 12:42:30,804 | INFO | STEP 3: Classifying all reports...
+2026-04-06 12:42:45,491 | INFO |   Processed 50,000 / 227,835 reports...
+2026-04-06 12:42:59,790 | INFO |   Processed 100,000 / 227,835 reports...
+2026-04-06 12:43:14,312 | INFO |   Processed 150,000 / 227,835 reports...
+2026-04-06 12:43:28,664 | INFO |   Processed 200,000 / 227,835 reports...
+2026-04-06 12:43:36,890 | INFO |   NLP Classification Results:
+2026-04-06 12:43:36,890 | INFO |     NEUTRAL: 114,717 (50.4%)
+2026-04-06 12:43:36,891 | INFO |     NEGATIVE: 68,915 (30.2%)
+2026-04-06 12:43:36,891 | INFO |     POSITIVE: 33,089 (14.5%)
+2026-04-06 12:43:36,891 | INFO |     DROP: 11,114 (4.9%)
+2026-04-06 12:43:36,891 | INFO | STEP 4: Building POSITIVE label set...
+2026-04-06 12:43:36,912 | INFO |   POSITIVE labels: 33,089
+2026-04-06 12:43:36,912 | INFO | STEP 5: Building NEGATIVE label set (clean negatives)...
+2026-04-06 12:43:36,995 | INFO |   NEGATIVE/NEUTRAL candidates from NLP: 183,632
+2026-04-06 12:43:37,077 | INFO |   After CheXpert 12-disease filter: 70,686
+2026-04-06 12:43:37,106 | INFO |   After excluding positive overlaps: 70,686
+2026-04-06 12:43:37,123 | INFO | STEP 6: Combining POSITIVE + NEGATIVE and saving...
+2026-04-06 12:43:37,789 | INFO |   Saved: C:\Users\dviya\Desktop\Pneumonia_labeling\data\output\final_pneumonia_labels_v2.csv
+2026-04-06 12:43:37,789 | INFO |   Total labels: 103,775
+2026-04-06 12:43:37,789 | INFO | 
+2026-04-06 12:43:37,789 | INFO | ======================================================================
+2026-04-06 12:43:37,789 | INFO | FINAL SUMMARY
+2026-04-06 12:43:37,789 | INFO | ======================================================================
+2026-04-06 12:43:37,790 | INFO |   POSITIVE:    33,089  (31.9%)
+2026-04-06 12:43:37,790 | INFO |   NEGATIVE:    70,686  (68.1%)
+2026-04-06 12:43:37,790 | INFO |   TOTAL:      103,775
+2026-04-06 12:43:37,790 | INFO |   NEG:POS ratio: 2.14:1
+2026-04-06 12:43:37,790 | INFO | 
+2026-04-06 12:43:37,791 | INFO |   Label source breakdown:
+2026-04-06 12:43:37,794 | INFO |     nlp_negative: 41,112
+2026-04-06 12:43:37,794 | INFO |     nlp_confirmed: 33,089
+2026-04-06 12:43:37,794 | INFO |     clean_normal: 29,574
+2026-04-06 12:43:37,798 | INFO | 
+2026-04-06 12:43:37,798 | INFO |   Reports dropped (uncertain): 11,114
+2026-04-06 12:43:37,799 | INFO |   Reports excluded by CheXpert disease filter: 112,946
+2026-04-06 12:43:37,799 | INFO |   Total reports NOT in final set: 124,060
+2026-04-06 12:43:37,799 | INFO | 
+2026-04-06 12:43:37,799 | INFO | ======================================================================
+2026-04-06 12:43:37,799 | INFO | SAMPLE VERIFICATION — 10 POSITIVE examples
+2026-04-06 12:43:37,799 | INFO | ======================================================================
+2026-04-06 12:43:37,819 | INFO |   [s54856328] evidence=positive_kw:left base opacity
+2026-04-06 12:43:37,819 | INFO |     IMPRESSION: Patchy left base opacity, in a relative linear configuration on the frontal
+ view, may be due to platelike atelectasis, but underlying infection is not
+ excluded in the appropriate clinical setting.
+2026-04-06 12:43:37,819 | INFO | 
+2026-04-06 12:43:37,832 | INFO |   [s52545651] evidence=positive_kw:infectious consolidation
+2026-04-06 12:43:37,832 | INFO |     IMPRESSION: 
+2026-04-06 12:43:37,832 | INFO | 
+2026-04-06 12:43:37,837 | INFO |   [s52339164] evidence=positive_kw:right base opacity
+2026-04-06 12:43:37,837 | INFO |     IMPRESSION: Interval improvement in CHF findings, effusions, and right base opacity.
+ Vascular plethora still noted, but improved. Persistent dense left lower lobe
+ collapse and/or consolidation.
+2026-04-06 12:43:37,837 | INFO | 
+2026-04-06 12:43:37,844 | INFO |   [s56561183] evidence=positive_kw:opacification
+2026-04-06 12:43:37,844 | INFO |     IMPRESSION: In comparison with the study ___ ___, there is a left PleurX catheter in
+ place.  There has been a small amount of aeration of lung in the left upper
+ zone.  The extensive opacification of all multipl
+2026-04-06 12:43:37,844 | INFO | 
+2026-04-06 12:43:37,849 | INFO |   [s50688638] evidence=positive_kw:opacification
+2026-04-06 12:43:37,849 | INFO |     IMPRESSION: As compared to the recent radiograph from 1 day earlier, endotracheal tube has
+ been placed, terminating 4 cm above the carina.  New complete opacification of
+ the left hemi thorax is consistent with 
+2026-04-06 12:43:37,849 | INFO | 
+2026-04-06 12:43:37,855 | INFO |   [s51039446] evidence=positive_kw:pneumonia
+2026-04-06 12:43:37,855 | INFO |     IMPRESSION: AP chest compared to ___ through ___, 4:13 p.m.:
+ 
+ Moderately severe widespread infiltrative pulmonary abnormality has improved. 
+ Heterogeneity in the right lower lobe may represent cavitation or a 
+2026-04-06 12:43:37,855 | INFO | 
+2026-04-06 12:43:37,862 | INFO |   [s54112571] evidence=positive_kw:opacification
+2026-04-06 12:43:37,862 | INFO |     IMPRESSION: In comparison with the study of ___, there again are low lung volumes that
+ accentuate the transverse diameter of the heart.  Bilateral pulmonary
+ opacifications are again seen, consistent with some c
+2026-04-06 12:43:37,862 | INFO | 
+2026-04-06 12:43:37,869 | INFO |   [s55179364] evidence=positive_kw:consolidation
+2026-04-06 12:43:37,869 | INFO |     IMPRESSION: Left upper lobe consolidation concerning for infectious process such as
+ tuberculosis. This is unlikely to be sclerosis at the left first rib
+ costochondral junction, however if there is further clini
+2026-04-06 12:43:37,869 | INFO | 
+2026-04-06 12:43:37,875 | INFO |   [s55641045] evidence=positive_kw:left basilar opacity
+2026-04-06 12:43:37,875 | INFO |     IMPRESSION: Left basilar opacity, potentially atelectasis, noting that
+ infection is also possible in the appropriate clinical setting.
+2026-04-06 12:43:37,876 | INFO | 
+2026-04-06 12:43:37,882 | INFO |   [s56630640] evidence=positive_kw:pneumonia
+2026-04-06 12:43:37,882 | INFO |     IMPRESSION: In comparison with the study of ___, there are lower lung volumes with
+ increased bibasilar atelectatic changes.  Because of the lower lung volumes
+ and atelectatic changes, it is difficult to determi
+2026-04-06 12:43:37,882 | INFO | 
+2026-04-06 12:43:37,882 | INFO | ======================================================================
+2026-04-06 12:43:37,882 | INFO | SAMPLE VERIFICATION — 10 NEGATIVE examples
+2026-04-06 12:43:37,882 | INFO | ======================================================================
+2026-04-06 12:43:37,896 | INFO |   [s52326083] source=nlp_negative evidence=negative_kw:no acute cardiopulmonary process
+2026-04-06 12:43:37,897 | INFO |     IMPRESSION: No acute cardiopulmonary process.
+2026-04-06 12:43:37,897 | INFO | 
+2026-04-06 12:43:37,902 | INFO |   [s51395880] source=clean_normal evidence=no_keyword_match
+2026-04-06 12:43:37,902 | INFO |     IMPRESSION: No acute intrathoracic process.
+2026-04-06 12:43:37,902 | INFO | 
+2026-04-06 12:43:37,908 | INFO |   [s53989748] source=clean_normal evidence=no_keyword_match
+2026-04-06 12:43:37,908 | INFO |     IMPRESSION: No evidence of metastatic disease.
+2026-04-06 12:43:37,908 | INFO | 
+2026-04-06 12:43:37,915 | INFO |   [s59538593] source=nlp_negative evidence=negative_kw:no acute cardiopulmonary process
+2026-04-06 12:43:37,915 | INFO |     IMPRESSION: No acute cardiopulmonary process.
+2026-04-06 12:43:37,915 | INFO | 
+2026-04-06 12:43:37,921 | INFO |   [s59875822] source=nlp_negative evidence=negex_negated:pneumonia
+2026-04-06 12:43:37,921 | INFO |     IMPRESSION: 
+2026-04-06 12:43:37,921 | INFO | 
+2026-04-06 12:43:37,928 | INFO |   [s52463023] source=nlp_negative evidence=negative_kw:no acute cardiopulmonary
+2026-04-06 12:43:37,928 | INFO |     IMPRESSION: No acute cardiopulmonary findings.
+2026-04-06 12:43:37,928 | INFO | 
+2026-04-06 12:43:37,934 | INFO |   [s51496947] source=nlp_negative evidence=negative_kw:no acute findings
+2026-04-06 12:43:37,934 | INFO |     IMPRESSION: No acute findings in the chest.
+2026-04-06 12:43:37,934 | INFO | 
+2026-04-06 12:43:37,940 | INFO |   [s54079069] source=nlp_negative evidence=negative_kw:no acute cardiopulmonary process
+2026-04-06 12:43:37,940 | INFO |     IMPRESSION: No acute cardiopulmonary process.
+2026-04-06 12:43:37,940 | INFO | 
+2026-04-06 12:43:37,946 | INFO |   [s56839802] source=clean_normal evidence=empty_text
+2026-04-06 12:43:37,946 | INFO |     IMPRESSION: 
+2026-04-06 12:43:37,946 | INFO | 
+2026-04-06 12:43:37,953 | INFO |   [s50963553] source=nlp_negative evidence=negative_kw:no definite focal consolidation
+2026-04-06 12:43:37,953 | INFO |     IMPRESSION: Mildly engorged central pulmonary vasculature without overt pulmonary edema. 
+ No definite focal consolidation.
+2026-04-06 12:43:37,953 | INFO | 
+2026-04-06 12:43:37,953 | INFO | Pipeline completed in 69.3 seconds (1.2 minutes)
+2026-04-06 12:43:37,953 | INFO | Output saved to: C:\Users\dviya\Desktop\Pneumonia_labeling\data\output\final_pneumonia_labels_v2.csv
