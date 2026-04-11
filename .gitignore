@@ -22,6 +22,8 @@ physionet_creds.json
 # Images (too large for git)
 data/images/
 
+data/output/multi_image/
+
 # Trained model weights
 models/
 
